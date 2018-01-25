@@ -37,10 +37,6 @@ namespace Test
                             listener.GetPackageLength += Listener_GetPackageLength;
 
                             listener.OnMsgReceived += Listener_OnMsgReceived;
-
-                            listener.GetSendMessage += Listener_GetSendMessage;
-
-                            listener.OnSended += Listener_OnSended;
                         }
                         catch (Exception ex)
                         {
@@ -70,9 +66,20 @@ namespace Test
             } while (com.ToUpper() != "EXIT");
         }
 
+        private static void Listener_OnMsgReceived(AsyncUserToken token, byte[] data)
+        {
+            Console.WriteLine("接收到数据：");
+            Console.WriteLine(" 来源IP：" + token.Remote.Address.ToString());
+            Console.WriteLine(" 连接时间：" + token.ConnectTime.ToString());
+
+            DataReader reader = new DataReader(data);
+        }
+
         private static int Listener_GetPackageLength(byte[] data, out int headLength)
         {
-            throw new NotImplementedException();
+            int length = DataReader.GetDataLength(data, out headLength);
+
+            return length;
         }
 
         private static void Listener_OnClientNumberChange(int number, AsyncUserToken token)
