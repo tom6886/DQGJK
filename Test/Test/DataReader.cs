@@ -13,7 +13,7 @@ namespace Test
 
         private string DateTimePattern = "20{0}-{1}-{2} {3}:{4}:{5}";
 
-        public enum ReaderState
+        internal enum ReaderState
         {
             Success = 1,
             WrongBodyStart = -2,
@@ -93,14 +93,14 @@ namespace Test
             //获取数据终止符,若不等于16,则说明解析正文有误
             byte[] subBody = SubBytes(subLength, DataLength + 1);
 
-            if (!subBody[0].Equals(BodyEnd)) { State = ReaderState.WrongBodyEnd; return; }
+            if (!subBody[0].Equals(BodyEnd)) { State = ReaderState.WrongBodyEnd; }
         }
 
         internal static int GetDataLength(byte[] data, out int headLength)
         {
             headLength = GetStartPosition(data);
 
-            return Convert.ToInt16(data[18]) + 23;
+            return Convert.ToInt16(data[headLength + 18]) + 23;
         }
 
         #region 操作数据
