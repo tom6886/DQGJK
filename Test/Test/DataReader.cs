@@ -21,23 +21,23 @@ namespace Test
         }
 
         #region 属性
-        public ReaderState State { get; private set; }
+        internal ReaderState State { get; private set; }
 
-        public byte CenterIP { get; private set; }
+        internal byte CenterIP { get; private set; }
 
-        public byte[] ClientIP { get; private set; }
+        internal byte[] ClientIP { get; private set; }
 
-        public DateTime SendTime { get; private set; }
+        internal DateTime SendTime { get; private set; }
 
-        public int Serial { get; private set; }
+        internal int Serial { get; private set; }
 
-        public string FunctionCode { get; private set; }
+        internal string FunctionCode { get; private set; }
 
-        public int DataLength { get; private set; }
+        internal int DataLength { get; private set; }
 
-        public byte[] Body { get; private set; }
+        internal byte[] Body { get; private set; }
 
-        public int TotalLength { get { return DataLength + 23; } }
+        internal int TotalLength { get { return DataLength + 23; } }
         #endregion
 
         internal DataReader(byte[] data)
