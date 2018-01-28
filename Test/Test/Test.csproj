@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CabinetData.cs" />
+    <Compile Include="DataBody.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="DBContext.cs" />
+    <Compile Include="Element.cs" />
     <Compile Include="Migrations\201801260300536_init.cs" />
     <Compile Include="Migrations\201801260300536_init.Designer.cs">
       <DependentUpon>201801260300536_init.cs</DependentUpon>

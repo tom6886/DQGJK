@@ -8,9 +8,45 @@ namespace Test
 {
     internal class Element
     {
+        /// <summary>
+        /// 主从机地址
+        /// </summary>
+        internal string Code { get; set; }
 
+        /// <summary>
+        /// 湿度
+        /// </summary>
+        internal decimal Humidity { get; set; }
 
-        internal ElementItem Code { get; private set; }
+        /// <summary>
+        /// 温度
+        /// </summary>
+        internal decimal Temperature { get; set; }
+
+        /// <summary>
+        /// 继电器1输出状态
+        /// </summary>
+        internal int RelayOne { get; set; }
+
+        /// <summary>
+        /// 继电器2输出状态
+        /// </summary>
+        internal int RelayTwo { get; set; }
+
+        /// <summary>
+        /// 湿度超限报警状态
+        /// </summary>
+        internal int HumidityAlarm { get; set; }
+
+        /// <summary>
+        /// 温度超限报警状态
+        /// </summary>
+        internal int TemperatureAlarm { get; set; }
+
+        /// <summary>
+        /// 除湿状态
+        /// </summary>
+        internal int Dehumidify { get; set; }
 
         /// <summary>
         /// 构造函数返回根据数组解析出的要素
@@ -20,43 +56,9 @@ namespace Test
         /// <param name="data"></param>
         internal Element(byte[] data)
         {
-            if (!data[0].Equals(ElementItemType.Code)) { return; }
+            DecodeResult<string> r = ElementDecode.CodeDecode(data);
+            Code = r.Result;
 
-
-        }
-    }
-
-    internal enum ElementItemType
-    {
-        Code = 0x08
-    }
-
-    internal abstract class ElementItem
-    {
-        public byte[] Content { get; set; }
-    }
-
-    internal class Code
-    {
-        internal const byte Marker = (byte)ElementItemType.Code;
-
-        internal const int Length = 1;
-    }
-
-    internal class ElementItems
-    {
-        internal static Dictionary<byte, int> Enums = new Dictionary<byte, int>();
-
-        internal static ElementItem _instance;
-
-        internal static ElementItem GetInstance()
-        {
-            if (_instance == null)
-            {
-                Enums.Add(0x08, 1);
-            }
-
-            return _instance;
         }
     }
 }

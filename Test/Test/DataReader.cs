@@ -23,9 +23,9 @@ namespace Test
         #region 属性
         internal ReaderState State { get; private set; }
 
-        internal byte CenterIP { get; private set; }
+        internal byte CenterCode { get; private set; }
 
-        internal byte[] ClientIP { get; private set; }
+        internal byte[] ClientCode { get; private set; }
 
         internal DateTime SendTime { get; private set; }
 
@@ -45,14 +45,14 @@ namespace Test
             //获取中心站位置,一个字节
             byte[] subStart = SubBytes(data, 2);
 
-            CenterIP = subStart[0];
+            CenterCode = subStart[0];
 
             //获取遥测站位置,五个字节
             byte[] subCenter = SubBytes(subStart, 1);
 
-            ClientIP = new byte[5];
+            ClientCode = new byte[5];
 
-            Array.Copy(subCenter, ClientIP, 5);
+            Array.Copy(subCenter, ClientCode, 5);
 
             //获取信息发送时间,六个字节,发包时间,BCD码
             byte[] subClient = SubBytes(subCenter, 5);
