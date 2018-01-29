@@ -64,6 +64,8 @@
     <Compile Include="DataBody.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="DBContext.cs" />
+    <Compile Include="DecodeFunctions.cs" />
+    <Compile Include="ElementDecode.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Migrations\201801260300536_init.cs" />
     <Compile Include="Migrations\201801260300536_init.Designer.cs">

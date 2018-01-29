@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Test
+﻿namespace Test
 {
-    internal class DecodeResult<T>
+    internal class DecodeResult
     {
         /// <summary>
         /// 解码器分割出的数组
@@ -21,18 +15,17 @@ namespace Test
         /// <summary>
         /// 解码器解码后得到的结果
         /// </summary>
-        internal T Result { get; set; }
+        internal object Result { get; set; }
     }
 
-    internal enum DecodeType
+    internal class DecodeFunctions
     {
-        Code = 0x08
-    }
+        internal delegate DecodeResult DecodeHandler(byte[] data);
 
-    internal class ElementDecode
-    {
-        internal static DecodeResult<string> CodeDecode(byte[] data)
+        internal static DecodeResult Code(byte[] data)
         {
+
+
             return null;
         }
     }
