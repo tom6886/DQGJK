@@ -60,8 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BCDConverter.cs" />
+    <Compile Include="BytesUtil.cs" />
     <Compile Include="CabinetData.cs" />
-    <Compile Include="DataBody.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="DecodeFunctions.cs" />

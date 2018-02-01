@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Test
@@ -36,6 +37,8 @@ namespace Test
         internal int DataLength { get; private set; }
 
         internal byte[] Body { get; private set; }
+
+        internal List<Element> Data { get; set; }
 
         internal int TotalLength { get { return DataLength + 23; } }
         #endregion
@@ -89,6 +92,8 @@ namespace Test
             Body = new byte[DataLength];
 
             Array.Copy(subLength, 1, Body, 0, DataLength);
+
+            Data = ElementDecode.ReadAll(Body);
 
             //获取数据终止符,若不等于16,则说明解析正文有误
             byte[] subBody = SubBytes(subLength, DataLength + 1);

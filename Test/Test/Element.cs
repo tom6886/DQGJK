@@ -21,6 +21,11 @@
         /// 设备状态
         /// </summary>
         internal DeviceState State { get; set; }
+
+        /// <summary>
+        /// 数据长度
+        /// </summary>
+        internal int DataLength { get; set; }
     }
 
     internal class DeviceState

@@ -43,11 +43,9 @@ namespace Test
             return copy;
         }
 
-        internal static string ToHexString(byte[] bytes) // 0xae00cf => "AE00CF "
+        internal static string ToHexString(byte[] bytes)
         {
             if (bytes == null) { return null; }
-
-            string hexString = string.Empty;
 
             StringBuilder sb = new StringBuilder();
 
@@ -57,6 +55,42 @@ namespace Test
             }
 
             return sb.ToString();
+        }
+
+        internal static string ToBinString(byte[] bytes)
+        {
+            if (bytes == null) { return null; }
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                string temp = Convert.ToString(bytes[i], 2);
+
+                temp = temp.Insert(0, new string('0', 8 - temp.Length));
+
+                sb.Append(temp);
+            }
+
+            return sb.ToString();
+        }
+
+        internal static int[] ToBinaryArray(byte[] bytes)
+        {
+            string binString = ToBinString(bytes);
+
+            if (string.IsNullOrEmpty(binString)) { return null; }
+
+            char[] chars = binString.ToCharArray();
+
+            List<int> list = new List<int>();
+
+            foreach (var item in chars)
+            {
+                list.Add(Convert.ToInt32(item.ToString()));
+            }
+
+            return list.ToArray();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Test
 {
-    internal enum DecodeType
+    internal enum DecodeType : byte
     {
         Code = 0x08,
         Humidity = 0x01,
@@ -29,7 +30,7 @@ namespace Test
 
         private static byte[] Decode(byte[] data, ref Element element)
         {
-            if (data.Length == 0 || Enum.IsDefined(typeof(DecodeType), data[0])) { return null; }
+            if (data.Length == 0 || !Enum.IsDefined(typeof(DecodeType), data[0])) { return null; }
 
             int length = GetLength(data[0]);
 
@@ -61,6 +62,8 @@ namespace Test
         {
             if (!data[0].Equals((byte)DecodeType.Code)) { return null; }
 
+            int length = data.Length;
+
             Element element = new Element();
 
             do
@@ -68,7 +71,35 @@ namespace Test
                 data = Decode(data, ref element);
             } while (data.Length > 0 && !data[0].Equals((byte)DecodeType.Code));
 
+            element.DataLength = length - data.Length;
+
             return element;
+        }
+
+        internal static List<Element> ReadAll(byte[] data)
+        {
+            List<Element> list = new List<Element>();
+
+            do
+            {
+                //如果数据头不是主从机地址，则截取到编号为止
+                if (!data[0].Equals((byte)DecodeType.Code))
+                {
+                    int index = Array.IndexOf(data, (byte)DecodeType.Code);
+
+                    if (index < 0) { break; }
+
+                    data = BytesUtil.SubBytes(data, index);
+                }
+
+                Element element = Read(data);
+
+                list.Add(element);
+
+                data = BytesUtil.SubBytes(data, element.DataLength);
+            } while (data.Length > 0);
+
+            return list;
         }
     }
 }

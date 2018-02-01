@@ -50,9 +50,22 @@ namespace Test
         {
             byte[] temp = BytesUtil.SubBytes(data, 2, 2);
 
+            int[] arr = BytesUtil.ToBinaryArray(temp);
 
+            if (arr == null) { return null; }
 
-            return null;
+            Array.Reverse(arr);
+
+            DeviceState state = new DeviceState()
+            {
+                RelayOne = arr[0],
+                RelayTwo = arr[1],
+                HumidityAlarm = arr[2],
+                TemperatureAlarm = arr[3],
+                Dehumidify = arr[4]
+            };
+
+            return state;
         }
     }
 }
