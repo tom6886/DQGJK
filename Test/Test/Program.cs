@@ -70,6 +70,10 @@ namespace Test
 
             MessageDecode reader = new MessageDecode(data);
             Message message = reader.Read();
+
+            string str = BytesUtil.ToHexString(message.ToByte());
+
+            Console.WriteLine(" 发送内容：" + str);
         }
 
         private static int Listener_GetPackageLength(byte[] data, out int headLength)

@@ -25,5 +25,10 @@ namespace Test
         internal List<Element> Data { get; set; }
 
         internal int TotalLength { get { return DataLength + 23; } }
+
+        internal byte[] ToByte()
+        {
+            return MessageEncode.ConvertToByte(this);
+        }
     }
 }
