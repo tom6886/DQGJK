@@ -8,7 +8,7 @@ namespace Test
     /// 2、例如：02 1A表示实时温度标识符，其中1A位数据结构定义，高5位=3（字节个数），低3位=2（小数点位数）
     /// 3、显示均为BCD码展示。
     /// </summary>
-    internal class DecodeFunctions
+    internal class ElementDecodeFunctions
     {
         /// <summary>
         /// 08H	N(2) 08H

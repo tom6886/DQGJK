@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using TCPHandler;
 
 namespace Test
@@ -72,12 +68,13 @@ namespace Test
             Console.WriteLine(" 来源IP：" + token.Remote.Address.ToString());
             Console.WriteLine(" 连接时间：" + token.ConnectTime.ToString());
 
-            DataReader reader = new DataReader(data);
+            MessageDecode reader = new MessageDecode(data);
+            Message message = reader.Read();
         }
 
         private static int Listener_GetPackageLength(byte[] data, out int headLength)
         {
-            int length = DataReader.GetDataLength(data, out headLength);
+            int length = MessageDecode.GetDataLength(data, out headLength);
 
             return length;
         }

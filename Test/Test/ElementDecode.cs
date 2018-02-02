@@ -39,19 +39,19 @@ namespace Test
             switch ((DecodeType)data[0])
             {
                 case DecodeType.Code:
-                    element.Code = DecodeFunctions.Code(data);
+                    element.Code = ElementDecodeFunctions.Code(data);
                     break;
 
                 case DecodeType.Humidity:
-                    element.Humidity = DecodeFunctions.Humiture(data);
+                    element.Humidity = ElementDecodeFunctions.Humiture(data);
                     break;
 
                 case DecodeType.Temperature:
-                    element.Temperature = DecodeFunctions.Humiture(data);
+                    element.Temperature = ElementDecodeFunctions.Humiture(data);
                     break;
 
                 case DecodeType.State:
-                    element.State = DecodeFunctions.State(data);
+                    element.State = ElementDecodeFunctions.State(data);
                     break;
             }
 
