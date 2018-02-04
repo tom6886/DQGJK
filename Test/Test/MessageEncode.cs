@@ -31,8 +31,8 @@ namespace Test
 
             list.AddRange(Head);
 
-            list.Add(message.CenterCode);
             list.AddRange(message.ClientCode);
+            list.Add(message.CenterCode);
             list.AddRange(TimeToByte(message.SendTime));
             list.AddRange(BCDConverter.ConvertFrom(message.Serial.ToString(), 2));
             list.AddRange(BytesUtil.ToHexArray(message.FunctionCode));

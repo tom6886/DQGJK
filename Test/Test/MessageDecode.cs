@@ -133,9 +133,14 @@ namespace Test
             message.SendTime = SendTime();
             message.Serial = Serial();
             message.FunctionCode = FunctionCode();
-            message.DataLength = DataLength();
-            message.Body = Body(message.DataLength);
-            message.Data = ElementDecode.ReadAll(message.Body);
+
+            //如果是心跳包则不解析包体
+            if (!message.FunctionCode.Equals("F2"))
+            {
+                message.DataLength = DataLength();
+                message.Body = Body(message.DataLength);
+                message.Data = ElementDecode.ReadAll(message.Body);
+            }
 
             return message;
         }
