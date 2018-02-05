@@ -20,5 +20,24 @@
     },
     // Optionally generate .map file
     "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/buddle.jquery.js",
+    "inputFiles": [
+      "wwwroot/js/jquery-1.9.1.js",
+      "wwwroot/js/jquery.form.js",
+      "wwwroot/js/jquery.pnotify.js",
+      "wwwroot/js/jquery.validate.js",
+      "wwwroot/js/jquery.unobtrusive-ajax.js",
+      "wwwroot/js/jquery.dcjqaccordion.2.7.js",
+      "wwwroot/js/jquery.nicescroll.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
   }
 ]

@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div style="display: block">
+    <img src="../image/logo.png" style="height: 86px;" />
+</div>
+<h2>物联网城市电网柜环境巡检系统</h2>
+<form class="form" id="form_login" action="@Url.Action("signin","Login")" method="post">
+    <input type="text" name="account" placeholder="用户名">
+    <input type="password" name="pwd" placeholder="密码">
+    <button type="submit" id="login-button">登录</button>
+</form>
+
+<script type="text/javascript" src="~/js/buddle.jquery.min.js"></script>
+<script type="text/javascript" src="~/js/Page/login.js"></script>
