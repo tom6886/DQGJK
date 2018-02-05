@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQGJK.Web", "DQGJK.Web\DQGJK.Web.csproj", "{1D9F956A-025B-4C24-9728-74583FF73658}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DQGJK.Web", "DQGJK.Web\DQGJK.Web.csproj", "{1D9F956A-025B-4C24-9728-74583FF73658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQGJK.Models", "DQGJK.Models\DQGJK.Models.csproj", "{067F4707-A906-4BA6-9066-217BFD6D74F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1D9F956A-025B-4C24-9728-74583FF73658}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D9F956A-025B-4C24-9728-74583FF73658}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D9F956A-025B-4C24-9728-74583FF73658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{067F4707-A906-4BA6-9066-217BFD6D74F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{067F4707-A906-4BA6-9066-217BFD6D74F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{067F4707-A906-4BA6-9066-217BFD6D74F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{067F4707-A906-4BA6-9066-217BFD6D74F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
