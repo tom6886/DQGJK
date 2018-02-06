@@ -12,4 +12,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DQGJK.Models\DQGJK.Models.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="XUtils">
+      <HintPath>..\..\references\XUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
