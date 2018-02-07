@@ -1,0 +1,115 @@
+﻿@using DQGJK.Web.PageModels;
+@model Pager
+
+@if (Model.PageCount > 1)
+{
+    <div style="height: 80px;">
+        <div style="float: left;">
+            <ul class="pagination">
+                @if (Model.PageIndex == 1)
+                {
+                    <li class="disabled"><a>首页</a></li>
+                    <li class="disabled"><a>上页</a></li>
+                }
+                else
+                {
+                    <li><a data-pageindex="1" href="javascript:void(0)">首页</a></li>
+                    <li><a data-pageindex="@Model.PrevIndex" href="javascript:void(0)">上页</a></li>
+                }
+
+                @if (Model.PageCount < 10)
+                {
+                    for (int i = 1, j = Model.PageCount; i <= j; i++)
+                    {
+                        if (i == Model.PageIndex)
+                        {
+                            <li class="active"><a href="javascript:void(0)">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a data-pageindex="@i" href="javascript:void(0)">@i</a></li>
+                        }
+                    }
+                }
+                else
+                {
+                    if (Model.PageIndex < 6)
+                    {
+                        for (int i = 1; i < 9; i++)
+                        {
+                            if (i == Model.PageIndex)
+                            {
+                                <li class="active"><a href="javascript:void(0)">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a data-pageindex="@i" href="javascript:void(0)">@i</a></li>
+                            }
+                        }
+
+                        <li><a data-pageindex="9" href="javascript:void(0)">...</a></li>
+                    }
+                    else if (Model.PageCount - Model.PageIndex < 6)
+                    {
+                        var p = Model.PageCount - 9;
+                        <li><a data-pageindex="@p" href="javascript:void(0)">...</a></li>
+
+                        for (int i = Model.PageCount - 8, j = Model.PageCount; i <= j; i++)
+                        {
+                            if (i == Model.PageIndex)
+                            {
+                                <li class="active"><a href="javascript:void(0)">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a data-pageindex="@i" href="javascript:void(0)">@i</a></li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var p = Model.PageIndex - 5;
+                        <li><a data-pageindex="@p" href="javascript:void(0)">...</a></li>
+
+                        for (int i = Model.PageIndex - 4, j = Model.PageIndex + 4; i < j; i++)
+                        {
+                            if (i == Model.PageIndex)
+                            {
+                                <li class="active"><a href="javascript:void(0)">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a data-pageindex="@i" href="javascript:void(0)">@i</a></li>
+                            }
+                        }
+
+                        var n = Model.PageIndex + 4;
+                        <li><a data-pageindex="@n" href="javascript:void(0)">...</a></li>
+                    }
+                }
+
+                @if (Model.PageIndex == Model.PageCount)
+                {
+                    <li class="disabled nextPage"><a>下一页</a></li>
+                    <li class="disabled"><a>尾页</a></li>
+                }
+                else
+                {
+                    <li><a class="nextPage" data-pageindex="@Model.NextIndex" href="javascript:void(0)">下一页</a></li>
+                    <li><a data-pageindex="@Model.PageCount" href="javascript:void(0)">尾页</a></li>
+                }
+            </ul>
+        </div>
+        <div class="input-group" style="width: 260px;">
+            <div class="input-group" style="margin: 20px;">
+                <span class="input-group-addon">转到第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" value="@Model.PageIndex" />
+                <input type="hidden" id="pageCount" value="@Model.PageCount" />
+                <span class="input-group-addon">页</span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id="goToBtn">跳转</button>
+                </span>
+            </div>
+        </div>
+    </div>
+}

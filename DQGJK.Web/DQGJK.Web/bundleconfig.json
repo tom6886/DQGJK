@@ -39,5 +39,44 @@
     },
     // Optionally generate .map file
     "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/css/common.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/jquery.pnotify.default.css",
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/font-awesome/css/font-awesome.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bootcss.js",
+    "inputFiles": [
+      "wwwroot/js/bootcss/css3-mediaqueries.js",
+      "wwwroot/js/bootcss/html5.js",
+      "wwwroot/js/bootcss/respond.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/integrate.js",
+    "inputFiles": [
+      "wwwroot/js/common.js",
+      "wwwroot/js/common-scripts.js",
+      "wwwroot/js/bootstrap.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
   }
 ]

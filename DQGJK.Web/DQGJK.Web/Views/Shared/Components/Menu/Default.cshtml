@@ -1,0 +1,30 @@
+﻿@using DQGJK.Web.PageModels;
+@model List<Pmenu>
+
+<ul class="nav navbar-nav" id="nav-accordion">
+
+    @foreach (Pmenu menu in Model)
+    {
+        if (menu.SubMenus != null && menu.SubMenus.Count > 0)
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa @menu.Iclass"></i>@menu.Name <span class="caret"></span></a>
+                <ul class="dropdown-menu" style="text-align: center;">
+                    @foreach (KeyValuePair<string, string> child in menu.SubMenus)
+                    {
+                        <li><a href="/@child.Value">@child.Key</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="/@menu.Href">
+                    <i class="fa @menu.Iclass"></i>
+                    <span>@menu.Name</span>
+                </a>
+            </li>
+        }
+    }
+</ul>

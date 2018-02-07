@@ -1,0 +1,113 @@
+/* for ie6 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td { margin: 0; padding: 0; color: #333; }
+body, button, input, select, textarea { font-family: Consolas,"微软雅黑",Arial, Helvetica, sans-serif; font-size: 14px; }
+h1 { font-size: 18px; text-align: center; }
+h2 { font-size: 14px; font-weight: normal; }
+h3 { font-size: 14px; font-weight: normal; }
+h4, h5, h6 { font-size: 100%; font-weight: normal; text-align: center; }
+address, cite, dfn, em, var { font-style: normal; }
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace; }
+small { font-size: 12px; }
+ul, ol, dl { list-style: none; }
+a { text-decoration: none; color: #333; }
+    a:hover, a:active, a:focus, a:visited { text-decoration: none; }
+    a:hover { text-decoration: none; }
+
+abbr[title], acronym[title] { border-bottom: 1px dotted; cursor: help; }
+q:before, q:after { content: ''; }
+/* 重置表单元素 */
+legend { color: #000; }
+fieldset, img { border: none; }
+button, input, select, textarea { font-size: 100%; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { border: none; height: 1px; }
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+html { overflow-y: scroll; }
+strong { font-weight: normal; }
+/*   通用样式   */
+.fr { float: right !important; }
+.fl { float: left !important; }
+
+.clickclass { background-color: #aeb2b7; }
+
+.top { background: #43A395; border-bottom: 1px solid #43A395; width: 100%; height: 60px; position: fixed; top: 0px; padding: 0 15px; z-index: 3; }
+.top-under { width: 100%; height: 60px; position: fixed; top: 60px; z-index: 3; }
+.sidebar-toggle-box { float: left; padding-right: 15px; margin-top: 20px; }
+    .sidebar-toggle-box .fa-bars { cursor: pointer; display: inline-block; font-size: 20px; }
+
+a.logo { font-size: 20px; color: #fff; float: left; padding: 0px 5px 0 0; line-height: 30px; display: block; text-transform: uppercase; }
+    a.logo img { color: #fff; float: left; display: block; margin-right: 5px; }
+    a.logo b { font-weight: 900; }
+    a.logo:hover, a.logo:focus { text-decoration: none; outline: none; }
+
+.top_more { float: right; padding: 15px 15px 0 0; }
+.top_more1 { width: 54px; display: block; height: 27px; line-height: 27px; border: 1px solid #56becd; border-radius: 3px; background: #68dff1; color: #fff; text-align: center; cursor: pointer; }
+
+.content { width: 100%; top: 120px; bottom: 0; position: absolute; }
+/*sidebar navigation*/
+#sidebar { width: 210px; height: 100%; }
+
+    #sidebar h5 { color: #f2f2f2; font-weight: 700; }
+
+    #sidebar ul li { position: relative; }
+
+    #sidebar .sub-menu > .sub li { padding-left: 32px; }
+
+        #sidebar .sub-menu > .sub li:last-child { padding-bottom: 10px; }
+
+.nav-collapse.collapse { display: inline; }
+
+ul.sidebar-menu, ul.sidebar-menu li ul.sub { margin: -2px 0 0; padding: 0; }
+
+ul.sidebar-menu { }
+
+#sidebar > ul > li > ul.sub { display: none; }
+
+    #sidebar > ul > li.active > ul.sub, #sidebar > ul > li > ul.sub > li > a { display: block; }
+
+ul.sidebar-menu li ul.sub li { background: #424a5d; margin-bottom: 0; margin-left: 0; margin-right: 0; }
+
+    ul.sidebar-menu li ul.sub li:last-child { border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; }
+
+    ul.sidebar-menu li ul.sub li a { font-size: 12px; padding: 6px 0; line-height: 35px; height: 35px; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -ms-transition: all 0.3s ease; transition: all 0.3s ease; color: #aeb2b7; }
+
+        ul.sidebar-menu li ul.sub li a:hover { color: white; background: transparent; }
+
+    ul.sidebar-menu li ul.sub li.active a { color: #43A395; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -ms-transition: all 0.3s ease; transition: all 0.3s ease; display: block; }
+
+ul.sidebar-menu li { /*line-height: 20px !important;*/ margin-bottom: 5px; margin-left: 10px; margin-right: 10px; }
+
+    ul.sidebar-menu li.sub-menu { line-height: 15px; }
+
+    ul.sidebar-menu li a span { display: inline-block; }
+
+    ul.sidebar-menu li a { color: #aeb2b7; text-decoration: none; display: block; padding: 15px 0 15px 10px; font-size: 12px; outline: none; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -ms-transition: all 0.3s ease; transition: all 0.3s ease; }
+
+        ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus { background: #43A395; color: #fff; display: block; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -ms-transition: all 0.3s ease; transition: all 0.3s ease; }
+
+
+        ul.sidebar-menu li a i { font-size: 15px; padding-right: 6px; }
+
+        ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i { color: #fff; }
+
+        ul.sidebar-menu li a.active i { color: #fff; }
+
+
+.mail-info, .mail-info:hover { margin: -3px 6px 0 0; font-size: 11px; }
+
+.device-state { float: right; color: wheat; margin-top: 15px; }
+/*--sidebar toggle---*/
+/*.content_right { border-radius: 8px; width: 100%; position: fixed; left: 225px; top: 70px; z-index: 2000; box-shadow: 0px 0px 5px #acb4bf; border: 1px solid #dedede; background: #fff; box-shadow: 0px 3px 2px #aab2bd; }
+.content_right1 { padding: 30px 15px; }
+.content_right2v { height: 34px; font-size: 14px; }
+.content_right2 { height: 32px; line-height: 32px; width: 290px; float: left; border: 1px solid #cdcdcc; border-radius: 4px; }
+.content_right2 span { background: #efeeee; float: left; text-align: center; width: 52px; color: #65545a; }
+.content_right2ip { height: 32px; line-height: 32px; width: 225px; float: right; border: none; color: #999b9a; outline: none; }
+.content_right3 { height: 34px; float: right; text-align: center; border-radius: 3px; line-height: 34px; width: 52px; background: #5ac1df; }
+.content_right3 a { color: #fff; }
+.content_right4 { border: 1px solid #dedede; margin-top: 14px; color: #757675; cursor: pointer; background: #fafaf9; line-height: 42px; height: 42px; padding-left: 6px; }*/
+
+.div-nopic { display: table; width: 100%; height: 100%; border: #c0c0c0 8px dashed; border-radius: 5px; text-align: center; color: #c0c0c0; font-size: 50px; line-height: 100%; vertical-align: middle; }
+
+    .div-nopic span { display: table-cell; vertical-align: middle; }

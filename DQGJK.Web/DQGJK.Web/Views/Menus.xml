@@ -1,0 +1,62 @@
+﻿<xml>
+  <menu roles="Administrator,Customer">
+    <name>图片浏览</name>
+    <href>NewImage</href>
+    <iclass>fa-dashboard</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>历史图片</name>
+    <href>images</href>
+    <iclass>fa-camera</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>电子地图</name>
+    <href>home</href>
+    <iclass>fa-picture-o</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>外破巡视</name>
+    <href>ImageLoop</href>
+    <iclass>fa-search</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="Administrator,Customer">
+    <name>系统管理</name>
+    <href>#</href>
+    <iclass>fa-cogs</iclass>
+    <subMenus>
+      <style>padding-left: 18%; width: 100%; margin-top: 5px;</style>
+      <subMenu  roles="Administrator">
+        <name>组织机构</name>
+        <href>dept</href>
+      </subMenu>
+      <subMenu roles="Administrator">
+        <name>账号管理</name>
+        <href>user</href>
+      </subMenu>
+      <subMenu roles="Administrator">
+        <name>站点管理</name>
+        <href>station</href>
+      </subMenu>
+      <subMenu roles="Administrator">
+        <name>设备管理</name>
+        <href>device</href>
+      </subMenu>
+      <subMenu roles="Administrator,Customer">
+        <name>个人信息</name>
+        <href>info</href>
+      </subMenu>
+      <subMenu roles="Administrator">
+        <name>用户设备</name>
+        <href>userdevice</href>
+      </subMenu>
+    </subMenus>
+  </menu>
+</xml>
