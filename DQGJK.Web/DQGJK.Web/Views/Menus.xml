@@ -35,7 +35,7 @@
       <style>padding-left: 18%; width: 100%; margin-top: 5px;</style>
       <subMenu  roles="Administrator">
         <name>组织机构</name>
-        <href>dept</href>
+        <href>department</href>
       </subMenu>
       <subMenu roles="Administrator">
         <name>账号管理</name>
