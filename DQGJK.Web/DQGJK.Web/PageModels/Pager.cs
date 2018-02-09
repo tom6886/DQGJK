@@ -6,12 +6,12 @@ namespace DQGJK.Web.PageModels
     {
         public Pager(double _TotalCount, int _PageIndex, int _PageSize)
         {
-            this.PageSize = _PageSize;
-            this.TotalCount = _TotalCount;
-            this.PageCount = Convert.ToInt32(Math.Ceiling(_TotalCount / (this.PageSize == 0 ? 10 : this.PageSize)));
-            this.PageIndex = _PageIndex;
-            this.PrevIndex = _PageIndex == 1 ? 1 : _PageIndex - 1;
-            this.NextIndex = _PageIndex == PageCount ? PageCount : _PageIndex + 1;
+            PageSize = _PageSize;
+            TotalCount = _TotalCount;
+            PageCount = Convert.ToInt32(Math.Ceiling(_TotalCount / (this.PageSize == 0 ? 10 : this.PageSize)));
+            PageIndex = _PageIndex > PageCount ? PageCount : _PageIndex;
+            PrevIndex = PageIndex == 1 ? 1 : PageIndex - 1;
+            NextIndex = PageIndex == PageCount ? PageCount : PageIndex + 1;
         }
 
         public Pager(double _TotalCount, int _PageIndex)

@@ -20,7 +20,7 @@ namespace DQGJK.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<DBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), opt => opt.UseRowNumberForPaging()));
 
             services.Configure<IISOptions>(options =>
             {
