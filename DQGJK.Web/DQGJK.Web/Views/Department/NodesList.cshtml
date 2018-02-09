@@ -1,0 +1,39 @@
+﻿@using DQGJK.Models;
+@model List<Department>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <td>部门名称</td>
+                <td>部门编号</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Department item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Code</td>
+                        @if (@item.Status == Status.enable)
+                        {
+                            <td><span class="label label-info label-mini">启用</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="label label-danger label-mini">禁用</span></td>
+                        }
+                        <td data-id="@item.ID">
+                            <a href="javascript:void(0)" class="editDict">编辑</a>
+                            |
+                            <a href="javascript:void(0)" class="delDept">删除</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,10 +1,33 @@
 ﻿;
 var Dept = Dept || {};
 
+Dept.Widgets = function () { }
+
+Dept.Widgets.prototype = {
+    keyInput: null,
+    tableContainer: null,
+    pageIndexName: null,
+    dialog: null,
+    nodes: null,
+    table: null,
+    init: function () {
+        this.keyInput = $("input[name=key]");
+        this.tableContainer = $("#unseen");
+        this.pageIndexName = $("#pageIndexBox");
+        this.dialog = new Dept.Dialog();
+        this.nodes = new Dept.Nodes();
+        this.table = new Dept.Table(this.tableContainer);
+
+        return this;
+    }
+};
+
 Dept.Data = {
-    query: function (key, pi) {
+    query: function (key, pi, callBack) {
         $.get("department/List", { key: key, pi: pi }, function (r) {
-            $("#unseen").html(r);
+            if (callBack == null || typeof (callBack) != "function") { return; }
+
+            callBack(r);
         });
     },
     delete: function (deptID) {
@@ -19,6 +42,18 @@ Dept.Data = {
         });
     }
 };
+
+Dept.Table = function (container) {
+    this.container = container;
+};
+
+Dept.Table.prototype = {
+    fresh: function () {
+        Dept.Data.query(this.keyInput.val(), this.pageIndexName.val(), function (r) {
+            this.container.html(r);
+        });
+    }
+}
 
 Dept.Dialog = function () { };
 
@@ -71,16 +106,88 @@ Dept.Dialog.prototype = {
     }
 }
 
+Dept.Nodes = function () { };
+
+Dept.Nodes.prototype = {
+    open: function (modal, code) {
+        var _this = this;
+
+        $.post("department/Nodes", { code: code }, function (r) {
+            if (r.code < 0) {
+                alert(r.msg);
+                return false;
+            }
+
+            modal.html(r);
+
+            $("#addNode", modal).click(function () {
+                dept.openNodeEdit($("#parent").val());
+            });
+
+            _this._get(code);
+        });
+    },
+    _get: function (code) {
+        var _this = this;
+
+        $.post("department/NodesGet", { code: code }, function (r) {
+            if (r.code < 0) {
+                alert(r.msg);
+                return false;
+            }
+
+            _this._bind(r);
+        });
+    },
+    _bind: function (table) {
+        //var _this = this;
+
+        //$("#container_nodes").html(table);
+
+        //$(".editDict", $("#container_nodes")).click(function () {
+        //    dept.openNodeEdit($("#parent").val(), $(this).parent().data("id"));
+        //});
+
+        //$(".delDept", $("#container_nodes")).click(function () {
+        //    if (!confirm("您确定要删除此部门？")) { return false; }
+
+        //    var _this = $(this);
+
+        //    $.post("dept/deleteDept", { deptID: _this.parent().data('id') }, function (r) {
+        //        alert(r.msg);
+
+        //        if (r.code < 0) {
+        //            return false;
+        //        }
+
+        //        dept.getNodes($("#parent").val());
+        //    });
+        //});
+    }
+}
+
 $(function () {
+    var widgets = new Dept.Widgets().init();
 
-    var dialog = new Dept.Dialog();
-
-    Dept.Data.query();
+    widgets.table.fresh();
 
     $("#dlg_edit").on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        dialog.open($(this), button.parent().data('id'));
+        widgets.dialog.open($(this), button.parent().data('id'));
     }).on('hidden.bs.modal', function () {
+        $(".modal-dialog", $(this)).remove();
+    });
+
+    var nodes = new Dept.Nodes();
+
+    $("#dlg_nodes").on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        widgets.nodes.open($(this), button.parent().data('id'));
+    }).on('hidden.bs.modal', function () {
+        $(".modal-dialog", $(this)).remove();
+    });
+
+    $("#dlg_node_edit").on('hidden.bs.modal', function () {
         $(".modal-dialog", $(this)).remove();
     });
 });
