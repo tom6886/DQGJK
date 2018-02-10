@@ -3,54 +3,48 @@ var Dept = Dept || {};
 
 Dept.Widgets = function () { }
 
-Dept.Widgets.prototype = {
-    keyInput: null,
-    tableContainer: null,
-    pageIndexName: null,
+Dept.Widgets = {
     dialog: null,
     nodes: null,
     table: null,
     init: function () {
-        this.keyInput = $("input[name=key]");
-        this.tableContainer = $("#unseen");
-        this.pageIndexName = $("#pageIndexBox");
         this.dialog = new Dept.Dialog();
         this.nodes = new Dept.Nodes();
-        this.table = new Dept.Table(this.tableContainer);
+        this.table = new Dept.Table().init();
 
         return this;
     }
 };
 
-Dept.Data = {
-    query: function (key, pi, callBack) {
-        $.get("department/List", { key: key, pi: pi }, function (r) {
-            if (callBack == null || typeof (callBack) != "function") { return; }
+Dept.Table = function () { };
 
-            callBack(r);
+Dept.Table.prototype = {
+    keyInput: null,
+    container: null,
+    pageIndexBox: null,
+    init: function () {
+        this.keyInput = $("input[name=key]");
+        this.container = $("#unseen");
+        this.pageIndexBox = $("#pageIndexBox");
+
+        return this;
+    },
+    query: function () {
+        var _this = this;
+
+        $.get("department/List", { key: _this.keyInput.val(), pi: _this.pageIndexBox.val() }, function (r) {
+            _this.container.html(r);
         });
     },
     delete: function (deptID) {
+        var _this = this;
+
         $.post("department/Delete", { deptID: deptID }, function (r) {
             alert(r.msg);
 
-            if (r.code < 0) {
-                return false;
-            }
+            if (r.code < 0) { return false; }
 
-            Dept.Data.query($("input[name=key]").val(), $("#pageIndexBox").val());
-        });
-    }
-};
-
-Dept.Table = function (container) {
-    this.container = container;
-};
-
-Dept.Table.prototype = {
-    fresh: function () {
-        Dept.Data.query(this.keyInput.val(), this.pageIndexName.val(), function (r) {
-            this.container.html(r);
+            _this.query();
         });
     }
 }
@@ -84,7 +78,7 @@ Dept.Dialog.prototype = {
 
                 if (r.code > 0) {
                     modal.modal('hide');
-                    Dept.Data.query($("input[name=key]").val(), 1);
+                    Dept.Widgets.table.query();
                 }
             }
         }).validate({
@@ -167,9 +161,9 @@ Dept.Nodes.prototype = {
 }
 
 $(function () {
-    var widgets = new Dept.Widgets().init();
+    var widgets = Dept.Widgets.init();
 
-    widgets.table.fresh();
+    widgets.table.query();
 
     $("#dlg_edit").on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);

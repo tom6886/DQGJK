@@ -51,9 +51,7 @@
         $(".delDept").click(function () {
             if (!confirm("您确定要删除此组织机构？")) { return false; }
 
-            var _this = $(this);
-
-            Dept.Data.delete(_this.parent().data('id'));
+            Dept.Widgets.table.delete($(this).parent().data('id'));
         });
     });
 </script>
