@@ -48,10 +48,22 @@
 
 <script type="text/javascript">
     $(function () {
+
         $(".delDept").click(function () {
             if (!confirm("您确定要删除此组织机构？")) { return false; }
 
             Dept.Widgets.table.delete($(this).parent().data('id'));
         });
+
+        $(".pagination a").click(function () {
+            Dept.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        });
+
+        $("#goToBtn").click(function () {
+            if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
+            Dept.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        })
     });
 </script>

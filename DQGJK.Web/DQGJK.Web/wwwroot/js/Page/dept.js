@@ -29,10 +29,10 @@ Dept.Table.prototype = {
 
         return this;
     },
-    query: function () {
+    query: function (pi) {
         var _this = this;
 
-        $.get("department/List", { key: _this.keyInput.val(), pi: _this.pageIndexBox.val() }, function (r) {
+        $.get("department/List", { key: _this.keyInput.val(), pi: pi }, function (r) {
             _this.container.html(r);
         });
     },
@@ -44,7 +44,7 @@ Dept.Table.prototype = {
 
             if (r.code < 0) { return false; }
 
-            _this.query();
+            _this.query(_this.pageIndexBox.val());
         });
     }
 }
@@ -100,11 +100,83 @@ Dept.Dialog.prototype = {
     }
 }
 
+Dept.NodesTable = function () { };
+
+Dept.NodesTable.prototype = {
+    container: null,
+    init: function () {
+        this.container = $("#container_nodes");
+
+        return this;
+    },
+    query: function () {
+        var _this = this;
+
+        $.get("department/NodesList", { code: Dept.Widgets.nodes.code }, function (r) {
+            _this.container.html(r);
+        });
+    },
+    delete: function (deptID) {
+        var _this = this;
+
+        $.post("department/Delete", { deptID: deptID }, function (r) {
+            alert(r.msg);
+
+            if (r.code < 0) { return false; }
+
+            _this.query();
+        });
+    }
+}
+
+Dept.NodesDialog = function () { };
+
+Dept.NodesDialog.prototype = {
+    open: function (id) {
+        var _this = this;
+
+        $.post("department/NodesDialog", { parentID: Dept.Widgets.nodes.code, id: id }, function (r) {
+            if (r.code < 0) {
+                alert(r.msg);
+                return false;
+            }
+
+            $("#dlg_node_edit").modal("show").html(r);
+
+            _this._bind($("#dlg_node_edit"));
+        });
+    },
+    _bind: function (modal) {
+        var _form = $("form", modal);
+
+        _form.ajaxForm({
+            success: function (r) {
+                alert(r.msg);
+
+                if (r.code > 0) {
+                    modal.modal('hide');
+                    Dept.Widgets.nodes.table.query();
+                }
+            }
+        });
+
+        $('select[name=Status]', _form).val($("#Status", _form).val());
+
+        $(".save", modal).click(function () {
+            _form.submit();
+        });
+    }
+}
+
 Dept.Nodes = function () { };
 
 Dept.Nodes.prototype = {
+    table: null,
+    dialog: null,
+    code: null,
     open: function (modal, code) {
         var _this = this;
+        _this.code = code;
 
         $.post("department/Nodes", { code: code }, function (r) {
             if (r.code < 0) {
@@ -114,49 +186,16 @@ Dept.Nodes.prototype = {
 
             modal.html(r);
 
+            _this.dialog = new Dept.NodesDialog();
+
             $("#addNode", modal).click(function () {
-                dept.openNodeEdit($("#parent").val());
+                _this.dialog.open();
             });
 
-            _this._get(code);
+            _this.table = new Dept.NodesTable().init(code);
+
+            _this.table.query();
         });
-    },
-    _get: function (code) {
-        var _this = this;
-
-        $.post("department/NodesGet", { code: code }, function (r) {
-            if (r.code < 0) {
-                alert(r.msg);
-                return false;
-            }
-
-            _this._bind(r);
-        });
-    },
-    _bind: function (table) {
-        //var _this = this;
-
-        //$("#container_nodes").html(table);
-
-        //$(".editDict", $("#container_nodes")).click(function () {
-        //    dept.openNodeEdit($("#parent").val(), $(this).parent().data("id"));
-        //});
-
-        //$(".delDept", $("#container_nodes")).click(function () {
-        //    if (!confirm("您确定要删除此部门？")) { return false; }
-
-        //    var _this = $(this);
-
-        //    $.post("dept/deleteDept", { deptID: _this.parent().data('id') }, function (r) {
-        //        alert(r.msg);
-
-        //        if (r.code < 0) {
-        //            return false;
-        //        }
-
-        //        dept.getNodes($("#parent").val());
-        //    });
-        //});
     }
 }
 

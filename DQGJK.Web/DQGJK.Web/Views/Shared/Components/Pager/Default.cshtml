@@ -113,21 +113,3 @@
         </div>
     </div>
 }
-<script type="text/javascript">
-    $(function () {
-        if (typeof (Widget) != "object") { return; }
-
-        var Pager = Object.create(Widget);
-
-        $(".pagination a").click(function () {
-            Pager.IndexChange($(this).data("pageindex"));
-            return false;
-        });
-
-        $("#goToBtn").click(function () {
-            if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
-            Pager.IndexChange($(this).data("pageindex"));
-            return false;
-        });
-    });
-</script>

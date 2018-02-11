@@ -37,3 +37,18 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript">
+    $(function () {
+        var nodes = Dept.Widgets.nodes;
+
+        $(".editDict").click(function () {
+            nodes.dialog.open($(this).parent().data("id"));
+        });
+
+        $(".delDept").click(function () {
+            if (!confirm("您确定要删除此部门？")) { return false; }
+
+            nodes.table.delete($(this).parent().data('id'));
+        });
+    });
+</script>

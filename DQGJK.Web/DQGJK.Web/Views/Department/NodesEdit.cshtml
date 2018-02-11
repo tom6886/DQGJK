@@ -1,0 +1,45 @@
+﻿<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">编辑部门</h4>
+        </div>
+        <div class="modal-body">
+            <form id="form_edit" action="department/Edit" method="post">
+                <input type="hidden" class="form-control" name="ID" value="@ViewBag.dept.ID" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">所属单位</span>
+                        <label class="form-control">@ViewBag.parent.Name</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">部门名称</span>
+                        <input type="text" class="form-control" name="Name" value="@ViewBag.dept.Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">部门编号</span>
+                        <input type="text" class="form-control" name="Code" value="@ViewBag.dept.Code" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select name="Status" class="form-control">
+                            <option value="enable">启用</option>
+                            <option value="disable">禁用</option>
+                        </select>
+                        <input type="hidden" id="Status" value="@ViewBag.dept.Status" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary save">保存</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+    </div>
+</div>

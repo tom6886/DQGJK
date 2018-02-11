@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DQGJK.Web.Controllers
 {
-    public partial class DepartmentController : Controller
+    public partial class DepartmentController : BaseController
     {
         private DBContext _context;
 
