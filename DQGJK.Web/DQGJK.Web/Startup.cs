@@ -34,7 +34,7 @@ namespace DQGJK.Web
             services.AddDistributedRedisCache(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("RedisConnection");
-                options.InstanceName = "sessions";
+                options.InstanceName = "DQGJK";
             });
 
             services.AddSession();
