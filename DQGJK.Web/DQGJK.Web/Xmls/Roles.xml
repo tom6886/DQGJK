@@ -1,0 +1,10 @@
+﻿<xml>
+  <role>
+    <name>Administrator</name>
+    <value>超级管理员</value>
+  </role>
+  <role>
+    <name>Customer</name>
+    <value>普通成员</value>
+  </role>
+</xml>

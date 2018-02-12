@@ -1,0 +1,72 @@
+﻿@using DQGJK.Models;
+@using DQGJK.Web.PageModels;
+@model List<UserInfo>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <td>用户名</td>
+                <td>真实姓名</td>
+                <td>联系号码</td>
+                <td>所属机构</td>
+                <td>当前角色</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (UserInfo item in Model)
+                {
+                    <tr>
+                        <td>@item.Account</td>
+                        <td>@item.DisplayName</td>
+                        <td>@item.Tel</td>
+                        <td>@item.DwName (@item.DeptName)</td>
+                        <td>@item.Roles</td>
+                        @if (@item.Status == Status.enable)
+                        {
+                            <td><span class="label label-info label-mini">启用</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="label label-danger label-mini">禁用</span></td>
+                        }
+                        <td data-id="@item.ID">
+                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#dlg_edit"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-xs delAccount"><i class="fa fa-trash-o "></i></button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div style="padding: 10px 15px;">
+    @await Component.InvokeAsync("Pager", (Pager)ViewBag.Pager)
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".delAccount").click(function () {
+            if (!confirm("您确定要删除此用户信息？")) { return false; }
+
+            var _this = $(this);
+
+            Account.Widgets.table.delete($(this).parent().data('id'));
+        });
+
+        $(".pagination a").click(function () {
+            Account.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        });
+
+        $("#goToBtn").click(function () {
+            if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
+            Account.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        })
+    });
+</script>

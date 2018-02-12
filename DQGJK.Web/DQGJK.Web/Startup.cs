@@ -2,6 +2,7 @@ using DQGJK.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -41,7 +42,7 @@ namespace DQGJK.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDistributedCache memoryCache)
         {
             //if (env.IsDevelopment())
             //{
@@ -66,6 +67,9 @@ namespace DQGJK.Web
                     name: "default",
                     template: "{controller=Login}/{action=Index}/{id?}");
             });
+
+            StartUpCache cache = new StartUpCache(memoryCache, env);
+            cache.RoleCache();
         }
     }
 }

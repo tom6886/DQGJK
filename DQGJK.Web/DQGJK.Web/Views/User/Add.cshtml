@@ -1,0 +1,75 @@
+﻿<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">添加用户</h4>
+        </div>
+        <div class="modal-body">
+            <form id="form_edit" action="user/Edit" method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">用户名称</span>
+                        <input type="text" class="form-control" name="Account" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">登录密码</span>
+                        <input type="password" class="form-control" name="PassWord" value="111111" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">真实姓名</span>
+                        <input type="text" class="form-control" name="DisplayName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">联系方式</span>
+                        <input type="text" class="form-control" name="Tel" />
+                    </div>
+                </div>
+                @if (ViewBag.userDept == null)
+                {
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">所属单位</span>
+                            <input type="hidden" data-select="dw" class="form-control _select" name="DW" />
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">所属部门</span>
+                        <input type="hidden" data-select="bm" class="form-control _select" name="DeptID" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">所属角色</span>
+                        <input type="hidden" data-select="r" class="form-control _select" name="Roles" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select name="Status" class="form-control _select">
+                            <option value="enable">启用</option>
+                            <option value="disable">禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary save">保存</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("._select").select_2();
+    });
+</script>

@@ -35,7 +35,7 @@ namespace DQGJK.Web.Views.Shared.Components
             }
 
             string currentRole = user.Roles.ToLower();
-            XDocument xml = XDocument.Load(_host.ContentRootPath + "/Views/Menus.xml");
+            XDocument xml = XDocument.Load(_host.ContentRootPath + "/Xmls/Menus.xml");
 
             if (!string.IsNullOrWhiteSpace(currentRole) && xml != null && xml.Nodes().Count() > 0)
             {

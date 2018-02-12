@@ -1,10 +1,59 @@
 ﻿;
-$(function () {
+var Account = Account || {};
 
-    var account = {};
+Account.Widgets = function () { }
 
-    account.openDialog = function (modal, accountID) {
-        $.post("user/queryDialog", { accountID: accountID }, function (r) {
+Account.Widgets = {
+    dialog: null,
+    table: null,
+    init: function () {
+        this.dialog = new Account.Dialog();
+        this.table = new Account.Table().init();
+
+        return this;
+    }
+};
+
+Account.Table = function () { };
+
+Account.Table.prototype = {
+    keyInput: null,
+    container: null,
+    pageIndexBox: null,
+    init: function () {
+        this.keyInput = $("input[name=key]");
+        this.container = $("#unseen");
+        this.pageIndexBox = $("#pageIndexBox");
+
+        return this;
+    },
+    query: function (pi) {
+        var _this = this;
+
+        $.get("user/List", { key: _this.keyInput.val(), pi: pi }, function (r) {
+            _this.container.html(r);
+        });
+    },
+    delete: function (userID) {
+        var _this = this;
+
+        $.post("user/Delete", { userID: userID }, function (r) {
+            alert(r.msg);
+
+            if (r.code < 0) { return false; }
+
+            _this.query(_this.pageIndexBox.val());
+        });
+    }
+}
+
+Account.Dialog = function () { };
+
+Account.Dialog.prototype = {
+    open: function (modal, userID) {
+        var _this = this;
+
+        $.post("user/Dialog", { userID: userID }, function (r) {
             if (r.code < 0) {
                 alert(r.msg);
                 return false;
@@ -12,11 +61,10 @@ $(function () {
 
             modal.html(r);
 
-            account.bindDialog(modal);
+            _this._bind(modal);
         });
-    };
-
-    account.bindDialog = function (modal) {
+    },
+    _bind: function (modal) {
         var _form = $("form", modal);
 
         _form.ajaxForm({
@@ -28,7 +76,7 @@ $(function () {
 
                 if (r.code > 0) {
                     modal.modal('hide');
-                    $("#form_query").submit();
+                    Account.Widgets.table.query();
                 }
             }
         }).validate({
@@ -63,19 +111,17 @@ $(function () {
             _form.submit();
         });
     }
+}
 
-    account.initPage = function () {
+$(function () {
+    var widgets = Account.Widgets.init();
 
-        $(".query").click(function () {
-            $("#form_query").submit();
-        });
+    widgets.table.query();
 
-        $("#dlg_edit").on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            account.openDialog($(this), button.parent().data('id'));
-        }).on('hidden.bs.modal', function () {
-            $(".modal-dialog", $(this)).remove();
-        });
-    }();
-
+    $("#dlg_edit").on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        widgets.dialog.open($(this), button.parent().data('id'));
+    }).on('hidden.bs.modal', function () {
+        $(".modal-dialog", $(this)).remove();
+    });
 });
