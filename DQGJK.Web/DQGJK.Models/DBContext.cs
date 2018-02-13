@@ -8,6 +8,8 @@ namespace DQGJK.Models
         {
         }
 
+        //模型
+
         public DbSet<Guser> Guser { get; set; }
 
         public DbSet<Department> Department { get; set; }
@@ -20,6 +22,11 @@ namespace DQGJK.Models
 
         public DbSet<Area> Area { get; set; }
 
-        public DbSet<UserInfo> UserInfo { get; set; }   //视图
+
+        //视图
+
+        public DbSet<UserInfo> UserInfo { get; set; }
+
+        public DbSet<StationInfo> StationInfo { get; set; }
     }
 }

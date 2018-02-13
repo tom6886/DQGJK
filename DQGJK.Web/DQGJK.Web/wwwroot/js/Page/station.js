@@ -1,10 +1,60 @@
 ﻿;
-$(function () {
+;
+var Station = Station || {};
 
-    var station = {};
+Station.Widgets = function () { }
 
-    station.openDialog = function (modal, stationID) {
-        $.post("station/queryDialog", { stationID: stationID }, function (r) {
+Station.Widgets = {
+    dialog: null,
+    table: null,
+    init: function () {
+        this.dialog = new Station.Dialog();
+        this.table = new Station.Table().init();
+
+        return this;
+    }
+};
+
+Station.Table = function () { };
+
+Station.Table.prototype = {
+    keyInput: null,
+    container: null,
+    pageIndexBox: null,
+    init: function () {
+        this.keyInput = $("input[name=key]");
+        this.container = $("#unseen");
+        this.pageIndexBox = $("#pageIndexBox");
+
+        return this;
+    },
+    query: function (pi) {
+        var _this = this;
+
+        $.get("station/List", { key: _this.keyInput.val(), pi: pi }, function (r) {
+            _this.container.html(r);
+        });
+    },
+    delete: function (stationID) {
+        var _this = this;
+
+        $.post("station/Delete", { stationID: stationID }, function (r) {
+            alert(r.msg);
+
+            if (r.code < 0) { return false; }
+
+            _this.query(_this.pageIndexBox.val());
+        });
+    }
+}
+
+Station.Dialog = function () { };
+
+Station.Dialog.prototype = {
+    open: function (modal, stationID) {
+        var _this = this;
+
+        $.post("station/Dialog", { stationID: stationID }, function (r) {
             if (r.code < 0) {
                 alert(r.msg);
                 return false;
@@ -12,11 +62,10 @@ $(function () {
 
             modal.html(r);
 
-            station.bindDialog(modal);
+            _this._bind(modal);
         });
-    };
-
-    station.bindDialog = function (modal) {
+    },
+    _bind: function (modal) {
         var _form = $("form", modal);
 
         _form.ajaxForm({
@@ -28,7 +77,7 @@ $(function () {
 
                 if (r.code > 0) {
                     modal.modal('hide');
-                    $("#form_query").submit();
+                    Station.Widgets.table.query();
                 }
             }
         }).validate({
@@ -63,22 +112,24 @@ $(function () {
 
             if (isNull) return false;
 
+            var country = $("input[name=Country]", modal).select2("data");
+
+            $("input[name=CityCode]", modal).val(country.code);
+
             _form.submit();
         });
     }
+}
 
-    station.initPage = function () {
+$(function () {
+    var widgets = Station.Widgets.init();
 
-        $(".query").click(function () {
-            $("#form_query").submit();
-        });
+    widgets.table.query();
 
-        $("#dlg_edit").on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            station.openDialog($(this), button.parent().data('id'));
-        }).on('hidden.bs.modal', function () {
-            $(".modal-dialog", $(this)).remove();
-        });
-    }();
-
+    $("#dlg_edit").on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        widgets.dialog.open($(this), button.parent().data('id'));
+    }).on('hidden.bs.modal', function () {
+        $(".modal-dialog", $(this)).remove();
+    });
 });
