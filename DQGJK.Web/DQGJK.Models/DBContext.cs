@@ -17,7 +17,9 @@ namespace DQGJK.Models
         public DbSet<Cabinet> Cabinet { get; set; }
 
         public DbSet<CabinetData> CabinetData { get; set; }
-        
+
+        public DbSet<Area> Area { get; set; }
+
         public DbSet<UserInfo> UserInfo { get; set; }   //视图
     }
 }

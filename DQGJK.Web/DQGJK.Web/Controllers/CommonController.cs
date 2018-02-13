@@ -132,5 +132,30 @@ namespace DQGJK.Web.Controllers
 
             return Json(new { results = results, total = total, pageSize = 10 });
         }
+
+        [HttpGet]
+        public JsonResult getArea(string levelType, string pId, string key, int page = 1)
+        {
+            var query = _context.Area.AsQueryable();
+
+            query = query.Where(q => q.LevelType.Equals(levelType));
+
+            if (!string.IsNullOrEmpty(pId)) { query = query.Where(q => q.ParentId.Equals(pId)); }
+
+            if (!string.IsNullOrEmpty(key)) { query = query.Where(q => q.Name.Contains(key) || q.Pinyin.Contains(key)); }
+
+            ArrayList results = new ArrayList();
+
+            List<Area> list = query.OrderBy(q => q.CityCode).Skip((page - 1) * 10).Take(10).ToList();
+
+            foreach (var item in list)
+            {
+                results.Add(new { id = item.ID, name = item.Name, code = item.CityCode });
+            }
+
+            int total = query.Count();
+
+            return Json(new { results = results, total = total, pageSize = 10 });
+        }
     }
 }

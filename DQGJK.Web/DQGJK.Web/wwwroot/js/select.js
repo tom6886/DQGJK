@@ -2,6 +2,8 @@
 (function ($) {
     var globe = { dw: null, bm: null };
 
+    var area = { province: null, city: null, country: null };
+
     var priv = {
         set: function ($this) {
             $this.each(function (i, v) {
@@ -87,6 +89,45 @@
         qbm: function (e) {
             priv.select({
                 elem: e, placeholder: "选择部门", url: "getQyDept", dataParam: "id"
+            });
+        },
+        p: function (e) {
+            area.province = priv.select({ elem: e, placeholder: "选择省", url: "getArea?levelType=1", dataParam: "name" });
+
+            area.province.on('change', function (e) {
+                if (area.city) {
+                    area.city.select2('val', '');
+                }
+
+                if (area.country) {
+                    area.country.select2('val', '');
+                }
+            });
+        },
+        ci: function (e) {
+            area.city = priv.select({
+                elem: e, placeholder: "选择市", url: "getArea?levelType=2", dataParam: "name", addQuery: function (query) {
+                    if (area.province) {
+                        var i = area.province.select2('data');
+                        if (i) { query.pId = i.id; };
+                    }
+                }
+            });
+
+            area.city.on('change', function (e) {
+                if (area.country) {
+                    area.country.select2('val', '');
+                }
+            });
+        },
+        co: function (e) {
+            area.country = priv.select({
+                elem: e, placeholder: "选择县", url: "getArea?levelType=3", dataParam: "name", addQuery: function (query) {
+                    if (area.city) {
+                        var i = area.city.select2('data');
+                        if (i) { query.pId = i.id; };
+                    }
+                }
             });
         }
     }
