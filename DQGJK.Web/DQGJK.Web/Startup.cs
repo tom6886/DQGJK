@@ -42,7 +42,7 @@ namespace DQGJK.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDistributedCache memoryCache)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDistributedCache memoryCache, DBContext context)
         {
             //if (env.IsDevelopment())
             //{
@@ -68,8 +68,8 @@ namespace DQGJK.Web
                     template: "{controller=Login}/{action=Index}/{id?}");
             });
 
-            StartUpCache cache = new StartUpCache(memoryCache, env);
-            cache.RoleCache();
+            StartUpCache cache = new StartUpCache(memoryCache, env, context);
+            cache.CacheAll();
         }
     }
 }

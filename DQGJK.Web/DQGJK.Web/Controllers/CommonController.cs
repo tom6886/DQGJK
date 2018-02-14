@@ -134,11 +134,11 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult getArea(string levelType, string pId, string key, int page = 1)
+        public JsonResult getArea(int levelType, string pId, string key, int page = 1)
         {
             var query = _context.Area.AsQueryable();
 
-            query = query.Where(q => q.LevelType.Equals(levelType));
+            query = query.Where(q => q.LevelType == levelType);
 
             if (!string.IsNullOrEmpty(pId)) { query = query.Where(q => q.ParentId.Equals(pId)); }
 

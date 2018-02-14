@@ -114,7 +114,7 @@ Station.Dialog.prototype = {
 
             var country = $("input[name=Country]", modal).select2("data");
 
-            $("input[name=CityCode]", modal).val(country.code);
+            $("input[name=CityCode]", modal).val(country.id);
 
             _form.submit();
         });

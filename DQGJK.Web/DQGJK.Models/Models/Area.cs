@@ -19,7 +19,7 @@ namespace DQGJK.Models
         public string ShortName { get; set; }
 
         [MaxLength(1), Required]
-        public string LevelType { get; set; }
+        public int LevelType { get; set; }
 
         [MaxLength(4), Required]
         public string CityCode { get; set; }
