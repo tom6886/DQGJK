@@ -64,6 +64,19 @@ namespace DQGJK.Web.Controllers
 
             ViewBag.Dw = dw;
 
+            Area country = _memoryCache.Get<List<Area>>("Country").Where(q => q.ID.Equals(station.CityCode)).FirstOrDefault();
+
+            ViewBag.country = country;
+
+            if (country != null)
+            {
+                Area city = _memoryCache.Get<List<Area>>("City").Where(q => q.ID.Equals(country.ParentId)).FirstOrDefault();
+
+                ViewBag.city = city;
+
+                if (city != null) { ViewBag.province = _memoryCache.Get<List<Area>>("Province").Where(q => q.ID.Equals(city.ParentId)).FirstOrDefault(); }
+            }
+
             return PartialView("Edit");
         }
 

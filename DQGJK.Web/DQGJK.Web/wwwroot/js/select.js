@@ -52,7 +52,7 @@
 
     var fc = {
         dw: function (e) {
-            globe.dw = priv.select({ elem: e, placeholder: "选择单位", url: "getDept?deptType=0", dataParam: "id" });
+            globe.dw = priv.select({ elem: e, placeholder: "选择单位", url: "GetDept?deptType=0", dataParam: "id" });
 
             globe.dw.on('change', function (e) {
                 if (globe.bm) {
@@ -62,7 +62,7 @@
         },
         bm: function (e) {
             globe.bm = priv.select({
-                elem: e, placeholder: "选择部门", url: "getDept?deptType=1", dataParam: "id", addQuery: function (query) {
+                elem: e, placeholder: "选择部门", url: "GetDept?deptType=1", dataParam: "id", addQuery: function (query) {
                     if (globe.dw) {
                         var i = globe.dw.select2('data');
                         if (i) { query.pId = i.id; };
@@ -72,7 +72,7 @@
         },
         u: function (e) {
             globe.bm = priv.select({
-                elem: e, placeholder: "选择用户", url: "getUser", dataParam: "id", addQuery: function (query) {
+                elem: e, placeholder: "选择用户", url: "GetUser", dataParam: "id", addQuery: function (query) {
                     if (globe.dw) {
                         var i = globe.bm.select2('data');
                         if (i) { query.pId = i.id; };
@@ -81,18 +81,18 @@
             });
         },
         s: function (e) {
-            priv.select({ elem: e, placeholder: "选择站点", url: "getStation", dataParam: "id" });
+            priv.select({ elem: e, placeholder: "选择站点", url: "GetStation", dataParam: "id" });
         },
         r: function (e) {
-            priv.select({ elem: e, placeholder: "选择角色", url: "getRoles", dataParam: "id" });
+            priv.select({ elem: e, placeholder: "选择角色", url: "GetRoles", dataParam: "id" });
         },
         qbm: function (e) {
             priv.select({
-                elem: e, placeholder: "选择部门", url: "getQyDept", dataParam: "id"
+                elem: e, placeholder: "选择部门", url: "GetQyDept", dataParam: "id"
             });
         },
         p: function (e) {
-            area.province = priv.select({ elem: e, placeholder: "选择省", url: "getArea?levelType=1", dataParam: "name" });
+            area.province = priv.select({ elem: e, placeholder: "选择省", url: "GetProvince", dataParam: "name" });
 
             area.province.on('change', function (e) {
                 if (area.city) {
@@ -106,7 +106,7 @@
         },
         ci: function (e) {
             area.city = priv.select({
-                elem: e, placeholder: "选择市", url: "getArea?levelType=2", dataParam: "name", addQuery: function (query) {
+                elem: e, placeholder: "选择市", url: "GetCity", dataParam: "name", addQuery: function (query) {
                     if (area.province) {
                         var i = area.province.select2('data');
                         if (i) { query.pId = i.id; };
@@ -115,6 +115,11 @@
             });
 
             area.city.on('change', function (e) {
+                if (area.province) {
+                    var i = area.city.select2('data');
+                    if (i) { area.province.select2('data', i.province); }
+                }
+
                 if (area.country) {
                     area.country.select2('val', '');
                 }
@@ -122,11 +127,25 @@
         },
         co: function (e) {
             area.country = priv.select({
-                elem: e, placeholder: "选择县", url: "getArea?levelType=3", dataParam: "name", addQuery: function (query) {
+                elem: e, placeholder: "选择县", url: "GetCountry", dataParam: "name", addQuery: function (query) {
                     if (area.city) {
                         var i = area.city.select2('data');
                         if (i) { query.pId = i.id; };
                     }
+                }
+            });
+
+            area.country.on('change', function (e) {
+                var i = area.country.select2('data');
+
+                if (!i) { return; }
+
+                if (area.province) {
+                    area.province.select2('data', i.province);
+                }
+
+                if (area.city) {
+                    area.city.select2('data', i.city);
                 }
             });
         }

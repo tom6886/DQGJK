@@ -21,7 +21,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult getDept(int deptType, string pId, string key, int page = 1)
+        public JsonResult GetDept(int deptType, string pId, string key, int page = 1)
         {
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
@@ -63,7 +63,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult getStation(string key, int page = 1)
+        public JsonResult GetStation(string key, int page = 1)
         {
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
@@ -90,7 +90,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult getRoles(string key, int page = 1)
+        public JsonResult GetRoles(string key, int page = 1)
         {
             ArrayList results = new ArrayList();
 
@@ -112,7 +112,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult getUser(string pId, string key, int page = 1)
+        public JsonResult GetUser(string pId, string key, int page = 1)
         {
             var query = _context.Guser.AsQueryable();
 
@@ -134,26 +134,92 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult getArea(int levelType, string pId, string key, int page = 1)
+        public JsonResult GetProvince(string key, int page = 1)
         {
-            var query = _context.Area.AsQueryable();
+            List<Area> provinces = _memoryCache.Get<List<Area>>("Province");
 
-            query = query.Where(q => q.LevelType == levelType);
+            if (!string.IsNullOrEmpty(key)) { provinces = provinces.Where(q => q.Name.Contains(key) || q.Pinyin.Contains(key)).ToList(); }
 
-            if (!string.IsNullOrEmpty(pId)) { query = query.Where(q => q.ParentId.Equals(pId)); }
+            int total = provinces.Count;
 
-            if (!string.IsNullOrEmpty(key)) { query = query.Where(q => q.Name.Contains(key) || q.Pinyin.Contains(key)); }
+            provinces = provinces.OrderBy(q => q.CityCode).Skip((page - 1) * 10).Take(10).ToList();
 
             ArrayList results = new ArrayList();
 
-            List<Area> list = query.OrderBy(q => q.CityCode).Skip((page - 1) * 10).Take(10).ToList();
-
-            foreach (var item in list)
+            foreach (var item in provinces)
             {
                 results.Add(new { id = item.ID, name = item.Name, code = item.CityCode });
             }
 
-            int total = query.Count();
+            return Json(new { results = results, total = total, pageSize = 10 });
+        }
+
+        [HttpGet]
+        public JsonResult GetCity(string pId, string key, int page = 1)
+        {
+            List<Area> provinces = _memoryCache.Get<List<Area>>("Province");
+
+            List<Area> cities = _memoryCache.Get<List<Area>>("City");
+
+            if (!string.IsNullOrEmpty(pId)) { cities = cities.Where(q => q.ParentId.Equals(pId)).ToList(); }
+
+            if (!string.IsNullOrEmpty(key)) { cities = cities.Where(q => q.Name.Contains(key) || q.Pinyin.Contains(key)).ToList(); }
+
+            int total = cities.Count;
+
+            cities = cities.OrderBy(q => q.CityCode).Skip((page - 1) * 10).Take(10).ToList();
+
+            ArrayList results = new ArrayList();
+
+            foreach (var item in cities)
+            {
+                Area p = provinces.Where(q => q.ID.Equals(item.ParentId)).FirstOrDefault();
+
+                object pItem = null;
+
+                if (p != null) { pItem = new { id = p.ID, name = p.Name, code = p.CityCode }; }
+
+                results.Add(new { id = item.ID, name = item.Name, code = item.CityCode, province = pItem });
+            }
+
+            return Json(new { results = results, total = total, pageSize = 10 });
+        }
+
+        [HttpGet]
+        public JsonResult GetCountry(string pId, string key, int page = 1)
+        {
+            List<Area> provinces = _memoryCache.Get<List<Area>>("Province");
+
+            List<Area> cities = _memoryCache.Get<List<Area>>("City");
+
+            List<Area> countries = _memoryCache.Get<List<Area>>("Country");
+
+            if (!string.IsNullOrEmpty(pId)) { countries = countries.Where(q => q.ParentId.Equals(pId)).ToList(); }
+
+            if (!string.IsNullOrEmpty(key)) { countries = countries.Where(q => q.Name.Contains(key) || q.Pinyin.Contains(key)).ToList(); }
+
+            int total = countries.Count;
+
+            countries = countries.OrderBy(q => q.CityCode).Skip((page - 1) * 10).Take(10).ToList();
+
+            ArrayList results = new ArrayList();
+
+            foreach (var item in countries)
+            {
+                Area ci = cities.Where(q => q.ID.Equals(item.ParentId)).FirstOrDefault();
+
+                Area p = provinces.Where(q => q.ID.Equals(ci?.ParentId)).FirstOrDefault();
+
+                object ciItem = null;
+
+                object pItem = null;
+
+                if (ci != null) { ciItem = new { id = ci.ID, name = ci.Name, code = ci.CityCode }; }
+
+                if (p != null) { pItem = new { id = p.ID, name = p.Name, code = p.CityCode }; }
+
+                results.Add(new { id = item.ID, name = item.Name, code = item.CityCode, province = pItem, city = ciItem });
+            }
 
             return Json(new { results = results, total = total, pageSize = 10 });
         }
