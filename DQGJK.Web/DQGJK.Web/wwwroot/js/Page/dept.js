@@ -204,6 +204,10 @@ $(function () {
 
     widgets.table.query();
 
+    $(".query").click(function () {
+        widgets.table.query();
+    });
+
     $("#dlg_edit").on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         widgets.dialog.open($(this), button.parent().data('id'));
