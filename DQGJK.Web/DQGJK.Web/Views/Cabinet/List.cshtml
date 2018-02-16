@@ -1,34 +1,28 @@
 ﻿@using DQGJK.Models;
 @using DQGJK.Web.PageModels;
-@model List<StationInfo>
+@model List<CabinetInfo>
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped table-condensed">
         <thead>
             <tr>
-                <td>站点名称</td>
-                <td>站点编号</td>
+                <td>设备名称</td>
+                <td>设备编号</td>
                 <td>所属机构</td>
-                <td>省</td>
-                <td>市</td>
-                <td>县</td>
-                <td>地址</td>
+                <td>所属站点</td>
                 <td>状态</td>
                 <td>操作</td>
             </tr>
         </thead>
         <tbody>
             @{
-                foreach (StationInfo item in Model)
+                foreach (CabinetInfo item in Model)
                 {
                     <tr>
                         <td>@item.Name</td>
                         <td>@item.Code</td>
                         <td>@item.DeptName</td>
-                        <td>@item.Province</td>
-                        <td>@item.City</td>
-                        <td>@item.Country</td>
-                        <td>@item.Address</td>
+                        <td>@item.StationName</td>
                         @if (@item.Status == Status.enable)
                         {
                             <td><span class="label label-info label-mini">启用</span></td>
@@ -39,7 +33,7 @@
                         }
                         <td data-id="@item.ID">
                             <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#dlg_edit"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-danger btn-xs delStation"><i class="fa fa-trash-o "></i></button>
+                            <button class="btn btn-danger btn-xs delCabinet"><i class="fa fa-trash-o "></i></button>
                         </td>
                     </tr>
                 }
@@ -54,22 +48,22 @@
 
 <script type="text/javascript">
     $(function () {
-        $(".delStation").click(function () {
-            if (!confirm("您确定要删除此站点？")) { return false; }
+        $(".delCabinet").click(function () {
+            if (!confirm("您确定要删除此设备？")) { return false; }
 
             var _this = $(this);
 
-            Station.Widgets.table.delete($(this).parent().data('id'));
+            Cabinet.Widgets.table.delete($(this).parent().data('id'));
         });
 
         $(".pagination a").click(function () {
-            Station.Widgets.table.query($(this).data("pageindex"));
+            Cabinet.Widgets.table.query($(this).data("pageindex"));
             return false;
         });
 
         $("#goToBtn").click(function () {
             if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
-            Station.Widgets.table.query($(this).data("pageindex"));
+            Cabinet.Widgets.table.query($(this).data("pageindex"));
             return false;
         })
     });

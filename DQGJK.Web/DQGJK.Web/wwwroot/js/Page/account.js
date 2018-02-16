@@ -92,22 +92,22 @@ Account.Dialog.prototype = {
 
         $('select[name=Status]', _form).val($("#Status", _form).val());
 
+        $("input._select", _form).on("change", function () {
+            var _this = $(this);
+
+            if (_this.val()) {
+                _this.parents(".form-group:first").removeClass("has-error");
+                _this.parents(".form-group:first").children("span").remove();
+            }
+            else {
+                var html = '<span for="StationID" generated="true" class="help-block">{0}是必选项</span>';
+                _this.parents(".form-group:first").addClass("has-error");
+                _this.parent().after(html.format(_this.siblings("span").text()));
+            }
+        });
+
         $(".save", modal).click(function () {
-            var isNull = false;
-
-            $("input._select", _form).each(function (i, v) {
-                if (!$(v).val()) {
-                    var html = '<label generated="true" class="error">{0}是必选项</label>';
-
-                    $(".error", $(v).parents(".input-group:first")).remove();
-                    $(v).after(html.format($(v).siblings("span").text()));
-
-                    isNull = true;
-                    return false;
-                }
-            });
-
-            if (isNull) return false;
+            if ($(".has-error").length > 0) { return false; }
             _form.submit();
         });
     }
@@ -117,6 +117,10 @@ $(function () {
     var widgets = Account.Widgets.init();
 
     widgets.table.query();
+
+    $(".query").click(function () {
+        widgets.table.query();
+    });
 
     $("#dlg_edit").on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);

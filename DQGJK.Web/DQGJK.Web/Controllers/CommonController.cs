@@ -71,7 +71,7 @@ namespace DQGJK.Web.Controllers
 
             query = query.Where(q => q.Status == Status.enable);
 
-            //if (department != null) { query = query.Where(q => q.DepartmentID.Equals(department.ID)); }
+            if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
 
             if (!string.IsNullOrEmpty(key)) { query = query.Where(q => q.Name.Contains(key) || q.Code.Contains(key)); }
 

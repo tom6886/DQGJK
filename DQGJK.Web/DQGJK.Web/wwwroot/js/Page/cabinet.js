@@ -1,22 +1,22 @@
 ﻿;
-var Station = Station || {};
+var Cabinet = Cabinet || {};
 
-Station.Widgets = function () { }
+Cabinet.Widgets = function () { }
 
-Station.Widgets = {
+Cabinet.Widgets = {
     dialog: null,
     table: null,
     init: function () {
-        this.dialog = new Station.Dialog();
-        this.table = new Station.Table().init();
+        this.dialog = new Cabinet.Dialog();
+        this.table = new Cabinet.Table().init();
 
         return this;
     }
 };
 
-Station.Table = function () { };
+Cabinet.Table = function () { };
 
-Station.Table.prototype = {
+Cabinet.Table.prototype = {
     keyInput: null,
     container: null,
     pageIndexBox: null,
@@ -30,14 +30,14 @@ Station.Table.prototype = {
     query: function (pi) {
         var _this = this;
 
-        $.get("station/List", { key: _this.keyInput.val(), pi: pi }, function (r) {
+        $.get("cabinet/List", { key: _this.keyInput.val(), pi: pi }, function (r) {
             _this.container.html(r);
         });
     },
-    delete: function (stationID) {
+    delete: function (cabinetID) {
         var _this = this;
 
-        $.post("station/Delete", { stationID: stationID }, function (r) {
+        $.post("cabinet/Delete", { cabinetID: cabinetID }, function (r) {
             alert(r.msg);
 
             if (r.code < 0) { return false; }
@@ -47,13 +47,13 @@ Station.Table.prototype = {
     }
 }
 
-Station.Dialog = function () { };
+Cabinet.Dialog = function () { };
 
-Station.Dialog.prototype = {
-    open: function (modal, stationID) {
+Cabinet.Dialog.prototype = {
+    open: function (modal, cabinetID) {
         var _this = this;
 
-        $.post("station/Dialog", { stationID: stationID }, function (r) {
+        $.post("cabinet/Dialog", { cabinetID: cabinetID }, function (r) {
             if (r.code < 0) {
                 alert(r.msg);
                 return false;
@@ -76,19 +76,17 @@ Station.Dialog.prototype = {
 
                 if (r.code > 0) {
                     modal.modal('hide');
-                    Station.Widgets.table.query();
+                    Cabinet.Widgets.table.query();
                 }
             }
         }).validate({
             rules: {
                 Name: "required",
-                Code: "required",
-                Address: "required"
+                Code: "required"
             },
             messages: {
-                Name: "站点名称是必填项",
-                Code: "站点编号是必填项",
-                Address: "站点地址是必填项"
+                Name: "设备名称是必填项",
+                Code: "设备编号是必填项"
             }
         });
 
@@ -110,18 +108,13 @@ Station.Dialog.prototype = {
 
         $(".save", modal).click(function () {
             if ($(".has-error").length > 0) { return false; }
-
-            var country = $("input[name=Country]", modal).select2("data");
-
-            $("input[name=CityCode]", modal).val(country.id);
-
             _form.submit();
         });
     }
 }
 
 $(function () {
-    var widgets = Station.Widgets.init();
+    var widgets = Cabinet.Widgets.init();
 
     widgets.table.query();
 

@@ -86,11 +86,6 @@
         r: function (e) {
             priv.select({ elem: e, placeholder: "选择角色", url: "GetRoles", dataParam: "id" });
         },
-        qbm: function (e) {
-            priv.select({
-                elem: e, placeholder: "选择部门", url: "GetQyDept", dataParam: "id"
-            });
-        },
         p: function (e) {
             area.province = priv.select({ elem: e, placeholder: "选择省", url: "GetProvince", dataParam: "name" });
 

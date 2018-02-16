@@ -60,10 +60,10 @@ namespace DQGJK.Web.Controllers
         {
             Department oldDept = _context.Department.Where(q => q.ID.Equals(dept.ID)).FirstOrDefault();
 
-            Guser user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
-
             if (oldDept == null)
             {
+                Guser user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
+
                 dept.Creator = user.DisplayName;
                 dept.CreatorID = user.ID;
                 dept.Status = Status.enable;

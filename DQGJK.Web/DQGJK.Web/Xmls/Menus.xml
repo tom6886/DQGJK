@@ -47,15 +47,11 @@
       </subMenu>
       <subMenu roles="Administrator">
         <name>设备管理</name>
-        <href>device</href>
+        <href>cabinet</href>
       </subMenu>
       <subMenu roles="Administrator,Customer">
         <name>个人信息</name>
         <href>info</href>
-      </subMenu>
-      <subMenu roles="Administrator">
-        <name>用户设备</name>
-        <href>userdevice</href>
       </subMenu>
     </subMenus>
   </menu>

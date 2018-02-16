@@ -89,8 +89,12 @@ namespace DQGJK.Web.Controllers
 
             if (oldStat == null)
             {
+                Guser user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
+
                 if (department != null) { station.DeptID = department.ID; }
 
+                station.CreatorID = user.ID;
+                station.Creator = user.DisplayName;
                 station.Status = Status.enable;
 
                 _context.Station.Add(station);

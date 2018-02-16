@@ -87,7 +87,11 @@ namespace DQGJK.Web.Controllers
 
             if (oldUser == null)
             {
+                Guser currentUser = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
+
                 user.PassWord = StringUtil.Md5Encrypt(user.PassWord);
+                user.CreatorID = currentUser.ID;
+                user.Creator = currentUser.DisplayName;
                 user.Status = Status.enable;
 
                 _context.Guser.Add(user);
