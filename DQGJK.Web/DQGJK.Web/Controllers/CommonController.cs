@@ -63,13 +63,29 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetStation(string key, int page = 1)
+        public JsonResult GetStation(string key, int areaType, string areaCode, int page = 1)
         {
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
             var query = _context.Station.AsQueryable();
 
             query = query.Where(q => q.Status == Status.enable);
+
+            switch (areaType)
+            {
+                case 1:
+                    string start = areaCode.Substring(0, 2);
+                    query = query.Where(q => q.CityCode.StartsWith(start));
+                    break;
+                case 2:
+                    List<Area> countries = _memoryCache.Get<List<Area>>("Country");
+                    List<string> codes = countries.Where(q => q.ParentId.Equals(areaCode)).Select(q => q.CityCode).ToList();
+                    query = query.Where(q => codes.Contains(q.CityCode));
+                    break;
+                case 3:
+                    query = query.Where(q => q.CityCode.Equals(areaCode));
+                    break;
+            }
 
             if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
 

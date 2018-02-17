@@ -2,7 +2,21 @@
 (function ($) {
     var globe = { dw: null, bm: null };
 
-    var area = { province: null, city: null, country: null };
+    var area = {
+        province: null, city: null, country: null, level: null, value: null,
+        setValue: function () {
+            var p = area.province.select2('data');
+            var ci = area.city.select2('data');
+            var co = area.country.select2('data');
+
+            if (co) { area.level = 3; area.value = co.id; return; }
+            if (ci) { area.level = 2; area.value = ci.id; return; }
+            if (p) { area.level = 1; area.value = p.id; return; }
+
+            area.level = null;
+            area.value = null;
+        }
+    };
 
     var priv = {
         set: function ($this) {
@@ -81,7 +95,14 @@
             });
         },
         s: function (e) {
-            priv.select({ elem: e, placeholder: "选择站点", url: "GetStation", dataParam: "id" });
+            priv.select({
+                elem: e, placeholder: "选择站点", url: "GetStation", dataParam: "id", addQuery: function (query) {
+                    if (area.level && area.value) {
+                        query.areaType = area.level;
+                        query.areaCode = area.value;
+                    }
+                }
+            });
         },
         r: function (e) {
             priv.select({ elem: e, placeholder: "选择角色", url: "GetRoles", dataParam: "id" });
@@ -97,6 +118,8 @@
                 if (area.country) {
                     area.country.select2('val', '');
                 }
+
+                area.setValue();
             });
         },
         ci: function (e) {
@@ -110,14 +133,17 @@
             });
 
             area.city.on('change', function (e) {
-                if (area.province) {
-                    var i = area.city.select2('data');
-                    if (i) { area.province.select2('data', i.province); }
+                var i = area.city.select2('data');
+
+                if (area.province && i) {
+                    area.province.select2('data', i.province);
                 }
 
                 if (area.country) {
                     area.country.select2('val', '');
                 }
+
+                area.setValue();
             });
         },
         co: function (e) {
@@ -142,6 +168,8 @@
                 if (area.city) {
                     area.city.select2('data', i.city);
                 }
+
+                area.setValue();
             });
         }
     }

@@ -1,7 +1,7 @@
 ﻿<xml>
   <menu roles="Administrator,Customer">
-    <name>图片浏览</name>
-    <href>NewImage</href>
+    <name>实时数据</name>
+    <href>home</href>
     <iclass>fa-dashboard</iclass>
     <subMenus></subMenus>
   </menu>
@@ -15,7 +15,7 @@
 
   <menu roles="">
     <name>电子地图</name>
-    <href>home</href>
+    <href>map</href>
     <iclass>fa-picture-o</iclass>
     <subMenus></subMenus>
   </menu>
