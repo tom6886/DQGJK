@@ -1,53 +1,58 @@
 ﻿<link href="~/js/select2/select2.css" rel="stylesheet" />
 <div class="row">
-    <div class="col-md-3">
-        <div class="content-panel panel panel-default" style="overflow: auto;">
+    <div class="col-md-12">
+        <div class="content-panel panel panel-default">
             <div class="panel-body">
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <span class="input-group-addon">省</span>
-                            <input type="hidden" data-select="p" class="form-control _select" name="Province" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <span class="input-group-addon">市</span>
-                            <input type="hidden" data-select="ci" class="form-control _select" name="City" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <span class="input-group-addon">县</span>
-                            <input type="hidden" data-select="co" class="form-control _select" name="Country" />
-                        </div>
-                    </div>
-                </div>
                 <div class="row" style="margin-bottom: 15px;">
-                    <div class="col-md-9">
-                        <div class="input-group">
-                            <span class="input-group-addon">站点</span>
-                            <input type="text" data-select="s" class="form-control _select" name="stationID" />
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">省</span>
+                                    <input type="hidden" data-select="p" class="form-control _select" name="Province" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                     <div class="col-md-3">
-                        <a class="btn btn-info query" style="float: right;" href="javascript:void(0)">查询</a>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">市</span>
+                                    <input type="hidden" data-select="ci" class="form-control _select" name="City" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">县</span>
+                                    <input type="hidden" data-select="co" class="form-control _select" name="Country" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">站点</span>
+                                    <input type="text" data-select="s" class="form-control _select" name="stationID" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-info query" style="float: right;" href="javascript:void(0)">查询</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div>当前设备：<span class="span-device"></span></div>
-
                 <section id="unseen"></section>
+                <div class="modal fade" id="dlg_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-9 imageContainner" style="padding-left:0;">
     </div>
 </div>
 

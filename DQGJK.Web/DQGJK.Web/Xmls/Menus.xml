@@ -7,7 +7,7 @@
   </menu>
 
   <menu roles="">
-    <name>历史图片</name>
+    <name>历史数据</name>
     <href>images</href>
     <iclass>fa-camera</iclass>
     <subMenus></subMenus>
@@ -21,9 +21,30 @@
   </menu>
 
   <menu roles="">
-    <name>外破巡视</name>
+    <name>告警查询</name>
     <href>ImageLoop</href>
     <iclass>fa-search</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>趋势分析</name>
+    <href>ImageLoop</href>
+    <iclass>fa-line-chart</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>报警设置</name>
+    <href>ImageLoop</href>
+    <iclass>fa-exclamation-triangle</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>除湿控制</name>
+    <href>ImageLoop</href>
+    <iclass>fa-sun-o</iclass>
     <subMenus></subMenus>
   </menu>
 
