@@ -86,9 +86,9 @@ Station.Dialog.prototype = {
                 Address: "required"
             },
             messages: {
-                Name: "站点名称是必填项",
-                Code: "站点编号是必填项",
-                Address: "站点地址是必填项"
+                Name: "环网柜名称是必填项",
+                Code: "环网柜编号是必填项",
+                Address: "环网柜地址是必填项"
             }
         });
 

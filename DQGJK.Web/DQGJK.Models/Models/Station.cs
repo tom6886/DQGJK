@@ -6,10 +6,10 @@ namespace DQGJK.Models
     [Table("Station")]
     public class Station : BaseEntity
     {
-        [Display(Name = "站点名称"), MaxLength(0x40), Required]
+        [Display(Name = "环网柜名称"), MaxLength(0x40), Required]
         public string Name { get; set; }
 
-        [Display(Name = "站点编号"), MaxLength(100)]
+        [Display(Name = "环网柜编号"), MaxLength(100)]
         public string Code { get; set; }
 
         [Display(Name = "所属单位ID"), MaxLength(100), Required]
@@ -27,7 +27,7 @@ namespace DQGJK.Models
         [Display(Name = "地区编号"), MaxLength(4), Required]
         public string CityCode { get; set; }
 
-        [Display(Name = "站点地址"), MaxLength(200), Required]
+        [Display(Name = "环网柜地址"), MaxLength(200), Required]
         public string Address { get; set; }
 
         public Status Status { get; set; }

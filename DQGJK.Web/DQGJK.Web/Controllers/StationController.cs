@@ -56,7 +56,7 @@ namespace DQGJK.Web.Controllers
 
             Station station = _context.Station.Where(q => q.ID.Equals(stationID)).FirstOrDefault();
 
-            if (station == null) { return Json(new { code = -1, msg = "找不到指定的站点" }); }
+            if (station == null) { return Json(new { code = -1, msg = "找不到指定的环网柜" }); }
 
             ViewBag.station = station;
 
@@ -128,7 +128,7 @@ namespace DQGJK.Web.Controllers
         {
             Station stat = _context.Station.Where(q => q.ID.Equals(stationID)).FirstOrDefault();
 
-            if (stat == null) { return Json(new { code = -1, msg = "您要删除的站点不存在" }); }
+            if (stat == null) { return Json(new { code = -1, msg = "您要删除的环网柜不存在" }); }
 
             _context.Station.Remove(stat);
 

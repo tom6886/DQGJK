@@ -63,7 +63,7 @@
         <href>user</href>
       </subMenu>
       <subMenu roles="Administrator">
-        <name>站点管理</name>
+        <name>环网柜管理</name>
         <href>station</href>
       </subMenu>
       <subMenu roles="Administrator">

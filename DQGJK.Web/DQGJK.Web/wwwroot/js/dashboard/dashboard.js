@@ -11,7 +11,7 @@
                     id: _this.attr("id"),
                     title: _this.data("title"),
                     config: _config,
-                    data: 60
+                    data: _this.data("value")
                 });
             });
         },

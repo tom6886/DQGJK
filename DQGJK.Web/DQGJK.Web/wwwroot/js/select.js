@@ -96,7 +96,7 @@
         },
         s: function (e) {
             priv.select({
-                elem: e, placeholder: "选择站点", url: "GetStation", dataParam: "id", addQuery: function (query) {
+                elem: e, placeholder: "选择环网柜", url: "GetStation", dataParam: "id", addQuery: function (query) {
                     if (area.level && area.value) {
                         query.areaType = area.level;
                         query.areaCode = area.value;
