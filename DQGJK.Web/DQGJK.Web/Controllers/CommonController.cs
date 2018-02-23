@@ -1,10 +1,17 @@
 ﻿using DQGJK.Models;
 using DQGJK.Web.Contexts;
+using DQGJK.Web.PageModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace DQGJK.Web.Controllers
 {
@@ -12,11 +19,14 @@ namespace DQGJK.Web.Controllers
     {
         private DBContext _context;
 
+        private IHostingEnvironment _host;
+
         private IDistributedCache _memoryCache;
 
-        public CommonController(DBContext context, IDistributedCache memoryCache)
+        public CommonController(DBContext context, IHostingEnvironment host, IDistributedCache memoryCache)
         {
             _context = context;
+            _host = host;
             _memoryCache = memoryCache;
         }
 
@@ -238,6 +248,49 @@ namespace DQGJK.Web.Controllers
             }
 
             return Json(new { results = results, total = total, pageSize = 10 });
+        }
+
+        [HttpGet]
+        public JsonResult GetBoardConfigs()
+        {
+            using (XmlReader reader = XmlReader.Create(_host.ContentRootPath + "/Xmls/Boards.xml"))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Pboard>));
+                List<Pboard> pboards = serializer.Deserialize(reader) as List<Pboard>;
+                reader.Close();
+                return Json(pboards);
+            }
+        }
+
+        [HttpGet]
+        public string SetBoardConfigs()
+        {
+            List<Pboard> list = new List<Pboard>();
+            Pboard pboard = new Pboard();
+            BoardConfig boardConfig = new BoardConfig();
+            List<PlotBand> bands = new List<PlotBand>();
+            PlotBand plotBand = new PlotBand();
+            plotBand.From = -20;
+            plotBand.To = 120;
+            plotBand.Color = "#55BF3B";
+            bands.Add(plotBand);
+            boardConfig.Min = -20;
+            boardConfig.Max = 200;
+            boardConfig.Title = "℃";
+            boardConfig.PlotBands = bands;
+            pboard.Name = "thermograph";
+            pboard.Config = boardConfig;
+            list.Add(pboard);
+
+            using (StringWriter sw = new StringWriter())
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Pboard>));
+                serializer.Serialize(sw, list);
+                sw.Close();
+                string str = sw.ToString();
+
+                return str;
+            }
         }
     }
 }
