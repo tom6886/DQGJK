@@ -63,6 +63,7 @@
     <Compile Include="BCDConverter.cs" />
     <Compile Include="BytesUtil.cs" />
     <Compile Include="CabinetData.cs" />
+    <Compile Include="CRCUtil.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="ElementDecodeFunctions.cs" />
     <Compile Include="ElementDecode.cs" />

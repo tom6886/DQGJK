@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test
 {
@@ -25,6 +22,10 @@ namespace Test
         internal List<Element> Data { get; set; }
 
         internal int TotalLength { get { return DataLength + 23; } }
+
+        internal byte[] CRC { get; set; }
+
+        internal bool IsChecked { get; set; }
 
         internal byte[] ToByte()
         {

@@ -15,13 +15,13 @@ namespace Test
 
         private const string DateTimePattern = "20{0}-{1}-{2} {3}:{4}:{5}";
 
+        private bool IsChecked = true;
         internal MessageDecode(byte[] data)
         {
             Data = data;
         }
 
         #region 解析方法
-
         //获取中心站位置,一个字节,3位
         internal byte CenterCode()
         {
@@ -90,13 +90,39 @@ namespace Test
         //因为前面的数据宽度都是固定的,若正文不是以02开头,则说明解析有误
         internal byte[] Body(int length)
         {
-            if (!Data[19].Equals(BodyStart)) { return null; }
+            if (!Data[19].Equals(BodyStart)) { IsChecked = false; return null; }
 
             byte[] body = new byte[length];
 
             Array.Copy(Data, 20, body, 0, length);
 
             return body;
+        }
+
+        internal byte[] CRC(int length)
+        {
+            int endPosition = length + 20;
+
+            if (!Data[endPosition].Equals(BodyEnd)) { IsChecked = false; return null; }
+
+            byte[] crc = new byte[2];
+
+            Array.Copy(Data, endPosition + 1, crc, 0, 2);
+
+            return crc;
+        }
+
+        internal bool CheckCRC(byte[] crc, int length)
+        {
+            int endBefore = length + 20;
+
+            byte[] checkData = new byte[endBefore];
+
+            Array.Copy(Data, 0, checkData, 0, endBefore);
+
+            string str = CRCUtil.ToModbusCRC16(checkData);
+
+            return str.Equals(BytesUtil.ToHexString(crc));
         }
         #endregion
 
@@ -141,6 +167,13 @@ namespace Test
                 message.Body = Body(message.DataLength);
                 message.Data = ElementDecode.ReadAll(message.Body);
             }
+
+            message.CRC = CRC(message.DataLength);
+
+            //如果起始符和结束符位置都正确，则校验最后的CRC码
+            if (IsChecked) { IsChecked = CheckCRC(message.CRC, message.DataLength); }
+
+            message.IsChecked = IsChecked;
 
             return message;
         }
