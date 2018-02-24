@@ -15,6 +15,10 @@ namespace DQGJK.Models
         [Display(Name = "所属单位ID"), MaxLength(100), Required]
         public string StationID { get; set; }
 
+        public decimal Humidity { get; set; }
+
+        public decimal Temperature { get; set; }
+
         public Status Status { get; set; }
     }
 }

@@ -71,7 +71,6 @@
     <Compile Include="Message.cs" />
     <Compile Include="MessageDecode.cs" />
     <Compile Include="MessageEncode.cs" />
-    <Compile Include="MessageHandler.cs" />
     <Compile Include="Migrations\201801260300536_init.cs" />
     <Compile Include="Migrations\201801260300536_init.Designer.cs">
       <DependentUpon>201801260300536_init.cs</DependentUpon>
