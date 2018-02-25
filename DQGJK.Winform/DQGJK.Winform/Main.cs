@@ -83,8 +83,7 @@ namespace DQGJK.Winform
         {
             MessageDecode reader = new MessageDecode(info);
             Message message = reader.Read();
-            //string str = BytesUtil.ToHexString(info);
-            string str = BytesUtil.ToHexString(message.ToByte());
+            string str = BytesUtil.ToHexString(info);
 
             StringBuilder sb = new StringBuilder();
             sb.Append("接收到数据：");
@@ -94,6 +93,18 @@ namespace DQGJK.Winform
             sb.Append(" 发送内容：" + str);
             sb.Append("\r\n");
             AppendLog(sb.ToString());
+
+            Message res = new Message();
+            res.ClientCode = message.ClientCode;
+            res.CenterCode = message.CenterCode;
+            res.SendTime = message.SendTime;
+            res.Serial = message.Serial;
+            //res.SendTime = DateTime.Now;
+            //res.Serial = message.Serial + 1;
+            res.FunctionCode = "C0";
+
+            listener.Send(token.UID, res.ToByte());
+
         }
 
         private int Listener_GetPackageLength(byte[] data, out int headLength)

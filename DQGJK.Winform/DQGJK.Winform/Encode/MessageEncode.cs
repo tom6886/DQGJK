@@ -37,8 +37,14 @@ namespace DQGJK.Winform
             list.AddRange(BCDUtil.ConvertFrom(message.Serial.ToString(), 2));
             list.AddRange(BytesUtil.ToHexArray(message.FunctionCode));
             list.Add(Mark);
+
+            message.DataLength = (message.Body == null) ? 0 : message.Body.Length;
             list.Add((byte)message.DataLength);
+
             list.Add(BodyStart);
+
+            if (message.Body != null) { list.AddRange(message.Body); }
+
             list.Add(Tail);
 
             message.CRC = CRCUtil.CRC16(list.ToArray());
