@@ -83,6 +83,7 @@ namespace DQGJK.Winform
         {
             MessageDecode reader = new MessageDecode(info);
             Message message = reader.Read();
+            //string str = BytesUtil.ToHexString(info);
             string str = BytesUtil.ToHexString(message.ToByte());
 
             StringBuilder sb = new StringBuilder();

@@ -40,6 +40,8 @@ namespace DQGJK.Winform
             list.Add((byte)message.DataLength);
             list.Add(BodyStart);
             list.Add(Tail);
+
+            message.CRC = CRCUtil.CRC16(list.ToArray());
             list.AddRange(message.CRC);
 
             return list.ToArray();

@@ -114,13 +114,13 @@ namespace DQGJK.Winform
 
         internal bool CheckCRC(byte[] crc, int length)
         {
-            int endBefore = length + 20;
+            int endBefore = length + 21;
 
             byte[] checkData = new byte[endBefore];
 
             Array.Copy(Data, 0, checkData, 0, endBefore);
 
-            string str = CRCUtil.ToModbusCRC16(checkData);
+            string str = BytesUtil.ToHexString(CRCUtil.CRC16(checkData));
 
             return str.Equals(BytesUtil.ToHexString(crc));
         }
