@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
-    internal enum DecodeType : byte
+    public enum DecodeType : byte
     {
         Code = 0x08,
         Humidity = 0x01,
@@ -11,7 +11,7 @@ namespace DQGJK.Winform
         State = 0x03
     }
 
-    internal class ElementDecode
+    public class ElementDecode
     {
         private static int GetLength(byte type)
         {
@@ -58,7 +58,7 @@ namespace DQGJK.Winform
             return BytesUtil.SubBytes(data, length);
         }
 
-        internal static Element Read(byte[] data)
+        public static Element Read(byte[] data)
         {
             if (!data[0].Equals((byte)DecodeType.Code)) { return null; }
 
@@ -76,7 +76,7 @@ namespace DQGJK.Winform
             return element;
         }
 
-        internal static List<Element> ReadAll(byte[] data)
+        public static List<Element> ReadAll(byte[] data)
         {
             List<Element> list = new List<Element>();
 

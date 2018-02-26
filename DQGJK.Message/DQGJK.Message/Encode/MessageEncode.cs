@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
-    internal class MessageEncode
+    public class MessageEncode
     {
         private static byte[] Head = { 0x7E, 0x7E };
 
@@ -25,7 +25,7 @@ namespace DQGJK.Winform
             return number > 9 ? number.ToString() : "0" + number;
         }
 
-        internal static byte[] ConvertToByte(Message message)
+        public static byte[] ConvertToByte(SendMessage message)
         {
             List<byte> list = new List<byte>();
 
@@ -38,8 +38,8 @@ namespace DQGJK.Winform
             list.AddRange(BytesUtil.ToHexArray(message.FunctionCode));
             list.Add(Mark);
 
-            message.DataLength = (message.Body == null) ? 0 : message.Body.Length;
-            list.Add((byte)message.DataLength);
+            int DataLength = (message.Body == null) ? 0 : message.Body.Length;
+            list.Add((byte)DataLength);
 
             list.Add(BodyStart);
 
@@ -47,8 +47,8 @@ namespace DQGJK.Winform
 
             list.Add(Tail);
 
-            message.CRC = CRCUtil.CRC16(list.ToArray());
-            list.AddRange(message.CRC);
+            byte[] CRC = CRCUtil.CRC16(list.ToArray());
+            list.AddRange(CRC);
 
             return list.ToArray();
         }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
     /// <summary>
     /// 1、N(D,d)表示十进制浮点数。其中D表示除小数点以外的数据位数，d表示小数点后的数据位数
     /// 2、例如：02 1A表示实时温度标识符，其中1A位数据结构定义，高5位=3（字节个数），低3位=2（小数点位数）
     /// 3、显示均为BCD码展示。
     /// </summary>
-    internal class ElementDecodeFunctions
+    public class ElementDecodeFunctions
     {
         /// <summary>
         /// 08H	N(2) 08H
@@ -17,7 +17,7 @@ namespace DQGJK.Winform
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        internal static string Code(byte[] data)
+        public static string Code(byte[] data)
         {
             return BCDUtil.ConvertTo(data[2]);
         }
@@ -30,7 +30,7 @@ namespace DQGJK.Winform
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        internal static decimal Humiture(byte[] data)
+        public static decimal Humiture(byte[] data)
         {
             byte[] temp = BytesUtil.SubBytes(data, 2, 3);
 
@@ -46,7 +46,7 @@ namespace DQGJK.Winform
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        internal static DeviceState State(byte[] data)
+        public static DeviceState State(byte[] data)
         {
             byte[] temp = BytesUtil.SubBytes(data, 2, 2);
 

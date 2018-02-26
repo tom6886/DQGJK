@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using DQGJK.Message;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -99,16 +95,20 @@ namespace Test.Client
 
         private int Smanager_GetPackageLength(byte[] data, out int headLength)
         {
-            headLength = 4;
-            byte[] lenBytes = new byte[4];
-            Array.Copy(data, lenBytes, 4);
-            int packageLen = BitConverter.ToInt32(lenBytes, 0);
-            return packageLen;
+            return MessageDecode.GetDataLength(data, out headLength);
         }
 
         private void Smanager_OnMsgReceived(byte[] info)
         {
-            SetMemoText("接收到服务端的消息：" + Encoding.UTF8.GetString(info) + "\r\n");
+            string str = BytesUtil.ToHexString(info);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("接收到数据：");
+            sb.Append("\r\n");
+            sb.Append(" 发送内容：" + str);
+            sb.Append("\r\n");
+
+            SetMemoText(sb.ToString());
         }
 
         private delegate void setMemoText(string str);

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
-    internal class BCDUtil
+    public class BCDUtil
     {
         private static Byte[] ConvertFrom(string strTemp)
         {

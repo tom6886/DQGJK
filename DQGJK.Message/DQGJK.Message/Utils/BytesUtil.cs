@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
-    internal class BytesUtil
+    public class BytesUtil
     {
-        internal static List<byte[]> SplteBytes(byte[] data, int index)
+        public static List<byte[]> SplteBytes(byte[] data, int index)
         {
             List<byte[]> list = new List<byte[]>();
 
@@ -25,7 +25,7 @@ namespace DQGJK.Winform
             return list;
         }
 
-        internal static byte[] SubBytes(byte[] data, int start)
+        public static byte[] SubBytes(byte[] data, int start)
         {
             byte[] copy = new byte[data.Length - start];
 
@@ -34,7 +34,7 @@ namespace DQGJK.Winform
             return copy;
         }
 
-        internal static byte[] SubBytes(byte[] data, int start, int length)
+        public static byte[] SubBytes(byte[] data, int start, int length)
         {
             byte[] copy = new byte[length];
 
@@ -43,7 +43,7 @@ namespace DQGJK.Winform
             return copy;
         }
 
-        internal static string ToHexString(byte[] bytes)
+        public static string ToHexString(byte[] bytes)
         {
             if (bytes == null) { return null; }
 
@@ -57,7 +57,7 @@ namespace DQGJK.Winform
             return sb.ToString();
         }
 
-        internal static byte[] ToHexArray(string hexString)
+        public static byte[] ToHexArray(string hexString)
         {
             hexString = hexString.Replace(" ", "");
 
@@ -73,7 +73,7 @@ namespace DQGJK.Winform
             return returnBytes;
         }
 
-        internal static string ToBinString(byte[] bytes)
+        public static string ToBinString(byte[] bytes)
         {
             if (bytes == null) { return null; }
 
@@ -91,7 +91,7 @@ namespace DQGJK.Winform
             return sb.ToString();
         }
 
-        internal static int[] ToBinaryArray(byte[] bytes)
+        public static int[] ToBinaryArray(byte[] bytes)
         {
             string binString = ToBinString(bytes);
 

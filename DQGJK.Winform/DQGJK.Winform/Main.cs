@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DQGJK.Message;
+using System;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
@@ -47,6 +48,8 @@ namespace DQGJK.Winform
 
                 listener.OnMsgReceived += Listener_OnMsgReceived;
 
+                listener.OnSended += Listener_OnSended;
+
                 btn1.Text = "停止";
 
                 btn1.Tag = 1;
@@ -79,10 +82,20 @@ namespace DQGJK.Winform
             }
         }
 
+        private void Listener_OnSended(AsyncUserToken token, System.Net.Sockets.SocketError error)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("已发送消息：");
+            sb.Append("\r\n");
+            sb.Append(" 发送IP：" + token.Remote.Address.ToString());
+            sb.Append("\r\n");
+            AppendLog(sb.ToString());
+        }
+
         private void Listener_OnMsgReceived(AsyncUserToken token, byte[] info)
         {
             MessageDecode reader = new MessageDecode(info);
-            Message message = reader.Read();
+            RecieveMessage message = reader.Read();
             string str = BytesUtil.ToHexString(info);
 
             StringBuilder sb = new StringBuilder();
@@ -94,7 +107,7 @@ namespace DQGJK.Winform
             sb.Append("\r\n");
             AppendLog(sb.ToString());
 
-            Message res = new Message();
+            SendMessage res = new SendMessage();
             res.ClientCode = message.ClientCode;
             res.CenterCode = message.CenterCode;
             res.SendTime = message.SendTime;

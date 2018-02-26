@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
-    internal class CRCUtil
+    public class CRCUtil
     {
-        internal static byte[] CRC16(byte[] data)
+        public static byte[] CRC16(byte[] data)
         {
             int len = data.Length;
 

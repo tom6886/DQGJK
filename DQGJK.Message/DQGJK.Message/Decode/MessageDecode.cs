@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 
-namespace DQGJK.Winform
+namespace DQGJK.Message
 {
-    internal class MessageDecode
+    public class MessageDecode
     {
         private byte[] Data;
 
@@ -16,20 +16,20 @@ namespace DQGJK.Winform
         private const string DateTimePattern = "20{0}-{1}-{2} {3}:{4}:{5}";
 
         private bool IsChecked = true;
-        internal MessageDecode(byte[] data)
+        public MessageDecode(byte[] data)
         {
             Data = data;
         }
 
         #region 解析方法
         //获取中心站位置,一个字节,3位
-        internal byte CenterCode()
+        public byte CenterCode()
         {
             return Data[2];
         }
 
         //获取遥测站位置,五个字节,4-8位
-        internal byte[] ClientCode()
+        public byte[] ClientCode()
         {
             byte[] client = new byte[5];
 
@@ -39,7 +39,7 @@ namespace DQGJK.Winform
         }
 
         //获取信息发送时间,六个字节,发包时间,BCD码,9-14位
-        internal DateTime SendTime()
+        public DateTime SendTime()
         {
             string[] strs = new string[6];
             StringBuilder sb = new StringBuilder(2);
@@ -59,7 +59,7 @@ namespace DQGJK.Winform
         }
 
         //获取流水号,两个字节,15-16位
-        internal int Serial()
+        public int Serial()
         {
             byte[] serial = new byte[2];
 
@@ -74,21 +74,21 @@ namespace DQGJK.Winform
         //C0H 终端机自报数据
         //B1H 中心站遥控设备
         //B2H 修改终端机参数
-        internal string FunctionCode()
+        public string FunctionCode()
         {
             return Data[16].ToString("X2");
         }
 
         //获取上下行标识及报文长度
         //分两个字节,前一个字节代表发送方,无需解析,后一个字节代表数据长度 18-19位
-        internal int DataLength()
+        public int DataLength()
         {
             return Convert.ToInt16(Data[18]);
         }
 
         //获取正文数据,02开头,后面的长度等于前面解析得到的报文长度
         //因为前面的数据宽度都是固定的,若正文不是以02开头,则说明解析有误
-        internal byte[] Body(int length)
+        public byte[] Body(int length)
         {
             if (!Data[19].Equals(BodyStart)) { IsChecked = false; return null; }
 
@@ -99,7 +99,7 @@ namespace DQGJK.Winform
             return body;
         }
 
-        internal byte[] CRC(int length)
+        public byte[] CRC(int length)
         {
             int endPosition = length + 20;
 
@@ -112,7 +112,7 @@ namespace DQGJK.Winform
             return crc;
         }
 
-        internal bool CheckCRC(byte[] crc, int length)
+        public bool CheckCRC(byte[] crc, int length)
         {
             int endBefore = length + 21;
 
@@ -143,16 +143,16 @@ namespace DQGJK.Winform
             return index;
         }
 
-        internal static int GetDataLength(byte[] data, out int headLength)
+        public static int GetDataLength(byte[] data, out int headLength)
         {
             headLength = GetStartPosition(data);
 
             return Convert.ToInt16(data[headLength + 18]) + 23;
         }
 
-        internal Message Read()
+        public RecieveMessage Read()
         {
-            Message message = new Message();
+            RecieveMessage message = new RecieveMessage();
 
             message.CenterCode = CenterCode();
             message.ClientCode = ClientCode();
