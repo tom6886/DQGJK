@@ -9,11 +9,16 @@ namespace DQGJK.Winform
 {
     public partial class Main : Form
     {
-        static SocketListener listener;
+        internal static SocketListener listener;
 
         public Main()
         {
             InitializeComponent();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void btn1_Click(object sender, System.EventArgs e)
@@ -107,17 +112,7 @@ namespace DQGJK.Winform
             sb.Append("\r\n");
             AppendLog(sb.ToString());
 
-            SendMessage res = new SendMessage();
-            res.ClientCode = message.ClientCode;
-            res.CenterCode = message.CenterCode;
-            res.SendTime = message.SendTime;
-            res.Serial = message.Serial;
-            //res.SendTime = DateTime.Now;
-            //res.Serial = message.Serial + 1;
-            res.FunctionCode = "C0";
-
-            listener.Send(token.UID, res.ToByte());
-
+            MessageHandler.Set(new MessageToken() { UID = token.UID, Message = message });
         }
 
         private int Listener_GetPackageLength(byte[] data, out int headLength)

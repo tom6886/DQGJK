@@ -5,7 +5,9 @@ namespace DQGJK.Message
 {
     public class MessageDecode
     {
-        private byte[] Data;
+        public byte[] Data;
+
+        public bool IsChecked = true;
 
         private const byte Start = 0x7E;
 
@@ -14,8 +16,6 @@ namespace DQGJK.Message
         private const byte BodyEnd = 0x16;
 
         private const string DateTimePattern = "20{0}-{1}-{2} {3}:{4}:{5}";
-
-        public bool IsChecked = true;
         public MessageDecode(byte[] data)
         {
             Data = data;

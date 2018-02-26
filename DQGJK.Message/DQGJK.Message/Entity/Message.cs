@@ -5,9 +5,13 @@ namespace DQGJK.Message
 {
     public class RecieveMessage
     {
+        public string Content { get; set; }
+
         public byte CenterCode { get; set; }
 
         public byte[] ClientCode { get; set; }
+
+        public string ClentCodeStr { get { return BytesUtil.ToHexString(ClientCode); } }
 
         public DateTime SendTime { get; set; }
 

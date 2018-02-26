@@ -68,6 +68,7 @@ namespace DQGJK.Message
         {
             RecieveMessage message = new RecieveMessage();
 
+            message.Content = BytesUtil.ToHexString(BaseDecode.Data);
             message.CenterCode = CenterCode();
             message.ClientCode = ClientCode();
             message.SendTime = SendTime();
