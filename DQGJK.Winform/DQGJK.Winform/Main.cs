@@ -94,7 +94,7 @@ namespace DQGJK.Winform
 
         private void Listener_OnMsgReceived(AsyncUserToken token, byte[] info)
         {
-            MessageDecode reader = new MessageDecode(info);
+            RecieveMessageDecode reader = new RecieveMessageDecode(info);
             RecieveMessage message = reader.Read();
             string str = BytesUtil.ToHexString(info);
 

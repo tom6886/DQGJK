@@ -43,6 +43,7 @@
     <Compile Include="Decode\ElementDecode.cs" />
     <Compile Include="Decode\ElementDecodeFunctions.cs" />
     <Compile Include="Decode\MessageDecode.cs" />
+    <Compile Include="Decode\RecieveMessageDecode.cs" />
     <Compile Include="Encode\MessageEncode.cs" />
     <Compile Include="Entity\Element.cs" />
     <Compile Include="Entity\Message.cs" />

@@ -15,41 +15,41 @@ namespace DQGJK.Message
 
         private const string DateTimePattern = "20{0}-{1}-{2} {3}:{4}:{5}";
 
-        private bool IsChecked = true;
+        public bool IsChecked = true;
         public MessageDecode(byte[] data)
         {
             Data = data;
         }
 
         #region 解析方法
-        //获取中心站位置,一个字节,3位
-        public byte CenterCode()
+        //获取中心站位置,一个字节,客户端发送3位,服务端发送8位
+        public byte CenterCode(int position)
         {
-            return Data[2];
+            return Data[position];
         }
 
-        //获取遥测站位置,五个字节,4-8位
-        public byte[] ClientCode()
+        //获取遥测站位置,五个字节,客户端发送4-8位，服务端发送3-7位
+        public byte[] ClientCode(int position)
         {
             byte[] client = new byte[5];
 
-            Array.Copy(Data, 3, client, 0, 5);
+            Array.Copy(Data, position, client, 0, 5);
 
             return client;
         }
 
         //获取信息发送时间,六个字节,发包时间,BCD码,9-14位
-        public DateTime SendTime()
+        public DateTime SendTime(int position)
         {
             string[] strs = new string[6];
             StringBuilder sb = new StringBuilder(2);
 
             //默认取前六个字节 举例：16 12 12 08 59 59
-            for (int i = 8; i < 14; i++)
+            for (int i = position; i < position + 6; i++)
             {
                 sb.Append(Data[i] >> 4);
                 sb.Append(Data[i] & 0x0f);
-                strs[i - 8] = sb.ToString();
+                strs[i - position] = sb.ToString();
                 sb.Clear();
             }
 
@@ -59,11 +59,11 @@ namespace DQGJK.Message
         }
 
         //获取流水号,两个字节,15-16位
-        public int Serial()
+        public int Serial(int position)
         {
             byte[] serial = new byte[2];
 
-            Array.Copy(Data, 14, serial, 0, 2);
+            Array.Copy(Data, position, serial, 0, 2);
 
             return BitConverter.ToInt16(serial, 0);
         }
@@ -74,35 +74,33 @@ namespace DQGJK.Message
         //C0H 终端机自报数据
         //B1H 中心站遥控设备
         //B2H 修改终端机参数
-        public string FunctionCode()
+        public string FunctionCode(int position)
         {
-            return Data[16].ToString("X2");
+            return Data[position].ToString("X2");
         }
 
         //获取上下行标识及报文长度
         //分两个字节,前一个字节代表发送方,无需解析,后一个字节代表数据长度 18-19位
-        public int DataLength()
+        public int DataLength(int position)
         {
             return Convert.ToInt16(Data[18]);
         }
 
         //获取正文数据,02开头,后面的长度等于前面解析得到的报文长度
         //因为前面的数据宽度都是固定的,若正文不是以02开头,则说明解析有误
-        public byte[] Body(int length)
+        public byte[] Body(int position, int length)
         {
-            if (!Data[19].Equals(BodyStart)) { IsChecked = false; return null; }
+            if (!Data[position].Equals(BodyStart)) { IsChecked = false; return null; }
 
             byte[] body = new byte[length];
 
-            Array.Copy(Data, 20, body, 0, length);
+            Array.Copy(Data, position + 1, body, 0, length);
 
             return body;
         }
 
-        public byte[] CRC(int length)
+        public byte[] CRC(int endPosition)
         {
-            int endPosition = length + 20;
-
             if (!Data[endPosition].Equals(BodyEnd)) { IsChecked = false; return null; }
 
             byte[] crc = new byte[2];
@@ -112,13 +110,11 @@ namespace DQGJK.Message
             return crc;
         }
 
-        public bool CheckCRC(byte[] crc, int length)
+        public bool CheckCRC(byte[] crc, int endBeforeLength)
         {
-            int endBefore = length + 21;
+            byte[] checkData = new byte[endBeforeLength];
 
-            byte[] checkData = new byte[endBefore];
-
-            Array.Copy(Data, 0, checkData, 0, endBefore);
+            Array.Copy(Data, 0, checkData, 0, endBeforeLength);
 
             string str = BytesUtil.ToHexString(CRCUtil.CRC16(checkData));
 
@@ -148,34 +144,6 @@ namespace DQGJK.Message
             headLength = GetStartPosition(data);
 
             return Convert.ToInt16(data[headLength + 18]) + 23;
-        }
-
-        public RecieveMessage Read()
-        {
-            RecieveMessage message = new RecieveMessage();
-
-            message.CenterCode = CenterCode();
-            message.ClientCode = ClientCode();
-            message.SendTime = SendTime();
-            message.Serial = Serial();
-            message.FunctionCode = FunctionCode();
-
-            //如果是心跳包则不解析包体
-            if (!message.FunctionCode.Equals("F2"))
-            {
-                message.DataLength = DataLength();
-                message.Body = Body(message.DataLength);
-                message.Data = ElementDecode.ReadAll(message.Body);
-            }
-
-            message.CRC = CRC(message.DataLength);
-
-            //如果起始符和结束符位置都正确，则校验最后的CRC码
-            if (IsChecked) { IsChecked = CheckCRC(message.CRC, message.DataLength); }
-
-            message.IsChecked = IsChecked;
-
-            return message;
         }
     }
 }
