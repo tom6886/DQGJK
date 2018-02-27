@@ -31,10 +31,22 @@ IMap.Table = function () {
 }
 
 IMap.Table.prototype = {
-    
+    query: function (pi) {
+        var _this = this;
+
+        $.get("map/StationList", {
+            province: _this.province.select2("val"),
+            city: _this.city.select2("val"),
+            country: _this.country.select2("val"),
+            pi: pi
+        }, function (r) {
+            _this.container.html(r);
+        });
+    }
 }
 
 $(function () {
     var widgets = IMap.Widgets.init();
 
+    widgets.table.query();
 });

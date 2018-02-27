@@ -1,0 +1,28 @@
+﻿@using DQGJK.Models;
+@using DQGJK.Web.PageModels;
+@model List<StationInfo>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed" id="deviceList">
+        <tbody>
+            @{
+                foreach (StationInfo item in Model)
+                {
+                    <tr data-code="@item.Code">
+                        <td style="line-height: 2.5; cursor: pointer;">@item.Name ( @item.Code ) </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div style="padding: 10px 15px;">
+    @await Component.InvokeAsync("Pager", (Pager)ViewBag.Pager)
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+    });
+</script>
