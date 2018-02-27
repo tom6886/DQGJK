@@ -1,32 +1,26 @@
 ﻿;
 var Cabinet = Cabinet || {};
 
-Cabinet.Widgets = function () { }
-
 Cabinet.Widgets = {
     dialog: null,
     table: null,
     init: function () {
         this.dialog = new Cabinet.Dialog();
-        this.table = new Cabinet.Table().init();
+        this.table = new Cabinet.Table();
 
         return this;
     }
 };
 
-Cabinet.Table = function () { };
+Cabinet.Table = function () {
+    this.keyInput = $("input[name=key]");
+    this.container = $("#unseen");
+    this.pageIndexBox = $("#pageIndexBox");
+
+    return this;
+};
 
 Cabinet.Table.prototype = {
-    keyInput: null,
-    container: null,
-    pageIndexBox: null,
-    init: function () {
-        this.keyInput = $("input[name=key]");
-        this.container = $("#unseen");
-        this.pageIndexBox = $("#pageIndexBox");
-
-        return this;
-    },
     query: function (pi) {
         var _this = this;
 

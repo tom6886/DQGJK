@@ -1,32 +1,26 @@
 ﻿;
 var Account = Account || {};
 
-Account.Widgets = function () { }
-
 Account.Widgets = {
     dialog: null,
     table: null,
     init: function () {
         this.dialog = new Account.Dialog();
-        this.table = new Account.Table().init();
+        this.table = new Account.Table();
 
         return this;
     }
 };
 
-Account.Table = function () { };
+Account.Table = function () {
+    this.keyInput = $("input[name=key]");
+    this.container = $("#unseen");
+    this.pageIndexBox = $("#pageIndexBox");
+
+    return this;
+};
 
 Account.Table.prototype = {
-    keyInput: null,
-    container: null,
-    pageIndexBox: null,
-    init: function () {
-        this.keyInput = $("input[name=key]");
-        this.container = $("#unseen");
-        this.pageIndexBox = $("#pageIndexBox");
-
-        return this;
-    },
     query: function (pi) {
         var _this = this;
 

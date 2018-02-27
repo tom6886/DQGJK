@@ -1,8 +1,6 @@
 ﻿;
 var Dept = Dept || {};
 
-Dept.Widgets = function () { }
-
 Dept.Widgets = {
     dialog: null,
     nodes: null,
@@ -10,25 +8,21 @@ Dept.Widgets = {
     init: function () {
         this.dialog = new Dept.Dialog();
         this.nodes = new Dept.Nodes();
-        this.table = new Dept.Table().init();
+        this.table = new Dept.Table();
 
         return this;
     }
 };
 
-Dept.Table = function () { };
+Dept.Table = function () {
+    this.keyInput = $("input[name=key]");
+    this.container = $("#unseen");
+    this.pageIndexBox = $("#pageIndexBox");
+
+    return this;
+};
 
 Dept.Table.prototype = {
-    keyInput: null,
-    container: null,
-    pageIndexBox: null,
-    init: function () {
-        this.keyInput = $("input[name=key]");
-        this.container = $("#unseen");
-        this.pageIndexBox = $("#pageIndexBox");
-
-        return this;
-    },
     query: function (pi) {
         var _this = this;
 

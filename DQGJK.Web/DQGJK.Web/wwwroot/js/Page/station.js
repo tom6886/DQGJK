@@ -1,32 +1,26 @@
 ﻿;
 var Station = Station || {};
 
-Station.Widgets = function () { }
-
 Station.Widgets = {
     dialog: null,
     table: null,
     init: function () {
         this.dialog = new Station.Dialog();
-        this.table = new Station.Table().init();
+        this.table = new Station.Table();
 
         return this;
     }
 };
 
-Station.Table = function () { };
+Station.Table = function () {
+    this.keyInput = $("input[name=key]");
+    this.container = $("#unseen");
+    this.pageIndexBox = $("#pageIndexBox");
+
+    return this;
+};
 
 Station.Table.prototype = {
-    keyInput: null,
-    container: null,
-    pageIndexBox: null,
-    init: function () {
-        this.keyInput = $("input[name=key]");
-        this.container = $("#unseen");
-        this.pageIndexBox = $("#pageIndexBox");
-
-        return this;
-    },
     query: function (pi) {
         var _this = this;
 
