@@ -17,7 +17,7 @@ namespace DQGJK.Winform
         {
             switch (token.Message.FunctionCode)
             {
-                case "F2": return;
+                case "F2": return;//心跳包不做处理
                 case "B0": break;
                 case "C0": C0(token); break;
                 case "B1": break;
