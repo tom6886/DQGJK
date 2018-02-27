@@ -8,7 +8,7 @@
             @{
                 foreach (StationInfo item in Model)
                 {
-                    <tr data-code="@item.Code">
+                    <tr data-lat="@item.Lat" data-lng="@item.Lng" data-code="@item.Code">
                         <td style="line-height: 2.5; cursor: pointer;">@item.Name ( @item.Code ) </td>
                     </tr>
                 }
@@ -23,6 +23,27 @@
 
 <script type="text/javascript">
     $(function () {
+        $(".pagination a").click(function () {
+            IMap.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        });
 
+        $("#goToBtn").click(function () {
+            if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
+            IMap.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        });
+
+        $("table tr").click(function () {
+            var _this = $(this), point = new BMap.Point(_this.attr("data-lng"), _this.attr("data-lat"));
+
+            IMap.Widgets.map.entity.centerAndZoom(point, 18);
+
+            $("table tr").removeClass("clickclass");
+
+            $(this).addClass("clickclass");
+        });
+
+        $("table tr:first").addClass("clickclass");
     });
 </script>

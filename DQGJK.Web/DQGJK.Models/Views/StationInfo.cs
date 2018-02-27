@@ -26,6 +26,10 @@ namespace DQGJK.Models
 
         public string Address { get; set; }
 
+        public string Lng { get; set; }
+
+        public string Lat { get; set; }
+
         public DateTime ModifyTime { get; set; }
 
         public Status Status { get; set; }

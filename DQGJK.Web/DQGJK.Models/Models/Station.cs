@@ -30,6 +30,12 @@ namespace DQGJK.Models
         [Display(Name = "环网柜地址"), MaxLength(200), Required]
         public string Address { get; set; }
 
+        [Display(Name = "经度")]
+        public string Lng { get; set; }
+
+        [Display(Name = "纬度")]
+        public string Lat { get; set; }
+
         public Status Status { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult StationList(string province, string city, string country, int pi = 1)
+        public PartialViewResult StationList(string province, string city, string country, string station, int pi = 1)
         {
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
@@ -33,6 +33,7 @@ namespace DQGJK.Web.Controllers
             if (!string.IsNullOrEmpty(province)) { query = query.Where(q => q.Province.Equals(province)); }
             if (!string.IsNullOrEmpty(city)) { query = query.Where(q => q.City.Equals(city)); }
             if (!string.IsNullOrEmpty(country)) { query = query.Where(q => q.Country.Equals(country)); }
+            if (!string.IsNullOrEmpty(station)) { query = query.Where(q => q.ID.Equals(station)); }
 
             Pager pager = new Pager(query.Count(), pi);
 
