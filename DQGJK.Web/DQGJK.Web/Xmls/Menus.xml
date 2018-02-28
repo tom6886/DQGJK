@@ -21,13 +21,6 @@
   </menu>
 
   <menu roles="">
-    <name>告警查询</name>
-    <href>alarm</href>
-    <iclass>fa-search</iclass>
-    <subMenus></subMenus>
-  </menu>
-
-  <menu roles="">
     <name>趋势分析</name>
     <href>trend</href>
     <iclass>fa-line-chart</iclass>

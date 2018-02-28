@@ -1,0 +1,73 @@
+﻿<link href="~/js/select2/select2.css" rel="stylesheet" />
+
+<style>
+    .pagination { margin: 0; }
+</style>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="content-panel panel panel-default" style="overflow: auto;">
+            <div class="panel-body">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">省</span>
+                            <input type="hidden" data-select="p" class="form-control _select" name="Province" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">市</span>
+                            <input type="hidden" data-select="ci" class="form-control _select" name="City" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">县</span>
+                            <input type="hidden" data-select="co" class="form-control _select" name="Country" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 15px;">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">环网柜</span>
+                            <input type="text" data-select="s" class="form-control _select" name="stationID" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a class="btn btn-info query" style="float: right;" href="javascript:void(0)">查询</a>
+                    </div>
+                </div>
+            </div>
+
+            <section id="unseen"></section>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="content-panel panel panel-default">
+            <div class="panel-body">
+                <div id="chart" style="width:90%;height:80%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/select2/select2.min.js"></script>
+<script type="text/javascript" src="~/js/select.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("._select").select_2();
+    });
+</script>
+
+<script type="text/javascript" src="~/js/Page/trend.js"></script>

@@ -15,18 +15,20 @@ namespace DQGJK.Models
         [Display(Name = "电气柜编号"), MaxLength(100)]
         public string Code { get; set; }
 
-        public decimal Humidity { get; set; }
+        public decimal AverageHumidity { get; set; }
 
-        public decimal Temperature { get; set; }
+        public decimal MaxHumidity { get; set; }
 
-        public int RelayOne { get; set; }
+        public decimal MinHumidity { get; set; }
 
-        public int RelayTwo { get; set; }
+        public decimal AverageTemperature { get; set; }
+
+        public decimal MaxTemperature { get; set; }
+
+        public decimal MinTemperature { get; set; }
 
         public int HumidityAlarm { get; set; }
 
         public int TemperatureAlarm { get; set; }
-
-        public int Dehumidify { get; set; }
     }
 }

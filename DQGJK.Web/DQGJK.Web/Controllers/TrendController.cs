@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DQGJK.Web.Controllers
 {
-    public class HistoryController : BaseController
+    public class TrendController : BaseController
     {
         public IActionResult Index()
         {
@@ -14,7 +14,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult List()
+        public PartialViewResult DeviceList()
         {
             return PartialView("List");
         }

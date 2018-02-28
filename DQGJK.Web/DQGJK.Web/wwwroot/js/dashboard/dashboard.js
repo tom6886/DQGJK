@@ -1,7 +1,5 @@
 ﻿;
 (function ($) {
-    var globe = { ty: null, yy: null };
-
     var priv = {
         set: function ($this) {
             $this.each(function (i, v) {
