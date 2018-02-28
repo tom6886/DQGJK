@@ -1,6 +1,7 @@
 ﻿using DQGJK.Models;
 using DQGJK.Web.Contexts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Utils;
 
@@ -69,12 +70,24 @@ namespace DQGJK.Web.Controllers
 
         public ActionResult LogOff()
         {
-            //Session.Clear();
-            //HttpCookie cookie = new HttpCookie("session-cookie-name");
-            //cookie.Expires = DateTime.Now.AddDays(-1);
-            //System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+            HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "login");
+        }
+
+        public JsonResult Password(string oldPassWord, string newPassWord)
+        {
+            Guser user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
+
+            if (!user.PassWord.Equals(StringUtil.Md5Encrypt(oldPassWord))) { return Json(new { code = -1, msg = "原密码错误，修改密码失败" }); }
+
+            user.PassWord = StringUtil.Md5Encrypt(newPassWord);
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            _context.SaveChanges();
+
+            return Json(new { code = 1, msg = "保存成功" });
         }
     }
 }

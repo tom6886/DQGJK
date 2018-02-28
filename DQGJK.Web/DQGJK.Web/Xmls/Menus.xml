@@ -49,10 +49,6 @@
         <name>设备管理</name>
         <href>cabinet</href>
       </subMenu>
-      <subMenu roles="Administrator,Customer">
-        <name>个人信息</name>
-        <href>info</href>
-      </subMenu>
     </subMenus>
   </menu>
 </xml>
