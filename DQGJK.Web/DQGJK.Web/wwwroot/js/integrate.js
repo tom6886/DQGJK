@@ -208,7 +208,7 @@ $(function () {
     });
 
     $("#btn_password", _form).click(function () {
-        if ($("input[name=newPassWord]", _form).val() != $("input[name=checkPassWord]", _form).val()) { alert("两次输入的密码不一致，请重新输入"); return false; }
+        if ($("input[name=newPassWord]", _form).val() !== $("input[name=checkPassWord]", _form).val()) { alert("两次输入的密码不一致，请重新输入"); return false; }
 
         _form.submit();
     });
