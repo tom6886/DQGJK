@@ -7,6 +7,7 @@ Station.Widgets = {
     init: function () {
         this.dialog = new Station.Dialog();
         this.table = new Station.Table();
+        this.commond = new Station.Commond();
 
         return this;
     }
@@ -112,7 +113,26 @@ Station.Dialog.prototype = {
             _form.submit();
         });
     }
-}
+};
+
+Station.Commond = function () { };
+
+Station.Commond.prototype = {
+    open: function (modal, stationID) {
+        var _this = this;
+
+        $.post("station/Commond", { stationID: stationID }, function (r) {
+            if (r.code < 0) {
+                alert(r.msg);
+                return false;
+            }
+
+            modal.html(r);
+
+            //_this._bind(modal);
+        });
+    }
+};
 
 $(function () {
     var widgets = Station.Widgets.init();
@@ -126,6 +146,13 @@ $(function () {
     $("#dlg_edit").on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         widgets.dialog.open($(this), button.parent().data('id'));
+    }).on('hidden.bs.modal', function () {
+        $(".modal-dialog", $(this)).remove();
+    });
+
+    $("#dlg_commond").on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        widgets.commond.open($(this), button.parent().data('id'));
     }).on('hidden.bs.modal', function () {
         $(".modal-dialog", $(this)).remove();
     });

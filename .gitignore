@@ -244,4 +244,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 DQGJK.Web/DQGJK.Models/Migrations
-DQGJK.Web/Depoly
+DQGJK.Web/Deploy
+DQGJK.Web/DQGJK.Web/Properties/PublishProfiles/
