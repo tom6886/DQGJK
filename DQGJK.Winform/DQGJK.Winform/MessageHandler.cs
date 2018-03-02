@@ -75,6 +75,8 @@ namespace DQGJK.Winform
         {
             C0Data data = new C0Data(message);
             MongoHandler.Save(data);
+            //mongodb不能直接保存内嵌对象 所以需要更新一下
+            data.UpdateData();
         }
         #endregion
 

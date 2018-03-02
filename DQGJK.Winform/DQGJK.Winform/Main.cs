@@ -16,11 +16,6 @@ namespace DQGJK.Winform
             InitializeComponent();
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn1_Click(object sender, System.EventArgs e)
         {
             int tag = Convert.ToInt16(btn1.Tag);

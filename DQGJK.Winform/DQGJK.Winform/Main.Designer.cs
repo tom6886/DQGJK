@@ -200,7 +200,6 @@
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "物联网城市电网柜环境巡检系统服务调试程序";
-            this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).EndInit();

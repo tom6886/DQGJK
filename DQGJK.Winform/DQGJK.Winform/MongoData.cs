@@ -1,5 +1,6 @@
 ﻿using DQGJK.Message;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 
@@ -35,5 +36,16 @@ namespace DQGJK.Winform
         }
 
         internal List<Element> Data { get; set; }
+
+        internal void UpdateData()
+        {
+            var _collection = MongoHandler.GetCollection<C0Data>();
+
+            var _filter = Builders<C0Data>.Filter.Eq(q => q.Id, this.Id);
+
+            var _update = Builders<C0Data>.Update.Set("Data", this.Data);
+
+            _collection.UpdateOneAsync(_filter, _update);
+        }
     }
 }

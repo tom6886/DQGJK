@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Configuration;
 
 namespace DQGJK.Winform
@@ -12,12 +13,26 @@ namespace DQGJK.Winform
             GetCollection<T>().InsertOne(t);
         }
 
-        private static IMongoCollection<T> GetCollection<T>(string collectionName = null)
+        internal static void SaveOfBson<T>(T t)
+        {
+            BsonDocument bd = t.ToBsonDocument();
+            GetBsonCollection<T>().InsertOne(bd);
+        }
+
+        internal static IMongoCollection<T> GetCollection<T>(string collectionName = null)
         {
             MongoUrl mongoUrl = new MongoUrl(_MongoDbConnectionStr);
             var mongoClient = new MongoClient(mongoUrl);
             var database = mongoClient.GetDatabase(mongoUrl.DatabaseName);
             return database.GetCollection<T>(collectionName ?? typeof(T).Name);
+        }
+
+        private static IMongoCollection<BsonDocument> GetBsonCollection<T>(string collectionName = null)
+        {
+            MongoUrl mongoUrl = new MongoUrl(_MongoDbConnectionStr);
+            var mongoClient = new MongoClient(mongoUrl);
+            var database = mongoClient.GetDatabase(mongoUrl.DatabaseName);
+            return database.GetCollection<BsonDocument>(collectionName ?? typeof(T).Name);
         }
     }
 }

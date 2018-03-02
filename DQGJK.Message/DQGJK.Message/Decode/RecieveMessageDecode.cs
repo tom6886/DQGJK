@@ -75,13 +75,14 @@ namespace DQGJK.Message
             message.Serial = Serial();
             message.FunctionCode = FunctionCode();
 
-            //如果是心跳包则不解析包体
-            if (!message.FunctionCode.Equals("F2"))
+            if (message.FunctionCode.Equals("B0") || message.FunctionCode.Equals("C0"))
             {
                 message.DataLength = DataLength();
                 message.Body = Body(message.DataLength);
                 message.Data = ElementDecode.ReadAll(message.Body);
             }
+
+
 
             message.CRC = CRC(message.DataLength + 20);
 
