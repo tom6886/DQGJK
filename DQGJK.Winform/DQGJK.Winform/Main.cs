@@ -152,5 +152,18 @@ namespace DQGJK.Winform
                 edit_log.MaskBox.AppendText(log);
             }
         }
+
+        private void btn_commond_Click(object sender, EventArgs e)
+        {
+            Commond form = new Commond();
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.SetCommond += Form_SetCommond;
+            form.ShowDialog(this);
+        }
+
+        private void Form_SetCommond(string uid, byte[] msg)
+        {
+            listener.Send(uid, msg);
+        }
     }
 }

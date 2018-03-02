@@ -41,6 +41,7 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btn_commond = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -77,6 +78,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.btn_commond);
             this.panelControl1.Controls.Add(this.btn1);
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Controls.Add(this.tb_buffer);
@@ -180,6 +182,15 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            // btn_commond
+            // 
+            this.btn_commond.Location = new System.Drawing.Point(761, 3);
+            this.btn_commond.Name = "btn_commond";
+            this.btn_commond.Size = new System.Drawing.Size(75, 23);
+            this.btn_commond.TabIndex = 13;
+            this.btn_commond.Text = "下发指令";
+            this.btn_commond.Click += new System.EventHandler(this.btn_commond_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -221,5 +232,6 @@
         private DevExpress.XtraEditors.MemoEdit edit_log;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.SimpleButton btn1;
+        private DevExpress.XtraEditors.SimpleButton btn_commond;
     }
 }
