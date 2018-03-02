@@ -15,10 +15,13 @@ namespace DQGJK.Winform
     {
         internal static void Set(MessageToken token)
         {
+            //首先更新缓存中的UID
+            SetCache(token);
+
             switch (token.Message.FunctionCode)
             {
                 case "F2": return;//心跳包不做处理
-                case "B0": break;
+                case "B0": B0(token); break;
                 case "C0": C0(token); break;
                 case "B1": break;
                 case "B2": break;
@@ -26,20 +29,26 @@ namespace DQGJK.Winform
         }
 
         /// <summary>
+        /// 中心站召测数据
+        /// </summary>
+        /// <param name="token"></param>
+        private static void B0(MessageToken token)
+        {
+            SaveMongoData(token.Message);
+        }
+
+        /// <summary>
         /// 终端机自报数据
         /// </summary>
         private static void C0(MessageToken token)
         {
-            SetCache(token);
-
             Response(token);
-
             SaveMongoData(token.Message);
         }
 
         #region 消息处理方法
 
-        #region C0
+        #region B0/C0
         /// <summary>
         /// 查询缓存，是否存在相同code的UID，更新UID
         /// </summary>
@@ -73,7 +82,7 @@ namespace DQGJK.Winform
         /// </summary>
         internal static void SaveMongoData(RecieveMessage message)
         {
-            C0Data data = new C0Data(message);
+            B0C0Data data = new B0C0Data(message);
             MongoHandler.Save(data);
             //mongodb不能直接保存内嵌对象 所以需要更新一下
             data.UpdateData();

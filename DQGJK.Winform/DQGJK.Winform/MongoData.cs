@@ -22,10 +22,10 @@ namespace DQGJK.Winform
     //心跳包，不保存日志数据
     internal class F2Data : MongoData { }
 
-    //终端机自报数据
-    internal class C0Data : MongoData
+    //终端机自报数据或者中心站召测数据
+    internal class B0C0Data : MongoData
     {
-        internal C0Data(RecieveMessage message)
+        internal B0C0Data(RecieveMessage message)
         {
             Id = new ObjectId();
             ClientCode = message.ClentCodeStr;
@@ -39,12 +39,9 @@ namespace DQGJK.Winform
 
         internal void UpdateData()
         {
-            var _collection = MongoHandler.GetCollection<C0Data>();
-
-            var _filter = Builders<C0Data>.Filter.Eq(q => q.Id, this.Id);
-
-            var _update = Builders<C0Data>.Update.Set("Data", this.Data);
-
+            var _collection = MongoHandler.GetCollection<B0C0Data>();
+            var _filter = Builders<B0C0Data>.Filter.Eq(q => q.Id, this.Id);
+            var _update = Builders<B0C0Data>.Update.Set("Data", this.Data);
             _collection.UpdateOneAsync(_filter, _update);
         }
     }
