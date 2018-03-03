@@ -8,7 +8,9 @@ namespace DQGJK.Message
         Code = 0x08,
         Humidity = 0x01,
         Temperature = 0x02,
-        State = 0x03
+        State = 0x03,
+        HumidityLimit = 0x04,
+        TemperatureLimit = 0x05
     }
 
     public class ElementDecode
@@ -23,6 +25,8 @@ namespace DQGJK.Message
                 case DecodeType.Humidity: length = 5; break;
                 case DecodeType.Temperature: length = 5; break;
                 case DecodeType.State: length = 4; break;
+                case DecodeType.HumidityLimit: length = 5; break;
+                case DecodeType.TemperatureLimit: length = 5; break;
             }
 
             return length;
@@ -52,6 +56,14 @@ namespace DQGJK.Message
 
                 case DecodeType.State:
                     element.State = ElementDecodeFunctions.State(data);
+                    break;
+
+                case DecodeType.HumidityLimit:
+                    element.HumidityLimit = ElementDecodeFunctions.Humiture(data);
+                    break;
+
+                case DecodeType.TemperatureLimit:
+                    element.TemperatureLimit = ElementDecodeFunctions.Humiture(data);
                     break;
             }
 

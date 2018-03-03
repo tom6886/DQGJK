@@ -16,13 +16,20 @@ namespace DQGJK.Winform
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            BonusSkins.Register();
-            SkinManager.EnableFormSkins();
-            UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-            Application.Run(new Main());
+                BonusSkins.Register();
+                SkinManager.EnableFormSkins();
+                UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+                Application.Run(new Main());
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("启动时报错", ex.Message, ex.StackTrace);
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DQGJK.Message
 {
@@ -10,11 +12,11 @@ namespace DQGJK.Message
         {
             CenterCode = 2,
             ClientCode = 3,
-            SendTime = 8,
-            Serial = 14,
-            FunctionCode = 16,
-            DataLength = 18,
-            BodyStart = 19
+            SendTime = 9,
+            Serial = 15,
+            FunctionCode = 17,
+            DataLength = 19,
+            BodyStart = 20
         }
 
         public RecieveMessageDecode(byte[] data)
@@ -35,7 +37,8 @@ namespace DQGJK.Message
 
         public DateTime SendTime()
         {
-            return BaseDecode.SendTime((int)DataPosition.SendTime);
+            //return BaseDecode.SendTime((int)DataPosition.SendTime);
+            return DateTime.Now;
         }
 
         public int Serial()
@@ -75,16 +78,19 @@ namespace DQGJK.Message
             message.Serial = Serial();
             message.FunctionCode = FunctionCode();
 
-            if (message.FunctionCode.Equals("B0") || message.FunctionCode.Equals("C0"))
+            if (!message.FunctionCode.Equals("F2"))
             {
                 message.DataLength = DataLength();
                 message.Body = Body(message.DataLength);
-                message.Data = ElementDecode.ReadAll(message.Body);
+                List<Element> dataList = ElementDecode.ReadAll(message.Body);
+
+                if (message.FunctionCode.Equals("B0") || message.FunctionCode.Equals("C0"))
+                    message.Data = dataList.Select(q => new B0C0Element(q)).ToList();
+                else if (message.FunctionCode.Equals("B1"))
+                    message.Data = dataList.Select(q => new B1Element(q)).ToList();
             }
 
-
-
-            message.CRC = CRC(message.DataLength + 20);
+            message.CRC = CRC(message.DataLength + 21);
 
             bool isChecked = BaseDecode.IsChecked;
             //如果起始符和结束符位置都正确，则校验最后的CRC码

@@ -25,8 +25,11 @@ namespace DQGJK.Message
         /// <summary>
         /// 湿度 01H	 N(5,2)	1AH 百分比
         /// 温度 02H	 N(5,2)	1AH	摄氏度
-        /// 温湿度，BCD码，3字节
+        /// 湿度阈值 04H	 N(5,2)	1AH	百分比
+        /// 温度阈值 05H	 N(5,2)	1AH	摄氏度
+        /// 温湿度/温湿度阈值，BCD码，3字节
         /// 示例：01 1A 00 88 66 02 1A 00 12 34
+        ///      04 1A 00 55 66 05 1A 00 66 55
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -36,7 +39,7 @@ namespace DQGJK.Message
 
             string bcdStr = BCDUtil.ConvertTo(temp);
 
-            return Convert.ToInt16(bcdStr) / 100.0m;
+            return Convert.ToInt64(bcdStr) / 100.0m;
         }
 
         /// <summary>

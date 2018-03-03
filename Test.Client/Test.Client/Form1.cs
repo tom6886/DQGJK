@@ -36,24 +36,24 @@ namespace Test.Client
         {
             if (string.IsNullOrWhiteSpace(memoEdit2.Text)) { MessageBox.Show("请输入发送内容"); return; }
 
-            smanager.Send(ConvertMsg(memoEdit2.Text));
+            smanager.Send(BytesUtil.ToHexArray(memoEdit2.Text));
         }
 
         #region 方法
 
-        private byte[] ConvertMsg(string text)
-        {
-            string[] strs = text.Split(' ');
+        //private byte[] ConvertMsg(string text)
+        //{
+        //    string[] strs = text.Split(' ');
 
-            byte[] data = new byte[strs.Length];
+        //    byte[] data = new byte[strs.Length];
 
-            for (int i = 0, length = strs.Length; i < length; i++)
-            {
-                data[i] = Convert.ToByte(strs[i], 16);
-            }
+        //    for (int i = 0, length = strs.Length; i < length; i++)
+        //    {
+        //        data[i] = Convert.ToByte(strs[i], 16);
+        //    }
 
-            return data;
-        }
+        //    return data;
+        //}
 
         public SocketError Connect(IPEndPoint endPoint)
         {

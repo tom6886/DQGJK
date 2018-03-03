@@ -23,7 +23,7 @@ namespace DQGJK.Message
 
         public byte[] Body { get; set; }
 
-        public List<Element> Data { get; set; }
+        public object Data { get; set; }
 
         public int TotalLength { get { return DataLength + 23; } }
 

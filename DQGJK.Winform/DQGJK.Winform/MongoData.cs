@@ -32,10 +32,10 @@ namespace DQGJK.Winform
             Content = message.Content;
             SendTime = message.SendTime;
             IsChecked = message.IsChecked;
-            Data = message.Data;
+            Data = (List<B0C0Element>)message.Data;
         }
 
-        internal List<Element> Data { get; set; }
+        internal List<B0C0Element> Data { get; set; }
 
         internal void UpdateData()
         {
@@ -44,5 +44,10 @@ namespace DQGJK.Winform
             var _update = Builders<B0C0Data>.Update.Set("Data", this.Data);
             _collection.UpdateOneAsync(_filter, _update);
         }
+    }
+
+    internal class B1Data : MongoData
+    {
+
     }
 }

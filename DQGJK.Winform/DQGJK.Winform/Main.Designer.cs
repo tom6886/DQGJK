@@ -31,6 +31,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.edit_log = new DevExpress.XtraEditors.MemoEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btn_commond = new DevExpress.XtraEditors.SimpleButton();
             this.btn1 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.tb_buffer = new DevExpress.XtraEditors.TextEdit();
@@ -41,7 +42,6 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btn_commond = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -90,6 +90,15 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(960, 26);
             this.panelControl1.TabIndex = 4;
+            // 
+            // btn_commond
+            // 
+            this.btn_commond.Location = new System.Drawing.Point(761, 3);
+            this.btn_commond.Name = "btn_commond";
+            this.btn_commond.Size = new System.Drawing.Size(75, 23);
+            this.btn_commond.TabIndex = 13;
+            this.btn_commond.Text = "下发指令";
+            this.btn_commond.Click += new System.EventHandler(this.btn_commond_Click);
             // 
             // btn1
             // 
@@ -143,7 +152,7 @@
             // 
             // tb_port
             // 
-            this.tb_port.EditValue = "13909";
+            this.tb_port.EditValue = "8899";
             this.tb_port.Location = new System.Drawing.Point(206, 4);
             this.tb_port.Name = "tb_port";
             this.tb_port.Size = new System.Drawing.Size(100, 20);
@@ -181,15 +190,6 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(964, 661);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // btn_commond
-            // 
-            this.btn_commond.Location = new System.Drawing.Point(761, 3);
-            this.btn_commond.Name = "btn_commond";
-            this.btn_commond.Size = new System.Drawing.Size(75, 23);
-            this.btn_commond.TabIndex = 13;
-            this.btn_commond.Text = "下发指令";
-            this.btn_commond.Click += new System.EventHandler(this.btn_commond_Click);
             // 
             // Main
             // 

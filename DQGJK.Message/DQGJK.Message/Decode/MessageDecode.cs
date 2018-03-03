@@ -22,23 +22,23 @@ namespace DQGJK.Message
         }
 
         #region 解析方法
-        //获取中心站位置,一个字节,客户端发送3位,服务端发送8位
+        //获取中心站位置,一个字节,客户端发送3位,服务端发送9位
         public byte CenterCode(int position)
         {
             return Data[position];
         }
 
-        //获取遥测站位置,五个字节,客户端发送4-8位，服务端发送3-7位
+        //获取遥测站位置,六个字节,客户端发送4-9位，服务端发送3-8位
         public byte[] ClientCode(int position)
         {
-            byte[] client = new byte[5];
+            byte[] client = new byte[6];
 
-            Array.Copy(Data, position, client, 0, 5);
+            Array.Copy(Data, position, client, 0, 6);
 
             return client;
         }
 
-        //获取信息发送时间,六个字节,发包时间,BCD码,9-14位
+        //获取信息发送时间,六个字节,发包时间,BCD码,10-15位
         public DateTime SendTime(int position)
         {
             string[] strs = new string[6];
@@ -58,7 +58,7 @@ namespace DQGJK.Message
             return Convert.ToDateTime(timeStr);
         }
 
-        //获取流水号,两个字节,15-16位
+        //获取流水号,两个字节,16-17位
         public int Serial(int position)
         {
             byte[] serial = new byte[2];
@@ -68,7 +68,7 @@ namespace DQGJK.Message
             return BitConverter.ToInt16(serial, 0);
         }
 
-        //获取功能码,一个字节,17位
+        //获取功能码,一个字节,18位
         //F2H 数据链路报（心跳包）
         //B0H 中心站召测设备实时数据参数
         //C0H 终端机自报数据
@@ -80,10 +80,10 @@ namespace DQGJK.Message
         }
 
         //获取上下行标识及报文长度
-        //分两个字节,前一个字节代表发送方,无需解析,后一个字节代表数据长度 18-19位
+        //分两个字节,前一个字节代表发送方,无需解析,后一个字节代表数据长度 19-20位
         public int DataLength(int position)
         {
-            return Convert.ToInt16(Data[18]);
+            return Convert.ToInt16(Data[position]);
         }
 
         //获取正文数据,02开头,后面的长度等于前面解析得到的报文长度
@@ -143,7 +143,7 @@ namespace DQGJK.Message
         {
             headLength = GetStartPosition(data);
 
-            return Convert.ToInt16(data[headLength + 18]) + 23;
+            return Convert.ToInt16(data[headLength + 19]) + 24;
         }
     }
 }

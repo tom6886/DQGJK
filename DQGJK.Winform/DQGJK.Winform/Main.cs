@@ -1,6 +1,7 @@
 ﻿using DQGJK.Message;
 using System;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using TCPHandler;
@@ -38,7 +39,7 @@ namespace DQGJK.Winform
 
                 listener.Init();
 
-                listener.Start(new IPEndPoint(IPAddress.Parse("127.0.0.1"), port));
+                listener.Start(new IPEndPoint(IPAddress.Any, port));
 
                 listener.OnClientNumberChange += Listener_OnClientNumberChange;
 
@@ -82,32 +83,44 @@ namespace DQGJK.Winform
             }
         }
 
-        private void Listener_OnSended(AsyncUserToken token, System.Net.Sockets.SocketError error)
+        private void Listener_OnSended(AsyncUserToken token, SocketError error)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("已发送消息：");
             sb.Append("\r\n");
             sb.Append(" 发送IP：" + token.Remote.Address.ToString());
             sb.Append("\r\n");
+            sb.Append(" 发送时间：" + DateTime.Now);
+            sb.Append("\r\n");
             AppendLog(sb.ToString());
         }
 
         private void Listener_OnMsgReceived(AsyncUserToken token, byte[] info)
         {
-            RecieveMessageDecode reader = new RecieveMessageDecode(info);
-            RecieveMessage message = reader.Read();
             string str = BytesUtil.ToHexString(info);
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append("接收到数据：");
-            sb.Append("\r\n");
-            sb.Append(" 来源IP：" + token.Remote.Address.ToString());
-            sb.Append("\r\n");
-            sb.Append(" 发送内容：" + str);
-            sb.Append("\r\n");
-            AppendLog(sb.ToString());
+            try
+            {
+                RecieveMessageDecode reader = new RecieveMessageDecode(info);
+                RecieveMessage message = reader.Read();
 
-            MessageHandler.Set(new MessageToken() { UID = token.UID, Message = message });
+                StringBuilder sb = new StringBuilder();
+                sb.Append("接收到数据：");
+                sb.Append("\r\n");
+                sb.Append(" 来源IP：" + token.Remote.Address.ToString());
+                sb.Append("\r\n");
+                sb.Append(" 接收时间：" + DateTime.Now);
+                sb.Append("\r\n");
+                sb.Append(" 接收内容：" + str);
+                sb.Append("\r\n");
+                AppendLog(sb.ToString());
+
+                MessageHandler.Set(new MessageToken() { UID = token.UID, Message = message });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("接收消息时出错", "接收到的消息：" + str + "\r\n" + ex.Message, ex.StackTrace);
+            }
         }
 
         private int Listener_GetPackageLength(byte[] data, out int headLength)

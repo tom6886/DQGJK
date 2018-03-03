@@ -45,7 +45,10 @@
     <Compile Include="Decode\MessageDecode.cs" />
     <Compile Include="Decode\RecieveMessageDecode.cs" />
     <Compile Include="Encode\MessageEncode.cs" />
+    <Compile Include="Entity\B2Element.cs" />
     <Compile Include="Entity\Element.cs" />
+    <Compile Include="Entity\B1Element.cs" />
+    <Compile Include="Entity\B0C0Element.cs" />
     <Compile Include="Entity\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\BCDUtil.cs" />

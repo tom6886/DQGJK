@@ -45,9 +45,9 @@ namespace DQGJK.Message
 
             if (message.Body != null) { list.AddRange(message.Body); }
 
-            list.Add(Tail);
-
             byte[] CRC = CRCUtil.CRC16(list.ToArray());
+
+            list.Add(Tail);
             list.AddRange(CRC);
 
             return list.ToArray();

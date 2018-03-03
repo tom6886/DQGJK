@@ -23,6 +23,16 @@
         public DeviceState State { get; set; }
 
         /// <summary>
+        /// 湿度阈值
+        /// </summary>
+        public decimal HumidityLimit { get; set; }
+
+        /// <summary>
+        /// 温度阈值
+        /// </summary>
+        public decimal TemperatureLimit { get; set; }
+
+        /// <summary>
         /// 数据长度
         /// </summary>
         public int DataLength { get; set; }

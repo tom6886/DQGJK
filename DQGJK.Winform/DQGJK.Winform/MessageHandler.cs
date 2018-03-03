@@ -57,6 +57,20 @@ namespace DQGJK.Winform
         {
             RecieveMessage message = token.Message;
             object cache = CacheUtil.GetCache(message.ClentCodeStr);
+
+            //如果IP地址变化，则关闭之前的连接
+            if (cache != null && !cache.ToString().Equals(token.UID))
+            {
+                try
+                {
+                    Main.listener.CloseClientSocket(cache.ToString());
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteLog("关闭连接时发生错误", ex.Message, ex.StackTrace);
+                }
+            }
+
             CacheUtil.SetCache(message.ClentCodeStr, token.UID);
         }
 
@@ -71,7 +85,7 @@ namespace DQGJK.Winform
             res.ClientCode = message.ClientCode;
             res.CenterCode = message.CenterCode;
             res.SendTime = DateTime.Now;
-            res.Serial = message.Serial + 1;
+            res.Serial = 0;
             res.FunctionCode = "C0";
 
             Main.listener.Send(token.UID, res.ToByte());
