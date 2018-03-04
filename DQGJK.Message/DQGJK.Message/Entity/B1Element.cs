@@ -1,6 +1,6 @@
 ﻿namespace DQGJK.Message
 {
-    internal class B1Element
+    public class B1Element
     {
         public B1Element(Element element)
         {

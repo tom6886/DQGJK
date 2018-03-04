@@ -23,7 +23,7 @@ namespace DQGJK.Winform
                 case "F2": return;//心跳包不做处理
                 case "B0": B0(token); break;
                 case "C0": C0(token); break;
-                case "B1": break;
+                case "B1": B1(token); break;
                 case "B2": break;
             }
         }
@@ -35,6 +35,7 @@ namespace DQGJK.Winform
         private static void B0(MessageToken token)
         {
             SaveMongoData(token.Message);
+            //todo 更新环网柜时间，设备状态
         }
 
         /// <summary>
@@ -44,8 +45,17 @@ namespace DQGJK.Winform
         {
             Response(token);
             SaveMongoData(token.Message);
+            //todo 更新环网柜时间，设备状态
         }
 
+
+        private static void B1(MessageToken token)
+        {
+            B1Data data = new B1Data(token.Message);
+            MongoHandler.Save(data);
+            //mongodb不能直接保存内嵌对象 所以需要更新一下
+            data.UpdateData();
+        }
         #region 消息处理方法
 
         #region B0/C0
