@@ -99,6 +99,14 @@ namespace DQGJK.Message
             return body;
         }
 
+        //解析召测/自报数据采集时间，E0E0开头，若不是，则解析有误
+        public DateTime DataTime(byte[] data)
+        {
+            if (data.Length < 2 || !(data[0].Equals(0xE0) && data[1].Equals(0xE0))) { IsChecked = false; return DateTime.MinValue; }
+
+            return ElementDecodeFunctions.DataTime(data);
+        }
+
         public byte[] CRC(int endPosition)
         {
             if (!Data[endPosition].Equals(BodyEnd)) { IsChecked = false; return null; }

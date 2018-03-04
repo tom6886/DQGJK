@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DQGJK.Message
 {
@@ -10,6 +11,35 @@ namespace DQGJK.Message
     /// </summary>
     public class ElementDecodeFunctions
     {
+        private const string DateTimePattern = "20{0}-{1}-{2} {3}:{4}:00";
+
+        /// <summary>
+        /// E0H	N(10) E0H		
+        /// 观测时间，数据定义固定E0H，BCD码，5字节
+        /// 示例：E0 E0 16 12 12 08 59
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static DateTime DataTime(byte[] data)
+        {
+            byte[] temp = BytesUtil.SubBytes(data, 2, 5);
+
+            string[] strs = new string[6];
+            StringBuilder sb = new StringBuilder(2);
+
+            for (int i = 0; i < 5; i++)
+            {
+                sb.Append(temp[i] >> 4);
+                sb.Append(temp[i] & 0x0f);
+                strs[i] = sb.ToString();
+                sb.Clear();
+            }
+
+            string timeStr = string.Format(DateTimePattern, strs);
+
+            return Convert.ToDateTime(timeStr);
+        }
+
         /// <summary>
         /// 08H	N(2) 08H
         /// 主从机地址，1字节（其中地址FF表示主机）

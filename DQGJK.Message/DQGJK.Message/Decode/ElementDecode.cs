@@ -94,15 +94,8 @@ namespace DQGJK.Message
 
             do
             {
-                //如果数据头不是主从机地址，则截取到编号为止
-                if (!data[0].Equals((byte)DecodeType.Code))
-                {
-                    int index = Array.IndexOf(data, (byte)DecodeType.Code);
-
-                    if (index < 0) { break; }
-
-                    data = BytesUtil.SubBytes(data, index);
-                }
+                //如果数据头不是主从机地址，则取消解析
+                if (!(data[0].Equals((byte)DecodeType.Code) && data[1].Equals(0x08))) { break; }
 
                 Element element = Read(data);
 

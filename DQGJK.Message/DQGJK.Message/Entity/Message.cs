@@ -23,6 +23,8 @@ namespace DQGJK.Message
 
         public byte[] Body { get; set; }
 
+        public DateTime DataTime { get; set; }
+
         public object Data { get; set; }
 
         public int TotalLength { get { return DataLength + 23; } }
