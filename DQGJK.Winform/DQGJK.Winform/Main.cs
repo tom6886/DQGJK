@@ -115,7 +115,8 @@ namespace DQGJK.Winform
                 sb.Append("\r\n");
                 AppendLog(sb.ToString());
 
-                MessageHandler.Set(new MessageToken() { UID = token.UID, Message = message });
+                MessageHandler msgHandler = new MessageHandler(token.UID, message);
+                msgHandler.Set();
             }
             catch (Exception ex)
             {
