@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decode\ElementB3Decode.cs" />
     <Compile Include="Decode\ElementDecode.cs" />
     <Compile Include="Decode\ElementDecodeFunctions.cs" />
     <Compile Include="Decode\MessageDecode.cs" />
     <Compile Include="Decode\RecieveMessageDecode.cs" />
     <Compile Include="Encode\MessageEncode.cs" />
     <Compile Include="Entity\B2Element.cs" />
+    <Compile Include="Entity\B3Element.cs" />
     <Compile Include="Entity\Element.cs" />
     <Compile Include="Entity\B1Element.cs" />
     <Compile Include="Entity\B0C0Element.cs" />

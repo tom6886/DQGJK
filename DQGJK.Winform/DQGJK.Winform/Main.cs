@@ -111,6 +111,8 @@ namespace DQGJK.Winform
                 sb.Append("\r\n");
                 sb.Append(" 接收时间：" + DateTime.Now);
                 sb.Append("\r\n");
+                sb.Append(" 数据类型：" + message.FunctionCode);
+                sb.Append("\r\n");
                 sb.Append(" 接收内容：" + str);
                 sb.Append("\r\n");
                 AppendLog(sb.ToString());

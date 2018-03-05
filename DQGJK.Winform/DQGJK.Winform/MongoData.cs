@@ -1,6 +1,5 @@
 ﻿using DQGJK.Message;
 using MongoDB.Bson;
-using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 
@@ -55,5 +54,20 @@ namespace DQGJK.Winform
         }
 
         public List<B1Element> Data { get; set; }
+    }
+
+    internal class B2Data : MongoData
+    {
+        internal B2Data(RecieveMessage message)
+        {
+            Id = new ObjectId();
+            ClientCode = message.ClentCodeStr;
+            Content = message.Content;
+            SendTime = message.SendTime;
+            IsChecked = message.IsChecked;
+            Data = (List<B2Element>)message.Data;
+        }
+
+        public List<B2Element> Data { get; set; }
     }
 }

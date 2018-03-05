@@ -84,6 +84,7 @@ namespace DQGJK.Message
             message.FunctionCode = FunctionCode();
             message.DataLength = DataLength();
             message.CRC = CRC(message.DataLength + 21);
+            message.IsChecked = false;
 
             //只有数据主体起始符和结束符位置都正确，才会继续解析数据主体
             if (!BaseDecode.IsChecked) { return message; }
@@ -103,12 +104,22 @@ namespace DQGJK.Message
                     bodyData = BytesUtil.SubBytes(bodyData, 7);
                 }
 
-                List<Element> dataList = ElementDecode.ReadAll(bodyData);
+                if (message.FunctionCode.Equals("B3"))
+                {
+                    ElementB3Decode b3Decode = new ElementB3Decode(bodyData);
+                    message.Data = b3Decode.Read();
+                }
+                else
+                {
+                    List<Element> dataList = ElementDecode.ReadAll(bodyData);
 
-                if (message.FunctionCode.Equals("B0") || message.FunctionCode.Equals("C0"))
-                    message.Data = dataList.Select(q => new B0C0Element(q)).ToList();
-                else if (message.FunctionCode.Equals("B1"))
-                    message.Data = dataList.Select(q => new B1Element(q)).ToList();
+                    if (message.FunctionCode.Equals("B0") || message.FunctionCode.Equals("C0"))
+                        message.Data = dataList.Select(q => new B0C0Element(q)).ToList();
+                    else if (message.FunctionCode.Equals("B1"))
+                        message.Data = dataList.Select(q => new B1Element(q)).ToList();
+                    else if (message.FunctionCode.Equals("B2"))
+                        message.Data = dataList.Select(q => new B2Element(q)).ToList();
+                }
             }
 
             bool isChecked = BaseDecode.IsChecked;

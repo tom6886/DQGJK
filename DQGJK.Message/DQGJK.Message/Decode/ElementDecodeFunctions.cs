@@ -100,5 +100,64 @@ namespace DQGJK.Message
 
             return state;
         }
+
+        /// <summary>
+        /// F0H	N(2) 08H
+        /// 中心站地址，BCD码，1字节
+        /// 示例：F0 08 01
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static byte CenterCode(byte[] data)
+        {
+            return data[2];
+        }
+
+        /// <summary>
+        /// F1H	N(12) 30H
+        /// 遥测站地址，BCD码，6字节
+        /// 示例：F1 28 00 12 34 56 78
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static byte[] ClientCode(byte[] data)
+        {
+            byte[] client = new byte[6];
+
+            Array.Copy(data, 2, client, 0, 6);
+
+            return client;
+        }
+
+        /// <summary>
+        /// F2H	N(18) 48H
+        /// 中心站1主信道类型及地址TCP协议，IPV4，BCD码，9字节 255255255255 000000，分别表示IP和端口
+        /// 示例：F2 48 06 01 23 45 67 89 00 60 12 结果 IP：060.123.456.789，端口：006012
+        /// </summary>
+        /// <returns></returns>
+        public static string IPPort(byte[] data)
+        {
+            byte[] ipPort = new byte[9];
+
+            Array.Copy(data, 2, ipPort, 0, 9);
+
+            return BCDUtil.ConvertTo(ipPort);
+        }
+
+        /// <summary>
+        /// F3H	N(4) 10H
+        /// min	上报时间间隔，BCD码，2字节
+        /// 示例：F3 10 00 60
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static int Interval(byte[] data)
+        {
+            byte[] interval = new byte[2];
+
+            Array.Copy(data, 2, interval, 0, 2);
+
+            return Convert.ToInt32(interval);
+        }
     }
 }

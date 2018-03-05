@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace DQGJK.Message
 {
-    public enum DecodeType : byte
-    {
-        Code = 0x08,
-        Humidity = 0x01,
-        Temperature = 0x02,
-        State = 0x03,
-        HumidityLimit = 0x04,
-        TemperatureLimit = 0x05
-    }
-
     public class ElementDecode
     {
+        private enum DecodeType : byte
+        {
+            Code = 0x08,
+            Humidity = 0x01,
+            Temperature = 0x02,
+            State = 0x03,
+            HumidityLimit = 0x04,
+            TemperatureLimit = 0x05
+        }
+
         private static int GetLength(byte type)
         {
             int length = 0;

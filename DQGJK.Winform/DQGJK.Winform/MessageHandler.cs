@@ -27,7 +27,7 @@ namespace DQGJK.Winform
                 case "B0": B0(); break;
                 case "C0": C0(); break;
                 case "B1": B1(); break;
-                case "B2": break;
+                case "B2": B2(); break;
             }
         }
 
@@ -56,6 +56,11 @@ namespace DQGJK.Winform
         private void B1()
         {
             MongoHandler.Save(new B1Data(_Message));
+        }
+
+        private void B2()
+        {
+            MongoHandler.Save(new B2Data(_Message));
         }
 
         #region 消息处理方法
@@ -100,7 +105,7 @@ namespace DQGJK.Winform
 
             Main.listener.Send(_UID, res.ToByte());
         }
-        
+
         #endregion
 
         #endregion
