@@ -46,7 +46,9 @@
     "inputFiles": [
       "wwwroot/css/jquery.pnotify.default.css",
       "wwwroot/css/bootstrap.css",
-      "wwwroot/css/font-awesome/css/font-awesome.css"
+      "wwwroot/css/font-awesome/css/font-awesome.css",
+      "wwwroot/css/style.css",
+      "wwwroot/css/htai.css"
     ]
   },
   {

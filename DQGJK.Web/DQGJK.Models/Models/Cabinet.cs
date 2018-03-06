@@ -19,6 +19,10 @@ namespace DQGJK.Models
 
         public decimal Temperature { get; set; }
 
+        public decimal HumidityLimit { get; set; }
+
+        public decimal TemperatureLimit { get; set; }
+
         public Status Status { get; set; }
     }
 }
