@@ -120,13 +120,13 @@ namespace DQGJK.Message
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static byte[] ClientCode(byte[] data)
+        public static string ClientCode(byte[] data)
         {
             byte[] client = new byte[6];
 
             Array.Copy(data, 2, client, 0, 6);
 
-            return client;
+            return BCDUtil.ConvertTo(client);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace DQGJK.Message
 
             Array.Copy(data, 2, interval, 0, 2);
 
-            return Convert.ToInt32(interval);
+            return Convert.ToInt16(BCDUtil.ConvertTo(interval));
         }
     }
 }

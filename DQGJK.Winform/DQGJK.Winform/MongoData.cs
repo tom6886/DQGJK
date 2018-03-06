@@ -70,4 +70,19 @@ namespace DQGJK.Winform
 
         public List<B2Element> Data { get; set; }
     }
+
+    internal class B3Data : MongoData
+    {
+        internal B3Data(RecieveMessage message)
+        {
+            Id = new ObjectId();
+            ClientCode = message.ClentCodeStr;
+            Content = message.Content;
+            SendTime = message.SendTime;
+            IsChecked = message.IsChecked;
+            Data = (B3Element)message.Data;
+        }
+
+        public B3Element Data { get; set; }
+    }
 }

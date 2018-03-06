@@ -5,6 +5,16 @@ namespace DQGJK.Message
 {
     public class ElementDecode
     {
+        public byte[] Data;
+
+        public byte[] LeftData;
+
+        public ElementDecode(byte[] data)
+        {
+            Data = data;
+            LeftData = data;
+        }
+
         private enum DecodeType : byte
         {
             Code = 0x08,
@@ -15,7 +25,7 @@ namespace DQGJK.Message
             TemperatureLimit = 0x05
         }
 
-        private static int GetLength(byte type)
+        private int GetLength(byte type)
         {
             int length = 0;
 
@@ -32,13 +42,13 @@ namespace DQGJK.Message
             return length;
         }
 
-        private static byte[] Decode(byte[] data, ref Element element)
+        private byte[] Decode(byte[] data, ref Element element)
         {
-            if (data.Length == 0 || !Enum.IsDefined(typeof(DecodeType), data[0])) { return null; }
+            if (data.Length == 0 || !Enum.IsDefined(typeof(DecodeType), data[0])) { return new byte[0]; }
 
             int length = GetLength(data[0]);
 
-            if (length == 0 || data.Length < length) { return null; }
+            if (length == 0 || data.Length < length) { return new byte[0]; }
 
             switch ((DecodeType)data[0])
             {
@@ -70,7 +80,7 @@ namespace DQGJK.Message
             return BytesUtil.SubBytes(data, length);
         }
 
-        public static Element Read(byte[] data)
+        public Element Read(byte[] data)
         {
             if (!data[0].Equals((byte)DecodeType.Code)) { return null; }
 
@@ -88,21 +98,21 @@ namespace DQGJK.Message
             return element;
         }
 
-        public static List<Element> ReadAll(byte[] data)
+        public List<Element> ReadAll()
         {
             List<Element> list = new List<Element>();
 
             do
             {
                 //如果数据头不是主从机地址，则取消解析
-                if (!(data[0].Equals((byte)DecodeType.Code) && data[1].Equals(0x08))) { break; }
+                if (!(LeftData[0].Equals((byte)DecodeType.Code) && LeftData[1].Equals(0x08))) { break; }
 
-                Element element = Read(data);
+                Element element = Read(LeftData);
 
                 list.Add(element);
 
-                data = BytesUtil.SubBytes(data, element.DataLength);
-            } while (data.Length > 0);
+                LeftData = BytesUtil.SubBytes(LeftData, element.DataLength);
+            } while (LeftData.Length > 0);
 
             return list;
         }

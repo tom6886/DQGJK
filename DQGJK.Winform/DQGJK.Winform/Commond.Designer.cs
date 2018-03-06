@@ -29,32 +29,32 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.cb_type = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btn_save = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.edit_content = new DevExpress.XtraEditors.MemoEdit();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.tb_device = new DevExpress.XtraEditors.TextEdit();
+            this.btn_save = new DevExpress.XtraEditors.SimpleButton();
+            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btn_create = new DevExpress.XtraEditors.SimpleButton();
+            this.tb_device = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.cb_type = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cb_type.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edit_content.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_device.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cb_type.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edit_content.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_device.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -72,6 +72,90 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // edit_content
+            // 
+            this.edit_content.Location = new System.Drawing.Point(12, 42);
+            this.edit_content.Name = "edit_content";
+            this.edit_content.Size = new System.Drawing.Size(560, 91);
+            this.edit_content.StyleController = this.layoutControl1;
+            this.edit_content.TabIndex = 7;
+            // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(12, 377);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(560, 22);
+            this.btn_save.StyleController = this.layoutControl1;
+            this.btn_save.TabIndex = 6;
+            this.btn_save.Text = "下发";
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // memoEdit1
+            // 
+            this.memoEdit1.Location = new System.Drawing.Point(12, 137);
+            this.memoEdit1.Name = "memoEdit1";
+            this.memoEdit1.Size = new System.Drawing.Size(560, 236);
+            this.memoEdit1.StyleController = this.layoutControl1;
+            this.memoEdit1.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btn_create);
+            this.panel1.Controls.Add(this.tb_device);
+            this.panel1.Controls.Add(this.labelControl2);
+            this.panel1.Controls.Add(this.cb_type);
+            this.panel1.Controls.Add(this.labelControl1);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(560, 26);
+            this.panel1.TabIndex = 4;
+            // 
+            // btn_create
+            // 
+            this.btn_create.Location = new System.Drawing.Point(366, 3);
+            this.btn_create.Name = "btn_create";
+            this.btn_create.Size = new System.Drawing.Size(75, 23);
+            this.btn_create.TabIndex = 4;
+            this.btn_create.Text = "生成指令";
+            this.btn_create.Click += new System.EventHandler(this.btn_create_Click);
+            // 
+            // tb_device
+            // 
+            this.tb_device.Location = new System.Drawing.Point(260, 4);
+            this.tb_device.Name = "tb_device";
+            this.tb_device.Size = new System.Drawing.Size(100, 20);
+            this.tb_device.TabIndex = 3;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(182, 7);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(72, 14);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "遥测站地址：";
+            // 
+            // cb_type
+            // 
+            this.cb_type.Location = new System.Drawing.Point(76, 4);
+            this.cb_type.Name = "cb_type";
+            this.cb_type.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cb_type.Properties.Items.AddRange(new object[] {
+            "B0",
+            "B1",
+            "B2",
+            "B3"});
+            this.cb_type.Size = new System.Drawing.Size(100, 20);
+            this.cb_type.TabIndex = 1;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(10, 7);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(60, 14);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "指令类型：";
+            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -86,18 +170,6 @@
             this.layoutControlGroup1.Size = new System.Drawing.Size(584, 411);
             this.layoutControlGroup1.TextVisible = false;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btn_create);
-            this.panel1.Controls.Add(this.tb_device);
-            this.panel1.Controls.Add(this.labelControl2);
-            this.panel1.Controls.Add(this.cb_type);
-            this.panel1.Controls.Add(this.labelControl1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(560, 26);
-            this.panel1.TabIndex = 4;
-            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.panel1;
@@ -109,35 +181,6 @@
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(10, 7);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 14);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "指令类型：";
-            // 
-            // cb_type
-            // 
-            this.cb_type.Location = new System.Drawing.Point(76, 4);
-            this.cb_type.Name = "cb_type";
-            this.cb_type.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cb_type.Properties.Items.AddRange(new object[] {
-            "B0",
-            "B1",
-            "B2"});
-            this.cb_type.Size = new System.Drawing.Size(100, 20);
-            this.cb_type.TabIndex = 1;
-            // 
-            // memoEdit1
-            // 
-            this.memoEdit1.Location = new System.Drawing.Point(12, 137);
-            this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(560, 236);
-            this.memoEdit1.StyleController = this.layoutControl1;
-            this.memoEdit1.TabIndex = 5;
             // 
             // layoutControlItem2
             // 
@@ -151,16 +194,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // btn_save
-            // 
-            this.btn_save.Location = new System.Drawing.Point(12, 377);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(560, 22);
-            this.btn_save.StyleController = this.layoutControl1;
-            this.btn_save.TabIndex = 6;
-            this.btn_save.Text = "下发";
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
-            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btn_save;
@@ -170,14 +203,6 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // edit_content
-            // 
-            this.edit_content.Location = new System.Drawing.Point(12, 42);
-            this.edit_content.Name = "edit_content";
-            this.edit_content.Size = new System.Drawing.Size(560, 91);
-            this.edit_content.StyleController = this.layoutControl1;
-            this.edit_content.TabIndex = 7;
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.edit_content;
@@ -186,30 +211,6 @@
             this.layoutControlItem4.Size = new System.Drawing.Size(564, 95);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(182, 7);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(72, 14);
-            this.labelControl2.TabIndex = 2;
-            this.labelControl2.Text = "遥测站地址：";
-            // 
-            // tb_device
-            // 
-            this.tb_device.Location = new System.Drawing.Point(260, 4);
-            this.tb_device.Name = "tb_device";
-            this.tb_device.Size = new System.Drawing.Size(100, 20);
-            this.tb_device.TabIndex = 3;
-            // 
-            // btn_create
-            // 
-            this.btn_create.Location = new System.Drawing.Point(366, 3);
-            this.btn_create.Name = "btn_create";
-            this.btn_create.Size = new System.Drawing.Size(75, 23);
-            this.btn_create.TabIndex = 4;
-            this.btn_create.Text = "生成指令";
-            this.btn_create.Click += new System.EventHandler(this.btn_create_Click);
             // 
             // Commond
             // 
@@ -222,17 +223,17 @@
             this.Text = "下发指令";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edit_content.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_device.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cb_type.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edit_content.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_device.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -4,9 +4,7 @@
     {
         public byte CenterCode { get; set; }
 
-        public byte[] ClientCode { get; set; }
-
-        public string ClentCodeStr { get { return BytesUtil.ToHexString(ClientCode); } }
+        public string ClientCode { get; set; }
 
         public string IPPort { get; set; }
 

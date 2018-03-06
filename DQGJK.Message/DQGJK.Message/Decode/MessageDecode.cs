@@ -151,6 +151,8 @@ namespace DQGJK.Message
         {
             headLength = GetStartPosition(data);
 
+            if (data.Length < headLength + 19) { return headLength + 43; }
+
             return Convert.ToInt16(data[headLength + 19]) + 24;
         }
     }

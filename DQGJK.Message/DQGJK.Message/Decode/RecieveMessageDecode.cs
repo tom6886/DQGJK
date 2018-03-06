@@ -111,7 +111,8 @@ namespace DQGJK.Message
                 }
                 else
                 {
-                    List<Element> dataList = ElementDecode.ReadAll(bodyData);
+                    ElementDecode decode = new ElementDecode(bodyData);
+                    List<Element> dataList = decode.ReadAll();
 
                     if (message.FunctionCode.Equals("B0") || message.FunctionCode.Equals("C0"))
                         message.Data = dataList.Select(q => new B0C0Element(q)).ToList();

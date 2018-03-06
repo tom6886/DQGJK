@@ -10,6 +10,12 @@ namespace DQGJK.Message
 
         public bool IsChecked = true;
 
+        public ElementB3Decode(byte[] data)
+        {
+            Data = data;
+            LeftData = data;
+        }
+
         private enum DecodeType : byte
         {
             CenterCode = 0xF0,
@@ -33,19 +39,13 @@ namespace DQGJK.Message
             return length;
         }
 
-        public ElementB3Decode(byte[] data)
-        {
-            Data = data;
-            LeftData = data;
-        }
-
         private byte[] Decode(byte[] data, ref B3Element element)
         {
-            if (data.Length == 0 || !Enum.IsDefined(typeof(DecodeType), data[0])) { IsChecked = false; return null; }
+            if (data.Length == 0 || !Enum.IsDefined(typeof(DecodeType), data[0])) { IsChecked = false; return new byte[0]; }
 
             int length = GetLength(data[0]);
 
-            if (length == 0 || data.Length < length) { IsChecked = false; return null; }
+            if (length == 0 || data.Length < length) { IsChecked = false; return new byte[0]; }
 
             switch ((DecodeType)data[0])
             {
@@ -76,7 +76,7 @@ namespace DQGJK.Message
             do
             {
                 LeftData = Decode(LeftData, ref element);
-            } while (LeftData.Length > 0 && !IsChecked);
+            } while (LeftData.Length > 0 && IsChecked);
 
             return element;
         }

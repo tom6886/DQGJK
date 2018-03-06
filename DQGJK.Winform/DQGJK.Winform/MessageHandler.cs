@@ -28,6 +28,7 @@ namespace DQGJK.Winform
                 case "C0": C0(); break;
                 case "B1": B1(); break;
                 case "B2": B2(); break;
+                case "B3": B3(); break;
             }
         }
 
@@ -52,15 +53,28 @@ namespace DQGJK.Winform
             //todo 更新环网柜时间，设备状态
         }
 
-
+        /// <summary>
+        /// 中心站遥控设备
+        /// </summary>
         private void B1()
         {
             MongoHandler.Save(new B1Data(_Message));
         }
 
+        /// <summary>
+        /// 修改终端机参数
+        /// </summary>
         private void B2()
         {
             MongoHandler.Save(new B2Data(_Message));
+        }
+
+        /// <summary>
+        /// 修改终端机通信参数
+        /// </summary>
+        private void B3()
+        {
+            MongoHandler.Save(new B3Data(_Message));
         }
 
         #region 消息处理方法
