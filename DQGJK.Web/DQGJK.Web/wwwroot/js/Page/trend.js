@@ -24,13 +24,13 @@ Trend.Table.prototype = {
 };
 
 $(function () {
-    var widgets = Trend.Widgets.init();
+    //var widgets = Trend.Widgets.init();
 
-    widgets.table.query();
+    //widgets.table.query();
 
-    $(".query").click(function () {
-        widgets.table.query();
-    });
+    //$(".query").click(function () {
+    //    widgets.table.query();
+    //});
 });
 
 
