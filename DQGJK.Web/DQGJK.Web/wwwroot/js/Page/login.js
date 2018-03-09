@@ -7,8 +7,10 @@ $(function () {
         dataType: 'json',
         success: function (r) {
             if (r.code < 0) {
-                $('form').fadeIn(500);
-                $('.wrapper').removeClass('form-success');
+                $('form').fadeIn(300, function () {
+                    $('.wrapper').removeClass('form-success');
+                });
+
                 alert(r.msg);
                 return false;
             }
@@ -30,8 +32,10 @@ $(function () {
         }
 
         event.preventDefault();
-        $('form').fadeOut(500);
-        $('.wrapper').addClass('form-success');
+        $('form').fadeOut(300, function () {
+            $('.wrapper').addClass('form-success');
+        });
+
 
         _form.submit();
     });

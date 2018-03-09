@@ -23,7 +23,6 @@
                 <b>环网柜智能云在线监测</b>
             </a>
             <!--logo end-->
-
             @*<img src="~/images/logo.png" style="height: 30px; float: right; margin-top: 15px;" />*@
 
             <div class="top_more">
@@ -33,7 +32,7 @@
         </div>
 
         <div class="top-under">
-            <nav class="navbar navbar-inverse">
+            <nav class="navbar navbar-inverse" style="margin-bottom:0;">
                 <div class="container-fluid">
                     @await Component.InvokeAsync("Menu")
 
@@ -50,6 +49,10 @@
             </section>
         </div>
     </section>
+
+    <div class="bottom">
+
+    </div>
 
     <div class="modal fade" id="dlg_password" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
