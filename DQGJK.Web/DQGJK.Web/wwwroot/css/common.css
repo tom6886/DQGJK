@@ -9085,7 +9085,7 @@ ul.sidebar-menu li { /*line-height: 20px !important;*/ margin-bottom: 5px; margi
 
 .wrapper { display: inline-block; margin-top: 0px; height: 100%; width: 100%; }
 
-a.logo { font-size: 20px; color: #ffffff; float: left; margin-top: 15px; text-transform: uppercase; }
+a.logo { font-size: 25px; color: #ffffff; float: left; margin-top: 10px; text-transform: uppercase; }
 
     a.logo b { font-weight: 900; }
 
@@ -9337,11 +9337,13 @@ PANELS CONFIGURATIONS
     .stock .summary strong { font-weight: 900; font-size: 14px; }
 
 /*Content Panel*/
-.content-panel { background: #ffffff; box-shadow: 0px 3px 2px #aab2bd; padding-top: 15px; padding-bottom: 5px; }
+.content-panel { background: #ffffff; box-shadow: 0px 3px 2px #aab2bd; margin: 0; }
     .content-panel h4 { margin-left: 10px; }
+    .content-panel .panel-body { height: 100%; }
+    .content-panel section { height: 96%; position: relative; }
+        .content-panel section .carousel { position: absolute; top: 52%; transform: translateY(-48%); }
 
 /*WEATHER PANELS*/
-
 /* Weather 1 */
 .weather { background: url(../img/weather.jpg) no-repeat center top; text-align: center; background-position: center center; }
     .weather i { color: white; margin-top: 45px; }
@@ -9603,9 +9605,7 @@ label { font-weight: 400; }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     /* Safari and Chrome */
     .panel-footer.revenue-foot { margin-bottom: -4px; }
-    ;
 }
-
 
 .panel-footer.revenue-foot ul { margin: 0; padding: 0; width: 100%; display: inline-flex; }
 
@@ -9678,9 +9678,14 @@ label { font-weight: 400; }
 
 .col-30 { width: 30%; float: left; position: relative; min-height: 1px; padding-right: 5px; padding-left: 5px; }
 .col-10 { width: 10%; float: left; position: relative; min-height: 1px; padding-right: 5px; padding-left: 5px; }
+.col-12 { width: 12%; float: left; position: relative; min-height: 1px; padding-right: 5px; padding-left: 5px; }
 
 .row.small-padding { padding: 5px; }
 .panel-body.small-padding { padding: 5px 0; }
+
+.bottom { font-size: 20px; padding: 10px 0; }
+    .bottom .bottom-group i { color: darkred; }
+    .bottom .bottom-group span { color: white; }
 
 /* for ie6 */
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td { margin: 0; padding: 0; color: #333; }
@@ -9722,7 +9727,7 @@ strong { font-weight: normal; }
 
 .bottom { background: #43A395; width: 100%; height: 50px; z-index: 3; position: fixed; bottom: 0; }
 
-a.logo { font-size: 20px; color: #fff; float: left; padding: 0px 5px 0 0; line-height: 30px; display: block; text-transform: uppercase; }
+a.logo { font-size: 25px; color: #fff; float: left; padding: 0px 5px 0 0; line-height: 30px; display: block; text-transform: uppercase; }
     a.logo img { color: #fff; float: left; display: block; margin-right: 5px; }
     a.logo b { font-weight: 900; }
     a.logo:hover, a.logo:focus { text-decoration: none; outline: none; }
