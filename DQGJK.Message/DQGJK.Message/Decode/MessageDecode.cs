@@ -39,23 +39,31 @@ namespace DQGJK.Message
         }
 
         //获取信息发送时间,六个字节,发包时间,BCD码,10-15位
+        //实际应用中有可能传送的时间字符串错误，这种情况返回当前时间，不做特殊处理
         public DateTime SendTime(int position)
         {
-            string[] strs = new string[6];
-            StringBuilder sb = new StringBuilder(2);
-
-            //默认取前六个字节 举例：16 12 12 08 59 59
-            for (int i = position; i < position + 6; i++)
+            try
             {
-                sb.Append(Data[i] >> 4);
-                sb.Append(Data[i] & 0x0f);
-                strs[i - position] = sb.ToString();
-                sb.Clear();
+                string[] strs = new string[6];
+                StringBuilder sb = new StringBuilder(2);
+
+                //默认取前六个字节 举例：16 12 12 08 59 59
+                for (int i = position; i < position + 6; i++)
+                {
+                    sb.Append(Data[i] >> 4);
+                    sb.Append(Data[i] & 0x0f);
+                    strs[i - position] = sb.ToString();
+                    sb.Clear();
+                }
+
+                string timeStr = string.Format(DateTimePattern, strs);
+
+                return Convert.ToDateTime(timeStr);
             }
-
-            string timeStr = string.Format(DateTimePattern, strs);
-
-            return Convert.ToDateTime(timeStr);
+            catch (Exception)
+            {
+                return DateTime.Now;
+            }
         }
 
         //获取流水号,两个字节,16-17位
