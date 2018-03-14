@@ -1,5 +1,8 @@
 ﻿using DQGJK.Message;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,6 +14,8 @@ namespace DQGJK.Winform
     public partial class Main : Form
     {
         internal static SocketListener listener;
+
+        internal static ConcurrentDictionary<string, string> online;
 
         public Main()
         {
@@ -51,6 +56,8 @@ namespace DQGJK.Winform
 
                 listener.OnSended += Listener_OnSended;
 
+                online = new ConcurrentDictionary<string, string>();
+
                 btn1.Text = "停止";
 
                 btn1.Tag = 1;
@@ -70,6 +77,8 @@ namespace DQGJK.Winform
                 int port = Convert.ToInt16(tb_port.Text);
 
                 listener.Stop();
+
+                online = new ConcurrentDictionary<string, string>();
 
                 btn1.Text = "启动";
 
@@ -175,6 +184,28 @@ namespace DQGJK.Winform
         private void Form_SetCommond(string uid, byte[] msg)
         {
             listener.Send(uid, msg);
+        }
+
+        private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            List<AsyncUserTokenInfo> tokens = listener.OnlineUserToken;
+
+            DateTime limit = DateTime.Now - new TimeSpan(0, 1, 0);
+
+            List<AsyncUserTokenInfo> overtime = tokens.Where(q => q.FreshTime < limit).ToList();
+
+            if (overtime.Count == 0) { return; }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(string.Format("检测到 {0} 个连接超时，准备进行主动断开", overtime.Count));
+            sb.Append("\r\n");
+
+            AppendLog(sb.ToString());
+
+            foreach (var item in overtime)
+            {
+                listener.CloseClientSocket(item.UID);
+            }
         }
     }
 }

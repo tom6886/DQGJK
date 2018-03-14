@@ -25,7 +25,9 @@ namespace DQGJK.Winform
 
             if (string.IsNullOrEmpty(tb_device.Text)) { MessageBox.Show("请填入遥测站地址"); return; }
 
-            object uid = CacheUtil.GetCache(tb_device.Text);
+            string uid;
+
+            Main.online.TryGetValue(tb_device.Text, out uid);
 
             if (uid == null) { MessageBox.Show("未找到在线的遥测站，请确认遥测站地址"); return; }
 

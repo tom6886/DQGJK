@@ -85,22 +85,22 @@ namespace DQGJK.Winform
         /// <param name="token"></param>
         internal void SetCache()
         {
-            object cache = CacheUtil.GetCache(_Message.ClentCodeStr);
+            string uid;
+
+            Main.online.TryGetValue(_Message.ClentCodeStr, out uid);
 
             //如果IP地址变化，则关闭之前的连接
-            if (cache != null && !cache.ToString().Equals(_UID))
+            if (uid != null && !uid.Equals(_UID))
             {
-                try
-                {
-                    Main.listener.CloseClientSocket(cache.ToString());
-                }
-                catch (Exception ex)
-                {
-                    LogHelper.WriteLog("关闭连接时发生错误", ex.Message, ex.StackTrace);
-                }
+                Main.listener.CloseClientSocket(uid);
             }
 
-            CacheUtil.SetCache(_Message.ClentCodeStr, _UID);
+            if (uid != null && uid.Equals(_UID)) { return; }
+
+            if (uid == null)
+                Main.online.TryAdd(_Message.ClentCodeStr, _UID);
+            else
+                Main.online.TryUpdate(_Message.ClentCodeStr, _UID, uid);
         }
 
         #region B0/C0
