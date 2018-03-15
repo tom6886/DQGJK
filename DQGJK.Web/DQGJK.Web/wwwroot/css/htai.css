@@ -43,7 +43,7 @@ a.logo { font-size: 25px; color: #fff; float: left; padding: 0px 5px 0 0; line-h
     a.logo b { font-weight: 900; }
     a.logo:hover, a.logo:focus { text-decoration: none; outline: none; }
 
-.top_more { float: right; padding: 15px 15px 0 0; }
+.top_more { float: right; padding: 12px 12px 0 0; }
 .top_more1 { width: 54px; display: block; height: 27px; line-height: 27px; border: 1px solid #56becd; border-radius: 3px; background: #68dff1; color: #fff; text-align: center; cursor: pointer; }
 
 .content { width: 100%; top: 100px; bottom: 35px; position: absolute; }

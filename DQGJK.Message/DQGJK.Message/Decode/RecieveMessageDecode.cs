@@ -37,8 +37,7 @@ namespace DQGJK.Message
 
         public DateTime SendTime()
         {
-            //return BaseDecode.SendTime((int)DataPosition.SendTime);
-            return DateTime.Now;
+            return BaseDecode.SendTime((int)DataPosition.SendTime);
         }
 
         public int Serial()

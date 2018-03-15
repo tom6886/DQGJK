@@ -11,7 +11,7 @@ namespace DQGJK.Message
 
         public byte[] ClientCode { get; set; }
 
-        public string ClentCodeStr { get { return BytesUtil.ToHexString(ClientCode); } }
+        public string ClientCodeStr { get { return BytesUtil.ToHexString(ClientCode); } }
 
         public DateTime SendTime { get; set; }
 

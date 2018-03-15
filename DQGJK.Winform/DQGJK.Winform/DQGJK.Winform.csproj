@@ -102,6 +102,13 @@
     <Compile Include="Commond.Designer.cs">
       <DependentUpon>Commond.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\C0Handler.cs" />
+    <Compile Include="Handlers\B3Handler.cs" />
+    <Compile Include="Handlers\B2Handler.cs" />
+    <Compile Include="Handlers\B1Handler.cs" />
+    <Compile Include="Handlers\B0Handler.cs" />
+    <Compile Include="Handlers\HandlerFactory.cs" />
+    <Compile Include="Handlers\IMessageHandler.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

@@ -1,4 +1,5 @@
 ﻿using DQGJK.Message;
+using DQGJK.Winform.Handlers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -92,87 +93,6 @@ namespace DQGJK.Winform
             }
         }
 
-        private void Listener_OnSended(AsyncUserToken token, SocketError error)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("已发送消息：");
-            sb.Append("\r\n");
-            sb.Append(" 发送IP：" + token.Remote.Address.ToString());
-            sb.Append("\r\n");
-            sb.Append(" 发送时间：" + DateTime.Now);
-            sb.Append("\r\n");
-            AppendLog(sb.ToString());
-        }
-
-        private void Listener_OnMsgReceived(AsyncUserToken token, byte[] info)
-        {
-            string str = BytesUtil.ToHexString(info);
-
-            try
-            {
-                RecieveMessageDecode reader = new RecieveMessageDecode(info);
-                RecieveMessage message = reader.Read();
-
-                StringBuilder sb = new StringBuilder();
-                sb.Append("接收到数据：");
-                sb.Append("\r\n");
-                sb.Append(" 来源IP：" + token.Remote.Address.ToString());
-                sb.Append("\r\n");
-                sb.Append(" 接收时间：" + DateTime.Now);
-                sb.Append("\r\n");
-                sb.Append(" 数据类型：" + message.FunctionCode);
-                sb.Append("\r\n");
-                sb.Append(" 接收内容：" + str);
-                sb.Append("\r\n");
-                AppendLog(sb.ToString());
-
-                MessageHandler msgHandler = new MessageHandler(token.UID, message);
-                msgHandler.Set();
-            }
-            catch (Exception ex)
-            {
-                LogHelper.WriteLog("接收消息时出错", "接收到的消息：" + str + "\r\n" + ex.Message, ex.StackTrace);
-            }
-        }
-
-        private int Listener_GetPackageLength(byte[] data, out int headLength)
-        {
-            return MessageDecode.GetDataLength(data, out headLength);
-        }
-
-        private string Listener_GetIDByEndPoint(IPEndPoint endPoint)
-        {
-            if (endPoint == null) { return null; }
-
-            return endPoint.GetHashCode().ToString();
-        }
-
-        private void Listener_OnClientNumberChange(int number, AsyncUserToken token)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(number > 0 ? "有设备接入" : "有设备断开");
-            sb.Append("\r\n");
-            sb.Append(" 来源IP：" + token.Remote.Address.ToString());
-            sb.Append("\r\n");
-            sb.Append(" 连接时间：" + token.ConnectTime.ToString());
-            sb.Append("\r\n");
-            AppendLog(sb.ToString());
-        }
-
-        private delegate void appendLog(string log);
-
-        private void AppendLog(string log)
-        {
-            if (edit_log.InvokeRequired)
-            {
-                BeginInvoke(new appendLog(AppendLog), log);
-            }
-            else
-            {
-                edit_log.MaskBox.AppendText(log);
-            }
-        }
-
         private void btn_commond_Click(object sender, EventArgs e)
         {
             Commond form = new Commond();
@@ -207,5 +127,112 @@ namespace DQGJK.Winform
                 listener.CloseClientSocket(item.UID);
             }
         }
+
+        #region TCPHandler接口处理
+        private void Listener_OnSended(AsyncUserToken token, SocketError error)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("已发送消息：");
+            sb.Append("\r\n");
+            sb.Append(" 发送IP：" + token.Remote.Address.ToString());
+            sb.Append("\r\n");
+            sb.Append(" 发送时间：" + DateTime.Now);
+            sb.Append("\r\n");
+            AppendLog(sb.ToString());
+        }
+
+        private void Listener_OnMsgReceived(AsyncUserToken token, byte[] info)
+        {
+            string str = BytesUtil.ToHexString(info);
+
+            try
+            {
+                RecieveMessageDecode reader = new RecieveMessageDecode(info);
+                RecieveMessage message = reader.Read();
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("接收到数据：");
+                sb.Append("\r\n");
+                sb.Append(" 来源IP：" + token.Remote.Address.ToString());
+                sb.Append("\r\n");
+                sb.Append(" 接收时间：" + DateTime.Now);
+                sb.Append("\r\n");
+                sb.Append(" 数据类型：" + message.FunctionCode);
+                sb.Append("\r\n");
+                sb.Append(" 接收内容：" + str);
+                sb.Append("\r\n");
+                AppendLog(sb.ToString());
+
+                SetCache(message.ClientCodeStr, token.UID);
+                if (message.FunctionCode.Equals("F2")) { return; }
+                IMessageHandler handler = HandlerFactory.Create(message.FunctionCode, token.UID, message);
+                handler.Handle();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("接收消息时出错", "接收到的消息：" + str + "\r\n" + ex.Message, ex.StackTrace);
+            }
+        }
+
+        private void SetCache(string client, string uid)
+        {
+            string _uid;
+
+            online.TryGetValue(client, out _uid);
+
+            //如果IP地址变化，则关闭之前的连接
+            if (_uid != null && !_uid.Equals(uid))
+            {
+                listener.CloseClientSocket(uid);
+            }
+
+            if (_uid != null && _uid.Equals(uid)) { return; }
+
+            if (uid == null)
+                online.TryAdd(client, uid);
+            else
+                online.TryUpdate(client, uid, uid);
+        }
+
+        private int Listener_GetPackageLength(byte[] data, out int headLength)
+        {
+            return MessageDecode.GetDataLength(data, out headLength);
+        }
+
+        private string Listener_GetIDByEndPoint(IPEndPoint endPoint)
+        {
+            if (endPoint == null) { return null; }
+
+            return endPoint.GetHashCode().ToString();
+        }
+
+        private void Listener_OnClientNumberChange(int number, AsyncUserToken token)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(number > 0 ? "有设备接入" : "有设备断开");
+            sb.Append("\r\n");
+            sb.Append(" 来源IP：" + token.Remote.Address.ToString());
+            sb.Append("\r\n");
+            sb.Append(" 连接时间：" + token.ConnectTime.ToString());
+            sb.Append("\r\n");
+            AppendLog(sb.ToString());
+        }
+        #endregion
+
+        #region 操作UI
+        private delegate void appendLog(string log);
+
+        private void AppendLog(string log)
+        {
+            if (edit_log.InvokeRequired)
+            {
+                BeginInvoke(new appendLog(AppendLog), log);
+            }
+            else
+            {
+                edit_log.MaskBox.AppendText(log);
+            }
+        }
+        #endregion
     }
 }

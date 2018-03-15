@@ -27,7 +27,7 @@ namespace DQGJK.Winform
         internal B0C0Data(RecieveMessage message)
         {
             Id = new ObjectId();
-            ClientCode = message.ClentCodeStr;
+            ClientCode = message.ClientCodeStr;
             Content = message.Content;
             SendTime = message.SendTime;
             DataTime = message.DataTime;
@@ -46,7 +46,7 @@ namespace DQGJK.Winform
         internal B1Data(RecieveMessage message)
         {
             Id = new ObjectId();
-            ClientCode = message.ClentCodeStr;
+            ClientCode = message.ClientCodeStr;
             Content = message.Content;
             SendTime = message.SendTime;
             IsChecked = message.IsChecked;
@@ -61,7 +61,7 @@ namespace DQGJK.Winform
         internal B2Data(RecieveMessage message)
         {
             Id = new ObjectId();
-            ClientCode = message.ClentCodeStr;
+            ClientCode = message.ClientCodeStr;
             Content = message.Content;
             SendTime = message.SendTime;
             IsChecked = message.IsChecked;
@@ -76,7 +76,7 @@ namespace DQGJK.Winform
         internal B3Data(RecieveMessage message)
         {
             Id = new ObjectId();
-            ClientCode = message.ClentCodeStr;
+            ClientCode = message.ClientCodeStr;
             Content = message.Content;
             SendTime = message.SendTime;
             IsChecked = message.IsChecked;

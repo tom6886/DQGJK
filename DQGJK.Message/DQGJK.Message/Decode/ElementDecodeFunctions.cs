@@ -22,22 +22,29 @@ namespace DQGJK.Message
         /// <returns></returns>
         public static DateTime DataTime(byte[] data)
         {
-            byte[] temp = BytesUtil.SubBytes(data, 2, 5);
-
-            string[] strs = new string[6];
-            StringBuilder sb = new StringBuilder(2);
-
-            for (int i = 0; i < 5; i++)
+            try
             {
-                sb.Append(temp[i] >> 4);
-                sb.Append(temp[i] & 0x0f);
-                strs[i] = sb.ToString();
-                sb.Clear();
+                byte[] temp = BytesUtil.SubBytes(data, 2, 5);
+
+                string[] strs = new string[6];
+                StringBuilder sb = new StringBuilder(2);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    sb.Append(temp[i] >> 4);
+                    sb.Append(temp[i] & 0x0f);
+                    strs[i] = sb.ToString();
+                    sb.Clear();
+                }
+
+                string timeStr = string.Format(DateTimePattern, strs);
+
+                return Convert.ToDateTime(timeStr);
             }
-
-            string timeStr = string.Format(DateTimePattern, strs);
-
-            return Convert.ToDateTime(timeStr);
+            catch (Exception)
+            {
+                return DateTime.Now;
+            }
         }
 
         /// <summary>
