@@ -110,7 +110,7 @@ namespace DQGJK.Winform
         {
             List<AsyncUserTokenInfo> tokens = listener.OnlineUserToken;
 
-            DateTime limit = DateTime.Now - new TimeSpan(0, 1, 0);
+            DateTime limit = DateTime.Now - new TimeSpan(0, 5, 0);
 
             List<AsyncUserTokenInfo> overtime = tokens.Where(q => q.FreshTime < limit).ToList();
 
@@ -163,7 +163,8 @@ namespace DQGJK.Winform
                 sb.Append("\r\n");
                 AppendLog(sb.ToString());
 
-                SetCache(message.ClientCodeStr, token.UID);
+                //更新设备缓存
+                UpdateCache(message.ClientCodeStr, token.UID);
                 if (message.FunctionCode.Equals("F2")) { return; }
                 IMessageHandler handler = HandlerFactory.Create(message.FunctionCode, token.UID, message);
                 handler.Handle();
@@ -174,7 +175,7 @@ namespace DQGJK.Winform
             }
         }
 
-        private void SetCache(string client, string uid)
+        private void UpdateCache(string client, string uid)
         {
             string _uid;
 

@@ -1,11 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using XUtils;
 
-namespace DQGJK.Models
+namespace DQGJK.Winform
 {
     [Table("Cabinet")]
-    public class Cabinet : BaseEntity
+    public class Cabinet
     {
+        public Cabinet()
+        {
+            this.ID = StringUtil.UniqueID();
+            this.CreateTime = DateTime.Now;
+            this.ModifyTime = DateTime.Now;
+        }
+
+        [MaxLength(50)]
+        public string Creator { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
+        [MaxLength(0x40)]
+        public string CreatorID { get; set; }
+
+        [Key, Column(Order = 1), Required, MaxLength(0x40)]
+        public string ID { get; set; }
+
+        public DateTime ModifyTime { get; set; }
+
+        [MaxLength(1000)]
+        public string Remark { get; set; }
+
         [Display(Name = "电气柜名称"), MaxLength(0x40), Required]
         public string Name { get; set; }
 
@@ -34,5 +59,11 @@ namespace DQGJK.Models
         public int Dehumidify { get; set; }
 
         public Status Status { get; set; }
+    }
+
+    public enum Status
+    {
+        enable = 1,
+        disable = 0
     }
 }
