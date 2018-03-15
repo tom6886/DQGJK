@@ -9683,7 +9683,7 @@ label { font-weight: 400; }
 .row.small-padding { padding: 5px; }
 .panel-body.small-padding { padding: 5px 0; }
 
-.bottom { font-size: 20px; padding: 10px 0; }
+.bottom { font-size: 16px; padding: 14px 0; }
     .bottom .bottom-group i { color: darkred; }
     .bottom .bottom-group span { color: white; }
 
