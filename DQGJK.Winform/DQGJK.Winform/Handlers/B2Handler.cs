@@ -2,7 +2,7 @@
 
 namespace DQGJK.Winform.Handlers
 {
-    internal class B2Handler : IMessageHandler
+    internal class B2Handler : BaseHandler<B2Element>, IMessageHandler
     {
         public B2Handler(string UID, RecieveMessage Message)
         {
@@ -17,6 +17,15 @@ namespace DQGJK.Winform.Handlers
         public void Handle()
         {
             MongoHandler.Save(new B2Data(_Message));
+
+            UpdateCabinet(_Message);
+        }
+
+        public override bool SetCabinet(B2Element element, ref Cabinet cabinet)
+        {
+            cabinet.HumidityLimit = element.HumidityLimit;
+            cabinet.TemperatureLimit = element.TemperatureLimit;
+            return true;
         }
     }
 }

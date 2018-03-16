@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using TCPHandler;
+using XUtils;
 
 namespace DQGJK.Winform
 {
@@ -108,23 +109,30 @@ namespace DQGJK.Winform
 
         private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            List<AsyncUserTokenInfo> tokens = listener.OnlineUserToken;
-
-            DateTime limit = DateTime.Now - new TimeSpan(0, 5, 0);
-
-            List<AsyncUserTokenInfo> overtime = tokens.Where(q => q.FreshTime < limit).ToList();
-
-            if (overtime.Count == 0) { return; }
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append(string.Format("检测到 {0} 个连接超时，准备进行主动断开", overtime.Count));
-            sb.Append("\r\n");
-
-            AppendLog(sb.ToString());
-
-            foreach (var item in overtime)
+            try
             {
-                listener.CloseClientSocket(item.UID);
+                List<AsyncUserTokenInfo> tokens = listener.OnlineUserToken;
+
+                DateTime limit = DateTime.Now - new TimeSpan(0, 5, 0);
+
+                List<AsyncUserTokenInfo> overtime = tokens.Where(q => q.FreshTime < limit).ToList();
+
+                if (overtime.Count == 0) { return; }
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append(string.Format("检测到 {0} 个连接超时，准备进行主动断开", overtime.Count));
+                sb.Append("\r\n");
+
+                AppendLog(sb.ToString());
+
+                foreach (var item in overtime)
+                {
+                    listener.CloseClientSocket(item.UID);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("主动断开连接时出错", ex.Message, ex.StackTrace);
             }
         }
 
@@ -197,26 +205,50 @@ namespace DQGJK.Winform
 
         private int Listener_GetPackageLength(byte[] data, out int headLength)
         {
-            return MessageDecode.GetDataLength(data, out headLength);
+            try
+            {
+                return MessageDecode.GetDataLength(data, out headLength);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("获取包长时出错", ex.Message, ex.StackTrace);
+                headLength = 0;
+                return 43;
+            }
         }
 
         private string Listener_GetIDByEndPoint(IPEndPoint endPoint)
         {
-            if (endPoint == null) { return null; }
+            try
+            {
+                if (endPoint == null) { return null; }
 
-            return endPoint.GetHashCode().ToString();
+                return endPoint.GetHashCode().ToString();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("获取UID时出错", ex.Message, ex.StackTrace);
+                return StringUtil.UniqueID();
+            }
         }
 
         private void Listener_OnClientNumberChange(int number, AsyncUserToken token)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(number > 0 ? "有设备接入" : "有设备断开");
-            sb.Append("\r\n");
-            sb.Append(" 来源IP：" + token.Remote.Address.ToString());
-            sb.Append("\r\n");
-            sb.Append(" 连接时间：" + token.ConnectTime.ToString());
-            sb.Append("\r\n");
-            AppendLog(sb.ToString());
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(number > 0 ? "有设备接入" : "有设备断开");
+                sb.Append("\r\n");
+                sb.Append(" 来源IP：" + token.Remote.Address.ToString());
+                sb.Append("\r\n");
+                sb.Append(" 连接时间：" + token.ConnectTime.ToString());
+                sb.Append("\r\n");
+                AppendLog(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("设备接入/断开时出错", ex.Message, ex.StackTrace);
+            }
         }
         #endregion
 

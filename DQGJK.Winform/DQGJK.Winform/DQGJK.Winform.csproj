@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\BaseHandler.cs" />
     <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\Cabinet.cs" />
     <Compile Include="Commond.cs">

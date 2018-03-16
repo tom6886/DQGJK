@@ -2,7 +2,7 @@
 
 namespace DQGJK.Winform.Handlers
 {
-    internal class B0Handler : IMessageHandler
+    internal class B0Handler : BaseHandler<B0C0Element>, IMessageHandler
     {
         public B0Handler(string UID, RecieveMessage Message)
         {
@@ -17,6 +17,23 @@ namespace DQGJK.Winform.Handlers
         public void Handle()
         {
             MongoHandler.Save(new B0C0Data(_Message));
+
+            UpdateCabinet(_Message);
+        }
+
+        public override bool SetCabinet(B0C0Element element, ref Cabinet cabinet)
+        {
+            if (!element.Valid) { return false; }
+
+            cabinet.Humidity = element.Humidity;
+            cabinet.Temperature = element.Temperature;
+            cabinet.RelayOne = element.State.RelayOne;
+            cabinet.RelayTwo = element.State.RelayTwo;
+            cabinet.HumidityAlarm = element.State.HumidityAlarm;
+            cabinet.TemperatureAlarm = element.State.TemperatureAlarm;
+            cabinet.Dehumidify = element.State.Dehumidify;
+
+            return true;
         }
     }
 }

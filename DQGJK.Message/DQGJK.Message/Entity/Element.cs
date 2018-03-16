@@ -1,6 +1,11 @@
 ﻿namespace DQGJK.Message
 {
-    public class Element
+    public interface IElement
+    {
+        string Code { get; set; }
+    }
+
+    public class Element : IElement
     {
         /// <summary>
         /// 主从机地址
