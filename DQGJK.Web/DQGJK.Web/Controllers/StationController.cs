@@ -136,11 +136,5 @@ namespace DQGJK.Web.Controllers
 
             return Json(new { code = 1, msg = "删除成功" });
         }
-
-        [HttpPost]
-        public object Commond(string stationID)
-        {
-            return PartialView("Commond");
-        }
     }
 }

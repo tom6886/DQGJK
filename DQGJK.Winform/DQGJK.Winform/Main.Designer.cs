@@ -43,6 +43,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Timers.Timer();
+            this.timer2 = new System.Timers.Timer();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -55,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timer2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -195,10 +197,16 @@
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 300000D;
             this.timer1.SynchronizingObject = this;
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 60000D;
+            this.timer2.SynchronizingObject = this;
+            this.timer2.Elapsed += new System.Timers.ElapsedEventHandler(this.timer2_Elapsed);
             // 
             // Main
             // 
@@ -222,6 +230,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timer2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,5 +252,6 @@
         private DevExpress.XtraEditors.SimpleButton btn1;
         private DevExpress.XtraEditors.SimpleButton btn_commond;
         private System.Timers.Timer timer1;
+        private System.Timers.Timer timer2;
     }
 }

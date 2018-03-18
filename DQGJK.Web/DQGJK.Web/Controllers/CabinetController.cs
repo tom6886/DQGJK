@@ -77,7 +77,7 @@ namespace DQGJK.Web.Controllers
             else
             {
                 oldCab.ModifyTime = DateTime.Now;
-                oldCab.StationID = oldCab.StationID;
+                oldCab.StationCode = oldCab.StationCode;
                 oldCab.Name = cabinet.Name;
                 oldCab.Status = cabinet.Status;
 

@@ -43,6 +43,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btn_select = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_content.Properties)).BeginInit();
@@ -100,6 +101,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btn_select);
             this.panel1.Controls.Add(this.btn_create);
             this.panel1.Controls.Add(this.tb_device);
             this.panel1.Controls.Add(this.labelControl2);
@@ -112,7 +114,7 @@
             // 
             // btn_create
             // 
-            this.btn_create.Location = new System.Drawing.Point(366, 3);
+            this.btn_create.Location = new System.Drawing.Point(447, 3);
             this.btn_create.Name = "btn_create";
             this.btn_create.Size = new System.Drawing.Size(75, 23);
             this.btn_create.TabIndex = 4;
@@ -212,6 +214,15 @@
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
+            // btn_select
+            // 
+            this.btn_select.Location = new System.Drawing.Point(366, 3);
+            this.btn_select.Name = "btn_select";
+            this.btn_select.Size = new System.Drawing.Size(75, 23);
+            this.btn_select.TabIndex = 5;
+            this.btn_select.Text = "选择设备";
+            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
+            // 
             // Commond
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -255,5 +266,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.TextEdit tb_device;
         private DevExpress.XtraEditors.SimpleButton btn_create;
+        private DevExpress.XtraEditors.SimpleButton btn_select;
     }
 }

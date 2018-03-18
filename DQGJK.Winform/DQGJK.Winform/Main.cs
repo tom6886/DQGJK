@@ -139,14 +139,30 @@ namespace DQGJK.Winform
         #region TCPHandler接口处理
         private void Listener_OnSended(AsyncUserToken token, SocketError error)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("已发送消息：");
-            sb.Append("\r\n");
-            sb.Append(" 发送IP：" + token.Remote.Address.ToString());
-            sb.Append("\r\n");
-            sb.Append(" 发送时间：" + DateTime.Now);
-            sb.Append("\r\n");
-            AppendLog(sb.ToString());
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+
+                if (error != SocketError.Success)
+                {
+                    sb.Append("发送消息时出错：" + error);
+                    sb.Append("\r\n");
+                    AppendLog(sb.ToString());
+                    return;
+                }
+
+                sb.Append("已发送消息：");
+                sb.Append("\r\n");
+                sb.Append(" 发送IP：" + token.Remote.Address.ToString());
+                sb.Append("\r\n");
+                sb.Append(" 发送时间：" + DateTime.Now);
+                sb.Append("\r\n");
+                AppendLog(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("发送消息时出错", ex.Message, ex.StackTrace);
+            }
         }
 
         private void Listener_OnMsgReceived(AsyncUserToken token, byte[] info)
@@ -192,12 +208,12 @@ namespace DQGJK.Winform
             //如果IP地址变化，则关闭之前的连接
             if (_uid != null && !_uid.Equals(uid))
             {
-                listener.CloseClientSocket(uid);
+                listener.CloseClientSocket(_uid);
             }
 
             if (_uid != null && _uid.Equals(uid)) { return; }
 
-            if (uid == null)
+            if (_uid == null)
                 online.TryAdd(client, uid);
             else
                 online.TryUpdate(client, uid, uid);
@@ -267,5 +283,13 @@ namespace DQGJK.Winform
             }
         }
         #endregion
+
+        private void timer2_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (edit_log.Text.Count() > 10000)
+            {
+                edit_log.Text = "";
+            }
+        }
     }
 }

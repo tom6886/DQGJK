@@ -16,7 +16,7 @@ namespace DQGJK.Models
 
         public string DeptName { get; set; }
 
-        public string StationID { get; set; }
+        public string StationCode { get; set; }
 
         public string StationName { get; set; }
 

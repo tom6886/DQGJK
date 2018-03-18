@@ -58,5 +58,17 @@ namespace DQGJK.Winform
 
             this.Close();
         }
+
+        private void btn_select_Click(object sender, EventArgs e)
+        {
+            Devices form = new Devices();
+            form.OnSelect += Form_OnSelect;
+            form.ShowDialog(this);
+        }
+
+        private void Form_OnSelect(string code)
+        {
+            tb_device.Text = code;
+        }
     }
 }

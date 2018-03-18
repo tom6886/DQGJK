@@ -94,7 +94,7 @@ Cabinet.Dialog.prototype = {
                 _this.parents(".form-group:first").children("span").remove();
             }
             else {
-                var html = '<span for="StationID" generated="true" class="help-block">{0}是必选项</span>';
+                var html = '<span generated="true" class="help-block">{0}是必选项</span>';
                 _this.parents(".form-group:first").addClass("has-error");
                 _this.parent().after(html.format(_this.siblings("span").text()));
             }

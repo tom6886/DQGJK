@@ -99,6 +99,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Devices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devices.Designer.cs">
+      <DependentUpon>Devices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Handlers\BaseHandler.cs" />
     <Compile Include="Models\DBContext.cs" />
     <Compile Include="Models\Cabinet.cs" />
@@ -129,6 +135,9 @@
     <Compile Include="Models\Station.cs" />
     <EmbeddedResource Include="Commond.resx">
       <DependentUpon>Commond.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devices.resx">
+      <DependentUpon>Devices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
