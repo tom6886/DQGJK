@@ -15,12 +15,12 @@
         /// <summary>
         /// 湿度
         /// </summary>
-        public decimal Humidity { get; set; }
+        public double Humidity { get; set; }
 
         /// <summary>
         /// 温度
         /// </summary>
-        public decimal Temperature { get; set; }
+        public double Temperature { get; set; }
 
         /// <summary>
         /// 设备状态
@@ -30,12 +30,12 @@
         /// <summary>
         /// 湿度阈值
         /// </summary>
-        public decimal HumidityLimit { get; set; }
+        public double HumidityLimit { get; set; }
 
         /// <summary>
         /// 温度阈值
         /// </summary>
-        public decimal TemperatureLimit { get; set; }
+        public double TemperatureLimit { get; set; }
 
         /// <summary>
         /// 数据长度

@@ -28,8 +28,8 @@ namespace DQGJK.Winform.Handlers
         {
             if (!element.Valid) { return false; }
 
-            cabinet.Humidity = element.Humidity;
-            cabinet.Temperature = element.Temperature;
+            cabinet.Humidity = Convert.ToDecimal(element.Humidity);
+            cabinet.Temperature = Convert.ToDecimal(element.Temperature);
             cabinet.RelayOne = element.State.RelayOne;
             cabinet.RelayTwo = element.State.RelayTwo;
             cabinet.HumidityAlarm = element.State.HumidityAlarm;

@@ -19,12 +19,12 @@
         /// <summary>
         /// 湿度
         /// </summary>
-        public decimal Humidity { get; set; }
+        public double Humidity { get; set; }
 
         /// <summary>
         /// 温度
         /// </summary>
-        public decimal Temperature { get; set; }
+        public double Temperature { get; set; }
 
         /// <summary>
         /// 数据有效性

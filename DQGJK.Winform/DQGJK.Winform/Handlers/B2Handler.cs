@@ -1,4 +1,5 @@
 ﻿using DQGJK.Message;
+using System;
 
 namespace DQGJK.Winform.Handlers
 {
@@ -23,8 +24,8 @@ namespace DQGJK.Winform.Handlers
 
         public override bool SetCabinet(B2Element element, ref Cabinet cabinet)
         {
-            cabinet.HumidityLimit = element.HumidityLimit;
-            cabinet.TemperatureLimit = element.TemperatureLimit;
+            cabinet.HumidityLimit = Convert.ToDecimal(element.HumidityLimit);
+            cabinet.TemperatureLimit = Convert.ToDecimal(element.TemperatureLimit);
             return true;
         }
     }

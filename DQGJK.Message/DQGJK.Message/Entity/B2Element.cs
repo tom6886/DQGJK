@@ -17,11 +17,11 @@
         /// <summary>
         /// 湿度阈值
         /// </summary>
-        public decimal HumidityLimit { get; set; }
+        public double HumidityLimit { get; set; }
 
         /// <summary>
         /// 温度阈值
         /// </summary>
-        public decimal TemperatureLimit { get; set; }
+        public double TemperatureLimit { get; set; }
     }
 }

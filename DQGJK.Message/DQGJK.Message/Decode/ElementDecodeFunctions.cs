@@ -70,13 +70,13 @@ namespace DQGJK.Message
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static decimal Humiture(byte[] data)
+        public static double Humiture(byte[] data)
         {
             byte[] temp = BytesUtil.SubBytes(data, 2, 3);
 
             string bcdStr = BCDUtil.ConvertTo(temp);
 
-            return Convert.ToInt64(bcdStr) / 100.0m;
+            return Convert.ToInt64(bcdStr) / 100.0;
         }
 
         /// <summary>
