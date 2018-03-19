@@ -1,0 +1,1 @@
+ db.B0C0Data.aggregate([{$match:{IsChecked:true,SendTime:{$gte: new ISODate('2018-03-04 00:00:00')}}},{$unwind:"$Data"},{$match:{"Data.Valid":true}},{$group:{ _id:{Client:"$ClientCode",DeviceCode:"$Data.Code"},number:{$avg:"Data.Humidity"}}}])

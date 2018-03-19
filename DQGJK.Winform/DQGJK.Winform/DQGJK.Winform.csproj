@@ -90,7 +90,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TCPHandler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\XTCPHandler.1.1.0\lib\TCPHandler.dll</HintPath>
+      <HintPath>..\packages\XTCPHandler.1.1.1\lib\TCPHandler.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="XUtils, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">

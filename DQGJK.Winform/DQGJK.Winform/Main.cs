@@ -216,7 +216,7 @@ namespace DQGJK.Winform
             if (_uid == null)
                 online.TryAdd(client, uid);
             else
-                online.TryUpdate(client, uid, uid);
+                online.TryUpdate(client, uid, _uid);
         }
 
         private int Listener_GetPackageLength(byte[] data, out int headLength)
