@@ -27,7 +27,7 @@ namespace DQGJK.Winform
             return database.GetCollection<T>(collectionName ?? typeof(T).Name);
         }
 
-        private static IMongoCollection<BsonDocument> GetBsonCollection<T>(string collectionName = null)
+        internal static IMongoCollection<BsonDocument> GetBsonCollection<T>(string collectionName = null)
         {
             MongoUrl mongoUrl = new MongoUrl(_MongoDbConnectionStr);
             var mongoClient = new MongoClient(mongoUrl);

@@ -291,5 +291,11 @@ namespace DQGJK.Winform
                 edit_log.Text = "";
             }
         }
+
+        private void brn_stat_Click(object sender, EventArgs e)
+        {
+            Statistic form = new Statistic();
+            form.ShowDialog(this);
+        }
     }
 }

@@ -44,6 +44,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Timers.Timer();
             this.timer2 = new System.Timers.Timer();
+            this.brn_stat = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -82,6 +83,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.brn_stat);
             this.panelControl1.Controls.Add(this.btn_commond);
             this.panelControl1.Controls.Add(this.btn1);
             this.panelControl1.Controls.Add(this.labelControl3);
@@ -97,7 +99,7 @@
             // 
             // btn_commond
             // 
-            this.btn_commond.Location = new System.Drawing.Point(761, 3);
+            this.btn_commond.Location = new System.Drawing.Point(704, 3);
             this.btn_commond.Name = "btn_commond";
             this.btn_commond.Size = new System.Drawing.Size(75, 23);
             this.btn_commond.TabIndex = 13;
@@ -106,7 +108,7 @@
             // 
             // btn1
             // 
-            this.btn1.Location = new System.Drawing.Point(680, 3);
+            this.btn1.Location = new System.Drawing.Point(623, 3);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(75, 23);
             this.btn1.TabIndex = 12;
@@ -116,7 +118,7 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(496, 7);
+            this.labelControl3.Location = new System.Drawing.Point(439, 7);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(72, 14);
             this.labelControl3.TabIndex = 11;
@@ -125,14 +127,14 @@
             // tb_buffer
             // 
             this.tb_buffer.EditValue = "1024";
-            this.tb_buffer.Location = new System.Drawing.Point(574, 4);
+            this.tb_buffer.Location = new System.Drawing.Point(517, 4);
             this.tb_buffer.Name = "tb_buffer";
             this.tb_buffer.Size = new System.Drawing.Size(100, 20);
             this.tb_buffer.TabIndex = 10;
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(312, 7);
+            this.labelControl2.Location = new System.Drawing.Point(255, 7);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(72, 14);
             this.labelControl2.TabIndex = 9;
@@ -141,14 +143,14 @@
             // tb_connect
             // 
             this.tb_connect.EditValue = "200";
-            this.tb_connect.Location = new System.Drawing.Point(390, 4);
+            this.tb_connect.Location = new System.Drawing.Point(333, 4);
             this.tb_connect.Name = "tb_connect";
             this.tb_connect.Size = new System.Drawing.Size(100, 20);
             this.tb_connect.TabIndex = 8;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(140, 7);
+            this.labelControl1.Location = new System.Drawing.Point(83, 7);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(60, 14);
             this.labelControl1.TabIndex = 7;
@@ -157,7 +159,7 @@
             // tb_port
             // 
             this.tb_port.EditValue = "8899";
-            this.tb_port.Location = new System.Drawing.Point(206, 4);
+            this.tb_port.Location = new System.Drawing.Point(149, 4);
             this.tb_port.Name = "tb_port";
             this.tb_port.Size = new System.Drawing.Size(100, 20);
             this.tb_port.TabIndex = 6;
@@ -208,6 +210,15 @@
             this.timer2.SynchronizingObject = this;
             this.timer2.Elapsed += new System.Timers.ElapsedEventHandler(this.timer2_Elapsed);
             // 
+            // brn_stat
+            // 
+            this.brn_stat.Location = new System.Drawing.Point(785, 3);
+            this.brn_stat.Name = "brn_stat";
+            this.brn_stat.Size = new System.Drawing.Size(83, 23);
+            this.brn_stat.TabIndex = 14;
+            this.brn_stat.Text = "补召统计数据";
+            this.brn_stat.Click += new System.EventHandler(this.brn_stat_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -253,5 +264,6 @@
         private DevExpress.XtraEditors.SimpleButton btn_commond;
         private System.Timers.Timer timer1;
         private System.Timers.Timer timer2;
+        private DevExpress.XtraEditors.SimpleButton brn_stat;
     }
 }
