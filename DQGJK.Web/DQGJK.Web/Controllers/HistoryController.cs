@@ -23,7 +23,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult List(string province, string city, string country, string stationID, string startDate, string endDate, int pi = 1)
+        public PartialViewResult List(string province, string city, string country, string stationCode, string startDate, string endDate, int pi = 1)
         {
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
@@ -33,7 +33,7 @@ namespace DQGJK.Web.Controllers
             if (!string.IsNullOrEmpty(province)) { query = query.Where(q => q.Province.Equals(province)); }
             if (!string.IsNullOrEmpty(city)) { query = query.Where(q => q.City.Equals(city)); }
             if (!string.IsNullOrEmpty(country)) { query = query.Where(q => q.Country.Equals(country)); }
-            if (!string.IsNullOrEmpty(stationID)) { query = query.Where(q => q.StationID.Equals(stationID)); }
+            if (!string.IsNullOrEmpty(stationCode)) { query = query.Where(q => q.ClientCode.Equals(stationCode)); }
             if (!string.IsNullOrEmpty(startDate)) { query = query.Where(q => q.CreateTime >= Convert.ToDateTime(startDate)); }
             if (!string.IsNullOrEmpty(endDate)) { query = query.Where(q => q.CreateTime < Convert.ToDateTime(endDate)); }
 

@@ -1,0 +1,115 @@
+﻿@using DQGJK.Models;
+@model List<Cabinet>
+
+<div class="panel panel-default" style="margin-bottom: 10px;">
+    <div class="panel-body" style="text-align: center;">
+        <span>@ViewBag.station.Name</span>
+        <span style="font-size: 12px;margin-left: 30px;">更新时间：@ViewBag.station.ModifyTime</span>
+    </div>
+</div>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-left:2%;padding-right:2%;">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @Html.Raw("<div class='item active'><div class='row'>")
+
+        @{ int i = 0;}
+        @{
+            foreach (Cabinet item in Model)
+            {
+                @if (i % 2 == 0 && i != 0)
+                {
+                    @Html.Raw("<div class='item'><div class='row'>")
+                }
+                <div class="col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">#@item.Name 柜</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="_board" data-title="温度" data-value="@Convert.ToInt16(item.Temperature)" data-board="thermograph" id="temboard_@i" style="min-width: 200px; max-width: 400px; height: 220px; margin: 0 auto"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="_board" data-title="湿度" data-value="@Convert.ToInt16(item.Humidity)" data-board="ygrometer" id="humboard_@i" style="min-width: 200px; max-width: 400px; height: 220px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-30">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">温度阈值</span>
+                                        <input type="text" class="form-control" name="TemperatureLimit" value="@item.TemperatureLimit" />
+                                    </div>
+                                </div>
+                                <div class="col-30">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">湿度阈值</span>
+                                        <input type="text" class="form-control" name="HumidityLimit" value="@item.HumidityLimit" />
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <button type="button" class="btn btn-info save">下发</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-30">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">除湿</span>
+                                        <select name="Dehumidify" class="form-control">
+                                            <option value="1">开启</option>
+                                            <option value="0">关闭</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-30">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">继电器1</span>
+                                        <select name="Relay1" class="form-control">
+                                            <option value="1">合</option>
+                                            <option value="0">分</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-30">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">继电器2</span>
+                                        <select name="Relay2" class="form-control">
+                                            <option value="1">合</option>
+                                            <option value="0">分</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <button type="button" class="btn btn-info save">下发</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (i % 2 == 1 || i == Model.Count)
+                {
+                    @Html.Raw("</div></div>")
+                }
+
+                i++;
+            }
+        }
+
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("._board").dashboard();
+    });
+</script>

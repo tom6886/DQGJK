@@ -107,7 +107,7 @@ namespace DQGJK.Web.Controllers
 
             foreach (var item in list)
             {
-                results.Add(new { id = item.ID, name = item.Name });
+                results.Add(new { id = item.Code, name = item.Name });
             }
 
             int total = query.Count();

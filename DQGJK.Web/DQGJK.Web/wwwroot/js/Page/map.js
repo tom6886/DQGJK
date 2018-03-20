@@ -47,7 +47,7 @@ IMap.Table = function () {
     this.province = $("input[name=Province]");
     this.city = $("input[name=City]");
     this.country = $("input[name=Country]");
-    this.station = $("input[name=stationID]");
+    this.station = $("input[name=StationCode]");
     this.container = $("#unseen");
     this.pageIndexBox = $("#pageIndexBox");
 

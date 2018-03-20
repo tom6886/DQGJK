@@ -33,7 +33,7 @@ namespace DQGJK.Web.Controllers
             if (!string.IsNullOrEmpty(province)) { query = query.Where(q => q.Province.Equals(province)); }
             if (!string.IsNullOrEmpty(city)) { query = query.Where(q => q.City.Equals(city)); }
             if (!string.IsNullOrEmpty(country)) { query = query.Where(q => q.Country.Equals(country)); }
-            if (!string.IsNullOrEmpty(station)) { query = query.Where(q => q.ID.Equals(station)); }
+            if (!string.IsNullOrEmpty(station)) { query = query.Where(q => q.Code.Equals(station)); }
 
             Pager pager = new Pager(query.Count(), pi);
 
