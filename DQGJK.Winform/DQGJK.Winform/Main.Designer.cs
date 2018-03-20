@@ -31,6 +31,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.edit_log = new DevExpress.XtraEditors.MemoEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.brn_stat = new DevExpress.XtraEditors.SimpleButton();
             this.btn_commond = new DevExpress.XtraEditors.SimpleButton();
             this.btn1 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -44,7 +45,6 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Timers.Timer();
             this.timer2 = new System.Timers.Timer();
-            this.brn_stat = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -96,6 +96,15 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(960, 26);
             this.panelControl1.TabIndex = 4;
+            // 
+            // brn_stat
+            // 
+            this.brn_stat.Location = new System.Drawing.Point(785, 3);
+            this.brn_stat.Name = "brn_stat";
+            this.brn_stat.Size = new System.Drawing.Size(83, 23);
+            this.brn_stat.TabIndex = 14;
+            this.brn_stat.Text = "补召统计数据";
+            this.brn_stat.Click += new System.EventHandler(this.brn_stat_Click);
             // 
             // btn_commond
             // 
@@ -209,15 +218,6 @@
             this.timer2.Interval = 60000D;
             this.timer2.SynchronizingObject = this;
             this.timer2.Elapsed += new System.Timers.ElapsedEventHandler(this.timer2_Elapsed);
-            // 
-            // brn_stat
-            // 
-            this.brn_stat.Location = new System.Drawing.Point(785, 3);
-            this.brn_stat.Name = "brn_stat";
-            this.brn_stat.Size = new System.Drawing.Size(83, 23);
-            this.brn_stat.TabIndex = 14;
-            this.brn_stat.Text = "补召统计数据";
-            this.brn_stat.Click += new System.EventHandler(this.brn_stat_Click);
             // 
             // Main
             // 

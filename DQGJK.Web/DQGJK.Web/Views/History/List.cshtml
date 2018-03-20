@@ -1,125 +1,71 @@
-﻿<div class="table-responsive">
+﻿@using DQGJK.Models;
+@using DQGJK.Web.PageModels;
+@model List<CabinetDataInfo>
+
+<div class="table-responsive">
     <table class="table table-bordered table-striped table-condensed">
         <thead>
             <tr>
-                <td>设备名称</td>
+                <td>环网柜名称</td>
+                <td>环网柜编号</td>
                 <td>设备编号</td>
                 <td>日期</td>
-                <td>平均温度</td>
-                <td>最高温度</td>
-                <td>最低温度</td>
                 <td>平均湿度</td>
                 <td>最高湿度</td>
                 <td>最低湿度</td>
-                <td>温度报警次数</td>
                 <td>湿度报警次数</td>
+                <td>平均温度</td>
+                <td>最高温度</td>
+                <td>最低温度</td>
+                <td>温度报警次数</td>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>长江路#1环网柜#1分柜</td>
-                <td>100101</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>长江路#1环网柜#2分柜</td>
-                <td>100102</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>长江路#1环网柜#3分柜</td>
-                <td>100103</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>长江路#2环网柜#1分柜</td>
-                <td>100201</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>长江路#2环网柜#2分柜</td>
-                <td>100202</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>长江路#2环网柜#3分柜</td>
-                <td>100203</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>胜利路#1环网柜#1分柜</td>
-                <td>200101</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>胜利路#1环网柜#2分柜</td>
-                <td>200102</td>
-                <td>2018-2-28</td>
-                <td>8</td>
-                <td>15</td>
-                <td>5</td>
-                <td>30</td>
-                <td>50</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
+            @{
+                foreach (CabinetDataInfo item in Model)
+                {
+                    <tr>
+                        <td>@item.StationName</td>
+                        <td>@item.ClientCode</td>
+                        @if (item.DeviceCode.Equals("1515"))
+                        {
+                            <td>主机</td>
+                        }
+                        else
+                        {
+                            <td>@item.DeviceCode</td>
+                        }
+                        <td>@item.Year-@item.Month-@item.Day</td>
+                        <td>@item.AverageHumidity</td>
+                        <td>@item.MaxHumidity</td>
+                        <td>@item.MinHumidity</td>
+                        <td>@item.HumidityAlarm</td>
+                        <td>@item.AverageTemperature</td>
+                        <td>@item.MaxTemperature</td>
+                        <td>@item.MinTemperature</td>
+                        <td>@item.TemperatureAlarm</td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 </div>
+
+<div style="padding: 10px 15px;">
+    @await Component.InvokeAsync("Pager", (Pager)ViewBag.Pager)
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".pagination a").click(function () {
+            History.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        });
+
+        $("#goToBtn").click(function () {
+            if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
+            History.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        })
+    });
+</script>

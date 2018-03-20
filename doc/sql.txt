@@ -1,1 +1,10 @@
- db.B0C0Data.aggregate([{$match:{IsChecked:true,SendTime:{$gte:'2018-03-19 00:00:00',$lte:'2018-03-20 00:00:00'}}},{$unwind:"$Data"},{$match:{"Data.Valid":true}},{$group:{ _id:{Client:"$ClientCode",DeviceCode:"$Data.Code"},maxHum:{$max:"$Data.Humidity"},minHum:{${$group:{ _id:{Client:"$ClientCode",DeviceCode:"$Data.Code"},maxHum:{$max:"$Data.Humidity"},minHum:{$min:"$Data.Humidity"},avgHum:{ $avg:"$Data.Humidity"},maxTem:{$max:"$Data.Temperature"},minTem:{$min:"$Data.Temperature"},avgTem:{$avg:"$Data.Temperature"}}}min:"$Data.Humidity"},avgHum:{ $avg: "$Data.Humidity"},maxTem:{$max:"$Data.Temperature"},minTem:{$min:"$Data.Temperature"},avgTem:{$avg:"$Data.Temperature"}}}])
+  //导出数据
+  mongoexport -h localhost:27017 -d DQGJK -c B0C0Data -o C://mongoexport/bak.json
+  
+  //导入数据
+  mongoimport -h localhost:27017 -d DQGJK -c B0C0Data C://mongoexport/bak.json
+  
+  
+  db.B0C0Data.aggregate([{$match:{IsChecked:true,SendTime:{$gte:ISODate('2018-03-19 00:00:00'),$lte:ISODate('2018-03-20 00:00:00')}}},{$unwind:"$Data"},{$match:{"Data.Valid":true}},{$group:{ _id:{Client:"$ClientCode",DeviceCode:"$Data.Code"},maxHum:{$max:"$Data.Humidity"},minHum:{$min:"$Data.Humidity"},avgHum:{ $avg:"$Data.Humidity"},maxTem:{$max:"$Data.Temperature"},minTem:{$min:"$Data.Temperature"},avgTem:{$avg:"$Data.Temperature"}}}])
+  
+  db.B0C0Data.aggregate([{$match:{IsChecked:true,SendTime:{$gte:ISODate('2018-03-19 00:00:00'),$lte:ISODate('2018-03-20 00:00:00')}}},{$unwind:"$Data"},{$group:{ _id:{Client:"$ClientCode",DeviceCode:"$Data.Code"},HumAlarm:{$sum:"$Data.State.HumidityAlarm"},TemAlarm:{}}}])

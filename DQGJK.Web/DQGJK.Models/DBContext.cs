@@ -30,5 +30,7 @@ namespace DQGJK.Models
         public DbSet<StationInfo> StationInfo { get; set; }
 
         public DbSet<CabinetInfo> CabinetInfo { get; set; }
+
+        public DbSet<CabinetDataInfo> CabinetDataInfo { get; set; }
     }
 }

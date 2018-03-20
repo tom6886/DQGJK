@@ -1,12 +1,22 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using XUtils;
 
-namespace DQGJK.Models
+namespace DQGJK.Winform
 {
     [Table("CabinetData")]
     public class CabinetData
     {
+        public CabinetData(DateTime date)
+        {
+            ID = StringUtil.UniqueID();
+            CreateTime = date;
+            Year = date.Year;
+            Month = date.Month;
+            Day = date.Day;
+        }
+
         [Key, Column(Order = 1), Required, MaxLength(0x40)]
         public string ID { get; set; }
 

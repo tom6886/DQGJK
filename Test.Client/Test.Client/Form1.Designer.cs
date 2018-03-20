@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btn_connnect = new DevExpress.XtraEditors.SimpleButton();
             this.btn_send = new DevExpress.XtraEditors.SimpleButton();
@@ -97,7 +96,9 @@
             // 
             // memoEdit2
             // 
-            this.memoEdit2.EditValue = resources.GetString("memoEdit2.EditValue");
+            this.memoEdit2.EditValue = "7E7E010000000000091803201430021459C0004B02E0E018032014300808FF011A005690021A00143" +
+    "003100017080801011A005740021A00140003100000080802011A005600021A00142003100000080" +
+    "803011A005900021A001400031000001616E5";
             this.memoEdit2.Location = new System.Drawing.Point(12, 262);
             this.memoEdit2.Name = "memoEdit2";
             this.memoEdit2.Size = new System.Drawing.Size(518, 198);

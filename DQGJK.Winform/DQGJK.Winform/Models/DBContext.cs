@@ -14,5 +14,7 @@ namespace DQGJK.Winform
         public DbSet<Station> Station { get; set; }
 
         public DbSet<Cabinet> Cabinet { get; set; }
+
+        public DbSet<CabinetData> CabinetData { get; set; }
     }
 }
