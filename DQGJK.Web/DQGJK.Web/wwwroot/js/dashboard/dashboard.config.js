@@ -9,6 +9,6 @@ $(function () {
             Board.config[r[i].name] = r[i].config;
         }
 
-        $("._board").dashboard();
+        //$("._board").dashboard();
     });
 });

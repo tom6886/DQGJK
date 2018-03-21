@@ -14,7 +14,7 @@ History.Table = function () {
     this.province = $("input[name=Province]");
     this.city = $("input[name=City]");
     this.country = $("input[name=Country]");
-    this.stationID = $("input[name=stationID]");
+    this.stationCode = $("input[name=stationCode]");
     this.startDate = $("input[name=StartDate]");
     this.endDate = $("input[name=EndDate]");
 };
@@ -27,7 +27,7 @@ History.Table.prototype = {
             province: _this.province.select2("val"),
             city: _this.city.select2("val"),
             country: _this.country.select2("val"),
-            stationID: _this.stationID.select2("val"),
+            stationCode: _this.stationCode.select2("val"),
             startDate: _this.startDate.val(),
             endDate: _this.endDate.val(),
             pi: pi
