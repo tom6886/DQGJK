@@ -297,5 +297,10 @@ namespace DQGJK.Winform
             Statistic form = new Statistic();
             form.ShowDialog(this);
         }
+
+        private void btn_test_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

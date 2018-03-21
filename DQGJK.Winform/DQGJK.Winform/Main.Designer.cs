@@ -45,6 +45,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Timers.Timer();
             this.timer2 = new System.Timers.Timer();
+            this.btn_test = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -83,6 +84,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.btn_test);
             this.panelControl1.Controls.Add(this.brn_stat);
             this.panelControl1.Controls.Add(this.btn_commond);
             this.panelControl1.Controls.Add(this.btn1);
@@ -219,6 +221,15 @@
             this.timer2.SynchronizingObject = this;
             this.timer2.Elapsed += new System.Timers.ElapsedEventHandler(this.timer2_Elapsed);
             // 
+            // btn_test
+            // 
+            this.btn_test.Location = new System.Drawing.Point(874, 3);
+            this.btn_test.Name = "btn_test";
+            this.btn_test.Size = new System.Drawing.Size(75, 23);
+            this.btn_test.TabIndex = 15;
+            this.btn_test.Text = "发送测试";
+            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -265,5 +276,6 @@
         private System.Timers.Timer timer1;
         private System.Timers.Timer timer2;
         private DevExpress.XtraEditors.SimpleButton brn_stat;
+        private DevExpress.XtraEditors.SimpleButton btn_test;
     }
 }
