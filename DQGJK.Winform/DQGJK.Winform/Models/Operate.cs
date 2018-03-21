@@ -23,11 +23,14 @@ namespace DQGJK.Winform
         [Display(Name = "操作内容"), MaxLength(500)]
         public string Content { get; set; }
 
+        public int RetryCount { get; set; }
+
         public OperateState State { get; set; }
     }
 
     public enum OperateState
     {
+        Error = -1,
         Before = 0,
         Sended = 1,
         Done = 2

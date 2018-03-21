@@ -27,13 +27,13 @@ namespace DQGJK.Message
             List<byte> list = new List<byte>();
 
             list.AddRange(new byte[] { 0x08, 0x08 });
-            list.AddRange(BCDUtil.ConvertFrom(Code, 1));
-            list.Add(0x06);
-            list.AddRange(BCDUtil.ConvertFrom(code[State.RelayOne], 1));
-            list.Add(0x07);
-            list.AddRange(BCDUtil.ConvertFrom(code[State.RelayTwo], 1));
-            list.Add(0x09);
-            list.AddRange(BCDUtil.ConvertFrom(code[State.Dehumidify], 1));
+            list.AddRange(BytesUtil.ToHexArray(Code));
+            list.AddRange(new byte[] { 0x06, 0x08 });
+            list.AddRange(BytesUtil.ToHexArray(code[State.RelayOne]));
+            list.AddRange(new byte[] { 0x07, 0x08 });
+            list.AddRange(BytesUtil.ToHexArray(code[State.RelayTwo]));
+            list.AddRange(new byte[] { 0x09, 0x08 });
+            list.AddRange(BytesUtil.ToHexArray(code[State.Dehumidify]));
 
             return list.ToArray();
         }

@@ -4,6 +4,7 @@ using DQGJK.Web.PageModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -291,6 +292,13 @@ namespace DQGJK.Web.Controllers
 
                 return str;
             }
+        }
+
+        [HttpPost]
+        public int GetOnlineCount()
+        {
+            DateTime board = DateTime.Now - new TimeSpan(0, 5, 0);
+            return _context.Station.Where(q => q.ModifyTime > board).Count();
         }
     }
 }

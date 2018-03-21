@@ -3,6 +3,7 @@ using DQGJK.Winform.Handlers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -298,9 +299,35 @@ namespace DQGJK.Winform
             form.ShowDialog(this);
         }
 
-        private void btn_test_Click(object sender, EventArgs e)
+        private void timer3_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            using (DBContext db = new DBContext())
+            {
+                //获取未发送过的消息
+                List<Operate> list = db.Operate.Where(q => q.State == OperateState.Before).ToList();
 
+                //获取发送过但没有返回报文的消息
+                List<Operate> sended = db.Operate.Where(q => q.State == OperateState.Sended && q.RetryCount < 6).ToList();
+
+                list.AddRange(sended);
+
+                if (list.Count == 0) { return; }
+
+                List<string> ids = list.Select(q => q.ID).ToList();
+
+                List<DeviceOperate> subList = db.DeviceOperate.Where(q => ids.Contains(q.OperateID)).ToList();
+
+                DateTime now = DateTime.Now;
+
+                list = list.OrderBy(q => q.CreateTime).ToList();
+
+                foreach (var item in list)
+                {
+                    db.Entry(MessageHelper.OperateHandle(item, subList, now)).State = EntityState.Modified;
+                }
+
+                db.SaveChanges();
+            }
         }
     }
 }

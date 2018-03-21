@@ -10,8 +10,9 @@ namespace DQGJK.Models
     {
         public Operate()
         {
-            this.ID = StringUtil.UniqueID();
-            this.CreateTime = DateTime.Now;
+            ID = StringUtil.UniqueID();
+            CreateTime = DateTime.Now;
+            RetryCount = 0;
             State = OperateState.Before;
         }
 
@@ -30,6 +31,8 @@ namespace DQGJK.Models
 
         [Display(Name = "操作内容"), MaxLength(500)]
         public string Content { get; set; }
+
+        public int RetryCount { get; set; }
 
         public OperateState State { get; set; }
     }

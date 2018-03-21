@@ -56,5 +56,22 @@ namespace DQGJK.Winform.Handlers
         }
 
         public abstract bool SetCabinet(T element, ref Cabinet cabinet);
+
+        public void UpdateOperate(RecieveMessage _Message, string FunctionCode)
+        {
+            using (DBContext db = new DBContext())
+            {
+                List<Operate> operate = db.Operate.Where(q => q.ClientCode.Equals(_Message.ClientCodeStr)
+                                            && q.State == OperateState.Sended && q.FunctionCode.Equals(FunctionCode)).ToList();
+
+                foreach (var item in operate)
+                {
+                    item.State = OperateState.Done;
+                    db.Entry(item).State = EntityState.Modified;
+                }
+
+                db.SaveChanges();
+            }
+        }
     }
 }

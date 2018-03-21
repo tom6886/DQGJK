@@ -27,14 +27,7 @@
                     <tr>
                         <td>@item.StationName</td>
                         <td>@item.ClientCode</td>
-                        @if (item.DeviceCode.Equals("1515"))
-                        {
-                            <td>主机</td>
-                        }
-                        else
-                        {
-                            <td>@item.DeviceCode</td>
-                        }
+                        <td>@item.DeviceCode</td>
                         <td>@item.Year-@item.Month-@item.Day</td>
                         <td>@item.AverageHumidity</td>
                         <td>@item.MaxHumidity</td>

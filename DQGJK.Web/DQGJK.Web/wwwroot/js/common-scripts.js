@@ -30,4 +30,12 @@
 
         _form.submit();
     });
+
+    FreshOnline();
+
+    setInterval(FreshOnline, 60000);
 });
+
+function FreshOnline() {
+    $.post("Common/GetOnlineCount", function (r) { $("#online-span").text(r); });
+};

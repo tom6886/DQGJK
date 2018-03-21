@@ -212,7 +212,15 @@ $(function () {
 
         _form.submit();
     });
+
+    FreshOnline();
+
+    setInterval(FreshOnline, 60000);
 });
+
+function FreshOnline() {
+    $.post("Common/GetOnlineCount", function (r) { $("#online-span").text(r); });
+};
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.

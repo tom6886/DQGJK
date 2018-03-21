@@ -20,6 +20,8 @@ namespace DQGJK.Winform.Handlers
             MongoHandler.Save(new B2Data(_Message));
 
             UpdateCabinet(_Message);
+
+            UpdateOperate(_Message, "B2");
         }
 
         public override bool SetCabinet(B2Element element, ref Cabinet cabinet)

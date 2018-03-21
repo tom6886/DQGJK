@@ -16,5 +16,9 @@ namespace DQGJK.Winform
         public DbSet<Cabinet> Cabinet { get; set; }
 
         public DbSet<CabinetData> CabinetData { get; set; }
+
+        public DbSet<Operate> Operate { get; set; }
+
+        public DbSet<DeviceOperate> DeviceOperate { get; set; }
     }
 }

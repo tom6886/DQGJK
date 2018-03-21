@@ -45,7 +45,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.timer1 = new System.Timers.Timer();
             this.timer2 = new System.Timers.Timer();
-            this.btn_test = new DevExpress.XtraEditors.SimpleButton();
+            this.timer3 = new System.Timers.Timer();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_log.Properties)).BeginInit();
@@ -59,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timer2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timer3)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -84,7 +85,6 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.btn_test);
             this.panelControl1.Controls.Add(this.brn_stat);
             this.panelControl1.Controls.Add(this.btn_commond);
             this.panelControl1.Controls.Add(this.btn1);
@@ -221,14 +221,12 @@
             this.timer2.SynchronizingObject = this;
             this.timer2.Elapsed += new System.Timers.ElapsedEventHandler(this.timer2_Elapsed);
             // 
-            // btn_test
+            // timer3
             // 
-            this.btn_test.Location = new System.Drawing.Point(874, 3);
-            this.btn_test.Name = "btn_test";
-            this.btn_test.Size = new System.Drawing.Size(75, 23);
-            this.btn_test.TabIndex = 15;
-            this.btn_test.Text = "发送测试";
-            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 300000D;
+            this.timer3.SynchronizingObject = this;
+            this.timer3.Elapsed += new System.Timers.ElapsedEventHandler(this.timer3_Elapsed);
             // 
             // Main
             // 
@@ -253,6 +251,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timer2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timer3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -276,6 +275,6 @@
         private System.Timers.Timer timer1;
         private System.Timers.Timer timer2;
         private DevExpress.XtraEditors.SimpleButton brn_stat;
-        private DevExpress.XtraEditors.SimpleButton btn_test;
+        private System.Timers.Timer timer3;
     }
 }

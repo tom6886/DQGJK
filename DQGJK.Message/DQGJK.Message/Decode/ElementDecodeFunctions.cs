@@ -56,7 +56,7 @@ namespace DQGJK.Message
         /// <returns></returns>
         public static string Code(byte[] data)
         {
-            return BCDUtil.ConvertTo(data[2]);
+            return BCDUtil.ConvertToHex(data[2]);
         }
 
         /// <summary>

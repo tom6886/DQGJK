@@ -15,6 +15,7 @@
 
     public enum OperateState
     {
+        Error = -1,
         Before = 0,
         Sended = 1,
         Done = 2

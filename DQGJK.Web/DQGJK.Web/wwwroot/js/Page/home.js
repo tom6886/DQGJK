@@ -50,17 +50,17 @@ Home.Carousel.prototype = {
                     stationCode: $("#stationCode").val(),
                     functionCode: "B1",
                     DeviceCode: _panel.attr("data-code"),
-                    RelayOne: $("select[name=Relay1]").val(),
-                    RelayTwo: $("select[name=Relay2]").val(),
-                    Dehumidify: $("select[name=Dehumidify]").val()
+                    RelayOne: $("select[name=Relay1]", _panel).val(),
+                    RelayTwo: $("select[name=Relay2]", _panel).val(),
+                    Dehumidify: $("select[name=Dehumidify]", _panel).val()
                 });
             } else if (_this.attr("data-code") === "B2") {
                 _entity.command({
                     stationCode: $("#stationCode").val(),
                     functionCode: "B2",
                     DeviceCode: _panel.attr("data-code"),
-                    HumidityLimit: $("input[name=HumidityLimit]").val(),
-                    TemperatureLimit: $("input[name=TemperatureLimit]").val()
+                    HumidityLimit: $("input[name=HumidityLimit]", _panel).val(),
+                    TemperatureLimit: $("input[name=TemperatureLimit]", _panel).val()
                 });
             }
         });
