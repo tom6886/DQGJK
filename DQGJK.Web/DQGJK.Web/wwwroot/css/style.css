@@ -775,3 +775,5 @@ label { font-weight: 400; }
 .bottom { font-size: 16px; padding: 14px 0; }
     .bottom .bottom-group i { color: darkred; }
     .bottom .bottom-group span { color: white; }
+
+.carousel-panel-edit { float: right; font-size: 14px; }

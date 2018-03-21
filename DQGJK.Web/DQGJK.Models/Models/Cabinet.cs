@@ -12,7 +12,7 @@ namespace DQGJK.Models
         [Display(Name = "电气柜编号"), MaxLength(100)]
         public string Code { get; set; }
 
-        [Display(Name = "所属环网柜CODE"), MaxLength(100), Required]
+        [Display(Name = "所属环网柜CODE"), MaxLength(10), Required]
         public string StationCode { get; set; }
 
         public decimal Humidity { get; set; }

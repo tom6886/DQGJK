@@ -9687,6 +9687,8 @@ label { font-weight: 400; }
     .bottom .bottom-group i { color: darkred; }
     .bottom .bottom-group span { color: white; }
 
+.carousel-panel-edit { float: right; font-size: 14px; }
+
 /* for ie6 */
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td { margin: 0; padding: 0; color: #333; }
 body, button, input, select, textarea { font-family: Consolas,"微软雅黑",Arial, Helvetica, sans-serif; font-size: 14px; }

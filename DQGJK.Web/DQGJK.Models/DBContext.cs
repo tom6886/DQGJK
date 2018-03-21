@@ -22,6 +22,9 @@ namespace DQGJK.Models
 
         public DbSet<Area> Area { get; set; }
 
+        public DbSet<Operate> Operate { get; set; }
+
+        public DbSet<DeviceOperate> DeviceOperate { get; set; }
 
         //视图
 

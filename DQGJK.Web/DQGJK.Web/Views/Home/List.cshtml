@@ -5,6 +5,7 @@
     <div class="panel-body" style="text-align: center;">
         <span>@ViewBag.station.Name</span>
         <span style="font-size: 12px;margin-left: 30px;">更新时间：@ViewBag.station.ModifyTime</span>
+        <input type="hidden" id="stationCode" value="@ViewBag.station.Code" />
     </div>
 </div>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-left:2%;padding-right:2%;">
@@ -21,9 +22,12 @@
                     @Html.Raw("<div class='item'><div class='row'>")
                 }
                 <div class="col-md-6">
-                    <div class="panel panel-info">
+                    <div class="panel panel-info" data-code="@item.Code">
                         <div class="panel-heading">
-                            <h3 class="panel-title">#@item.Name 柜</h3>
+                            <h3 class="panel-title">
+                                #@item.Name 柜
+                                <a href="javascript:void(0)" class="carousel-panel-edit">操作</a>
+                            </h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -38,49 +42,52 @@
                                 <div class="col-30">
                                     <div class="input-group">
                                         <span class="input-group-addon">温度阈值</span>
-                                        <input type="text" class="form-control" name="TemperatureLimit" value="@item.TemperatureLimit" />
+                                        <input type="text" class="form-control carousel-input" readonly="readonly" name="TemperatureLimit" value="@item.TemperatureLimit" />
                                     </div>
                                 </div>
                                 <div class="col-30">
                                     <div class="input-group">
                                         <span class="input-group-addon">湿度阈值</span>
-                                        <input type="text" class="form-control" name="HumidityLimit" value="@item.HumidityLimit" />
+                                        <input type="text" class="form-control carousel-input" readonly="readonly" name="HumidityLimit" value="@item.HumidityLimit" />
                                     </div>
                                 </div>
                                 <div class="col-10">
-                                    <button type="button" class="btn btn-info save">下发</button>
+                                    <button type="button" class="btn btn-info carousel-save" data-code="B2" style="display:none;">下发</button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-30">
                                     <div class="input-group">
                                         <span class="input-group-addon">除湿</span>
-                                        <select name="Dehumidify" class="form-control">
+                                        <select name="Dehumidify" class="form-control carousel-select" disabled>
                                             <option value="1">开启</option>
                                             <option value="0">关闭</option>
                                         </select>
+                                        <input type="hidden" class="select-value" value="@item.Dehumidify" />
                                     </div>
                                 </div>
                                 <div class="col-30">
                                     <div class="input-group">
                                         <span class="input-group-addon">继电器1</span>
-                                        <select name="Relay1" class="form-control">
+                                        <select name="Relay1" class="form-control carousel-select" disabled>
                                             <option value="1">合</option>
                                             <option value="0">分</option>
                                         </select>
+                                        <input type="hidden" class="select-value" value="@item.RelayOne" />
                                     </div>
                                 </div>
                                 <div class="col-30">
                                     <div class="input-group">
                                         <span class="input-group-addon">继电器2</span>
-                                        <select name="Relay2" class="form-control">
+                                        <select name="Relay2" class="form-control carousel-select" disabled>
                                             <option value="1">合</option>
                                             <option value="0">分</option>
                                         </select>
+                                        <input type="hidden" class="select-value" value="@item.RelayTwo" />
                                     </div>
                                 </div>
                                 <div class="col-10">
-                                    <button type="button" class="btn btn-info save">下发</button>
+                                    <button type="button" class="btn btn-info carousel-save" data-code="B1" style="display:none;">下发</button>
                                 </div>
                             </div>
                         </div>
