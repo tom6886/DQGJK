@@ -40,7 +40,7 @@ Home.Carousel.prototype = {
             $(".carousel-input", _panel).attr("readonly", !_editable);
             $(".carousel-select", _panel).attr("disabled", !_editable);
             $(".carousel-save", _panel).toggle();
-            _this.text(_editable ? "停止操作" : "操作");
+            _this.text(_editable ? "停止遥控" : "遥控");
         });
 
         $(".carousel-save").click(function () {

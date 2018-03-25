@@ -142,7 +142,9 @@ namespace DQGJK.Message
         {
             int index = -1;
 
-            for (int i = 0, length = data.Length; i < length; i++)
+            if (data.Length < 2) { return index; }
+
+            for (int i = 0, length = data.Length; i < length - 1; i++)
             {
                 //连续两个7E代表报文起始符
                 if (data[i] == Start && data[i + 1] == Start)

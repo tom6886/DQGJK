@@ -22,6 +22,8 @@ namespace DQGJK.Winform.Handlers
 
                 db.Entry(_station).State = EntityState.Modified;
 
+                if (_Message.Data == null) { db.SaveChanges(); return; }
+
                 List<Cabinet> _cabinets = db.Cabinet.Where(q => q.StationCode.Equals(_Message.ClientCodeStr)).ToList();
 
                 List<T> data = (List<T>)_Message.Data;

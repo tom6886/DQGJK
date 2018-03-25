@@ -83,6 +83,10 @@ namespace DQGJK.Web.Controllers
         [HttpPost]
         public JsonResult Edit(Station station)
         {
+            Station sameCode = _context.Station.Where(q => q.Code.Equals(station.Code) && !q.ID.Equals(station.ID)).FirstOrDefault();
+
+            if (sameCode != null) { return Json(new { code = -1, msg = "已存在相同编号的环网柜" }); }
+
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
             Station oldStat = _context.Station.Where(q => q.ID.Equals(station.ID)).FirstOrDefault();
@@ -129,6 +133,10 @@ namespace DQGJK.Web.Controllers
             Station stat = _context.Station.Where(q => q.ID.Equals(stationID)).FirstOrDefault();
 
             if (stat == null) { return Json(new { code = -1, msg = "您要删除的环网柜不存在" }); }
+
+            List<Cabinet> devices = _context.Cabinet.Where(q => q.StationCode.Equals(stat.Code)).ToList();
+
+            if (devices.Count > 0) { _context.Cabinet.RemoveRange(devices); }
 
             _context.Station.Remove(stat);
 

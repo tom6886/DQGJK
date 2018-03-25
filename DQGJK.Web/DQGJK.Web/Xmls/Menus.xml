@@ -46,7 +46,7 @@
         <href>station</href>
       </subMenu>
       <subMenu roles="Administrator">
-        <name>设备管理</name>
+        <name>电气柜管理</name>
         <href>cabinet</href>
       </subMenu>
     </subMenus>

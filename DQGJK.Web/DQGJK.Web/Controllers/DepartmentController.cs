@@ -97,21 +97,21 @@ namespace DQGJK.Web.Controllers
 
             if (dept == null) { return Json(new { code = -1, msg = "您要删除的组织机构不存在" }); }
 
-            //if (!string.IsNullOrEmpty(dept.ParentID))
-            //{
-            //    List<Station> stats = _context.Station.Where(q => q.DeptID.Equals(dept.ID)).ToList();
+            if (!string.IsNullOrEmpty(dept.ParentID))
+            {
+                List<Station> stats = _context.Station.Where(q => q.DeptID.Equals(dept.ID)).ToList();
 
-            //    if (stats.Count > 0)
-            //    {
-            //        List<string> statsIds = stats.Select(q => q.ID).ToList();
+                if (stats.Count > 0)
+                {
+                    List<string> statsCodes = stats.Select(q => q.Code).ToList();
 
-            //        List<Cabinet> devices = _context.Cabinet.Where(q => statsIds.Contains(q.StationID)).ToList();
+                    List<Cabinet> devices = _context.Cabinet.Where(q => statsCodes.Contains(q.StationCode)).ToList();
 
-            //        if (devices.Count > 0) { Device.Delete(devices, db); }
+                    if (devices.Count > 0) { _context.Cabinet.RemoveRange(devices); }
 
-            //        _context.Station.RemoveRange(stats);
-            //    }
-            //}
+                    _context.Station.RemoveRange(stats);
+                }
+            }
 
             _context.Department.Remove(dept);
 

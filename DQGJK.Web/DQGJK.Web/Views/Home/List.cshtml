@@ -26,7 +26,10 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 #@item.Name 柜
-                                <a href="javascript:void(0)" class="carousel-panel-edit">操作</a>
+                                @if (ViewBag.user.Roles.Equals("Administrator"))
+                                {
+                                    <a href="javascript:void(0)" class="carousel-panel-edit">遥控</a>
+                                }
                             </h3>
                         </div>
                         <div class="panel-body">

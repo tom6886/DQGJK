@@ -25,6 +25,9 @@
 
                 if (!func) { return true; }
 
+                //固定宽度
+                $(v).css("width", ($(v).parent().width() - $(v).siblings("span").width()) * 0.9);
+
                 func($(v));
             });
         },
