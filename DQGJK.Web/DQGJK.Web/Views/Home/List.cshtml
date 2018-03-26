@@ -35,10 +35,10 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="_board" data-title="温度" data-value="@Convert.ToInt16(item.Temperature)" data-board="thermograph" id="temboard_@i" style="min-width: 200px; max-width: 400px; height: 220px; margin: 0 auto"></div>
+                                    <div class="_board" data-title="温度" data-value='@item.Temperature.ToString("0.##")' data-board="thermograph" id="temboard_@i" style="min-width: 200px; max-width: 400px; height: 220px; margin: 0 auto"></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="_board" data-title="湿度" data-value="@Convert.ToInt16(item.Humidity)" data-board="ygrometer" id="humboard_@i" style="min-width: 200px; max-width: 400px; height: 220px; margin: 0 auto"></div>
+                                    <div class="_board" data-title="湿度" data-value='@item.Humidity.ToString("0.##")' data-board="ygrometer" id="humboard_@i" style="min-width: 200px; max-width: 400px; height: 220px; margin: 0 auto"></div>
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom:10px;">

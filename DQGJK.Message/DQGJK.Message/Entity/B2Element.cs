@@ -32,7 +32,7 @@ namespace DQGJK.Message
             List<byte> list = new List<byte>();
 
             list.AddRange(new byte[] { 0x08, 0x08 });
-            list.AddRange(BCDUtil.ConvertFrom(Code, 1));
+            list.AddRange(BytesUtil.ToHexArray(Code));
             list.AddRange(new byte[] { 0x04, 0x1A });
             string _humLimit = (Math.Round(HumidityLimit, 2) * 100).ToString().PadLeft(6, '0');
             list.AddRange(BCDUtil.ConvertFrom(_humLimit, 3));

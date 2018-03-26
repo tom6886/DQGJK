@@ -25,6 +25,8 @@ namespace DQGJK.Winform.Handlers
 
         public override bool SetCabinet(B1Element element, ref Cabinet cabinet)
         {
+            if (element.State == null) { return false; }
+
             cabinet.RelayOne = element.State.RelayOne;
             cabinet.RelayTwo = element.State.RelayTwo;
             cabinet.Dehumidify = element.State.Dehumidify;

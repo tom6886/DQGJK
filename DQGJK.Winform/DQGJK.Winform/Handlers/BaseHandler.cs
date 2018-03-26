@@ -51,9 +51,9 @@ namespace DQGJK.Winform.Handlers
                         db.Cabinet.Add(cabinet);
                     else
                         db.Entry(cabinet).State = EntityState.Modified;
-
-                    db.SaveChanges();
                 }
+
+                db.SaveChanges();
             }
         }
 
