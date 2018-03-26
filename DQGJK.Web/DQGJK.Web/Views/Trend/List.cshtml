@@ -1,30 +1,56 @@
-﻿<div class="table-responsive">
-    <table class="table table-bordered table-condensed" id="deviceList">
-        <tbody>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">长江路#1环网柜#1分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">长江路#1环网柜#2分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">长江路#1环网柜#3分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">长江路#2环网柜#1分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">长江路#2环网柜#2分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">长江路#2环网柜#3分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">胜利路#1环网柜#1分柜</td>
-            </tr>
-            <tr>
-                <td style="line-height: 2.5; cursor: pointer;">胜利路#2环网柜#2分柜</td>
-            </tr>
-        </tbody>
-    </table>
+﻿<div class="panel panel-default" style="margin-bottom: 10px;">
+    <div class="panel-body" style="text-align: center;">
+        <span>@ViewBag.station.Name</span>
+        <span style="font-size: 12px;margin-left: 30px;">更新时间：@ViewBag.station.ModifyTime</span>
+    </div>
+</div>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-left:2%;padding-right:2%;width:100%;">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @*<div class="item active">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <div id="chart0" class="_line" data-title="#1柜月平均温湿度" style="min-width:400px;height:320px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <div id="chart1" class="_line" data-title="#2柜月平均温湿度" style="min-width:400px;height:320px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <div id="chart2" class="_line" data-title="#3柜月平均温湿度" style="min-width:400px;height:320px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <div id="chart3" class="_line" data-title="#4柜月平均温湿度" style="min-width:400px;height:320px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
