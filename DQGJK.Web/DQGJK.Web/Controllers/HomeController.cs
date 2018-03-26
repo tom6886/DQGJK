@@ -44,7 +44,7 @@ namespace DQGJK.Web.Controllers
         {
             Guser user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
 
-            if (!user.Roles.Equals("Administrator")) { return Json(new { code = -1, msg = "只有管理员角色可以遥控设备" }); }
+            if (!(user.Roles.Equals("Administrator") || user.Roles.Equals("Operator"))) { return Json(new { code = -1, msg = "只有管理员或者操作人员可以遥控设备" }); }
 
             Operate parent = _context.Operate.Where(q => q.ClientCode.Equals(stationCode)
                                 && q.FunctionCode.Equals(functionCode) && q.State == OperateState.Before).FirstOrDefault();

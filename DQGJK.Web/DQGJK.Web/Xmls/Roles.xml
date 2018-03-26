@@ -7,4 +7,8 @@
     <name>Customer</name>
     <value>普通成员</value>
   </role>
+  <role>
+    <name>Operator</name>
+    <value>操作人员</value>
+  </role>
 </xml>

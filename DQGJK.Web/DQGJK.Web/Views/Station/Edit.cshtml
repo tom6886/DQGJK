@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">单位</span>
-                            <input type="hidden" name="DeptID" data-select="dw" class="form-control _select" data-id="@ViewBag.Dw.ID" data-value="@ViewBag.Dw.Name" />
+                            <input type="text" name="DeptID" data-select="dw" class="form-control _select" data-id="@ViewBag.Dw.ID" data-value="@ViewBag.Dw.Name" />
                         </div>
                     </div>
                 }
@@ -31,19 +31,19 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">省</span>
-                        <input type="hidden" data-select="p" class="form-control _select" name="Province" data-value="@ViewBag.province?.Name" data-id="@ViewBag.province?.ID" />
+                        <input type="text" data-select="p" class="form-control _select" name="Province" data-value="@ViewBag.province?.Name" data-id="@ViewBag.province?.ID" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">市</span>
-                        <input type="hidden" data-select="ci" class="form-control _select" name="City" data-value="@ViewBag.city?.Name" data-id="@ViewBag.city?.ID" />
+                        <input type="text" data-select="ci" class="form-control _select" name="City" data-value="@ViewBag.city?.Name" data-id="@ViewBag.city?.ID" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">县</span>
-                        <input type="hidden" data-select="co" class="form-control _select" name="Country" data-value="@ViewBag.country?.Name" data-id="@ViewBag.country?.ID" />
+                        <input type="text" data-select="co" class="form-control _select" name="Country" data-value="@ViewBag.country?.Name" data-id="@ViewBag.country?.ID" />
                         <input type="hidden" name="CityCode" value="@ViewBag.station.CityCode" />
                     </div>
                 </div>

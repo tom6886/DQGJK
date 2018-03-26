@@ -26,7 +26,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 #@item.Name 柜
-                                @if (ViewBag.user.Roles.Equals("Administrator"))
+                                @if (ViewBag.user.Roles.Equals("Administrator") || ViewBag.user.Roles.Equals("Operator"))
                                 {
                                     <a href="javascript:void(0)" class="carousel-panel-edit">遥控</a>
                                 }
