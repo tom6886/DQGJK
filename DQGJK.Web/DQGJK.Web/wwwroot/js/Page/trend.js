@@ -2,45 +2,40 @@
 var Trend = Trend || {};
 
 Trend.Widgets = {
-    table: null,
+    station: null,
     init: function () {
-        this.table = new Trend.Table();
+        this.station = new Trend.Station();
         return this;
     }
 };
 
-Trend.Table = function () {
+Trend.Station = function () {
     this.container = $("#unseen");
+    this.province = $("input[name=Province]");
+    this.city = $("input[name=City]");
+    this.country = $("input[name=Country]");
+    this.stationCode = $("input[name=StationCode]");
 };
 
-Trend.Table.prototype = {
+Trend.Station.prototype = {
     query: function (pi) {
         var _this = this;
 
-        $.get("trend/DeviceList", { pi: pi }, function (r) {
+        $.get("Trend/StationInfo", {
+            stationCode: _this.stationCode.select2("val")
+        }, function (r) {
             _this.container.html(r);
+            //_this.bind();
         });
     }
 };
 
 $(function () {
-    //var widgets = Trend.Widgets.init();
+    var widgets = Trend.Widgets.init();
 
-    //widgets.table.query();
+    widgets.station.query();
 
-    //$(".query").click(function () {
-    //    widgets.table.query();
-    //});
+    $(".query").click(function () {
+        widgets.station.query();
+    });
 });
-
-
-
-
-Trend.LineChart = function () {
-    this.container = $("#chart");
-    this.entity = null;
-}
-
-Trend.LineChart.prototype = {
-
-}
