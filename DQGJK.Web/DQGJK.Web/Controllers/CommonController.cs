@@ -297,7 +297,7 @@ namespace DQGJK.Web.Controllers
         [HttpPost]
         public int GetOnlineCount()
         {
-            DateTime board = DateTime.Now - new TimeSpan(0, 5, 0);
+            DateTime board = DateTime.Now - new TimeSpan(0, 10, 0);
             return _context.Station.Where(q => q.ModifyTime > board).Count();
         }
     }

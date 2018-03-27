@@ -30,6 +30,14 @@ Trend.Station.prototype = {
     }
 };
 
+Trend.Carousel = function () {
+
+};
+
+Trend.Carousel.prototype = {
+
+};
+
 $(function () {
     var widgets = Trend.Widgets.init();
 

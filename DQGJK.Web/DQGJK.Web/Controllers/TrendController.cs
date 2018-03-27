@@ -34,5 +34,13 @@ namespace DQGJK.Web.Controllers
 
             return PartialView("List");
         }
+
+        [HttpGet]
+        public JsonResult Cabinets(string stationCode, int statType)
+        {
+
+
+            return null;
+        }
     }
 }
