@@ -7,6 +7,8 @@
             Code = element.Code;
             Humidity = element.Humidity;
             Temperature = element.Temperature;
+            HumidityLimit = element.HumidityLimit;
+            TemperatureLimit = element.TemperatureLimit;
             State = element.State;
             Valid = ((Temperature > -50 && Temperature < 100) && (Humidity > 0 && Humidity < 100));
         }
@@ -25,6 +27,16 @@
         /// 温度
         /// </summary>
         public double Temperature { get; set; }
+
+        /// <summary>
+        /// 湿度
+        /// </summary>
+        public double HumidityLimit { get; set; }
+
+        /// <summary>
+        /// 温度
+        /// </summary>
+        public double TemperatureLimit { get; set; }
 
         /// <summary>
         /// 数据有效性

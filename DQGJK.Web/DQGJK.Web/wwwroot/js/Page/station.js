@@ -87,6 +87,8 @@ Station.Dialog.prototype = {
             }
         });
 
+        $("._select", _form).select_2();
+
         $('select[name=Status]', _form).val($("#Status", _form).val());
 
         $("input._select", _form).on("change", function () {

@@ -301,32 +301,39 @@ namespace DQGJK.Winform
 
         private void timer3_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            using (DBContext db = new DBContext())
+            try
             {
-                //获取未发送过的消息
-                List<Operate> list = db.Operate.Where(q => q.State == OperateState.Before).ToList();
-
-                //获取发送过但没有返回报文的消息
-                List<Operate> sended = db.Operate.Where(q => q.State == OperateState.Sended && q.RetryCount < 6).ToList();
-
-                list.AddRange(sended);
-
-                if (list.Count == 0) { return; }
-
-                List<string> ids = list.Select(q => q.ID).ToList();
-
-                List<DeviceOperate> subList = db.DeviceOperate.Where(q => ids.Contains(q.OperateID)).ToList();
-
-                DateTime now = DateTime.Now;
-
-                list = list.OrderBy(q => q.CreateTime).ToList();
-
-                foreach (var item in list)
+                using (DBContext db = new DBContext())
                 {
-                    db.Entry(MessageHelper.OperateHandle(item, subList, now)).State = EntityState.Modified;
-                }
+                    //获取未发送过的消息
+                    List<Operate> list = db.Operate.Where(q => q.State == OperateState.Before).ToList();
 
-                db.SaveChanges();
+                    //获取发送过但没有返回报文的消息
+                    List<Operate> sended = db.Operate.Where(q => q.State == OperateState.Sended && q.RetryCount < 6).ToList();
+
+                    list.AddRange(sended);
+
+                    if (list.Count == 0) { return; }
+
+                    List<string> ids = list.Select(q => q.ID).ToList();
+
+                    List<DeviceOperate> subList = db.DeviceOperate.Where(q => ids.Contains(q.OperateID)).ToList();
+
+                    DateTime now = DateTime.Now;
+
+                    list = list.OrderBy(q => q.CreateTime).ToList();
+
+                    foreach (var item in list)
+                    {
+                        db.Entry(MessageHelper.OperateHandle(item, subList, now)).State = EntityState.Modified;
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("下发命令时出错", ex.Message, ex.StackTrace);
             }
         }
     }
