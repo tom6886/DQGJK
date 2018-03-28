@@ -18,11 +18,11 @@ Home.Carousel = function () {
 }
 
 Home.Carousel.prototype = {
-    query: function () {
+    query: function (code) {
         var _this = this;
 
         $.get("Home/Carousel", {
-            stationCode: _this.stationCode.select2("val")
+            stationCode: code
         }, function (r) {
             _this.container.html(r);
             _this.bind();
@@ -78,6 +78,10 @@ $(function () {
     widgets.carousel.query();
 
     $(".query").click(function () {
-        widgets.carousel.query();
+        widgets.carousel.query(widgets.carousel.stationCode.select2("val"));
     });
+
+    setInterval(function () {
+        widgets.carousel.query($("#stationCode").val());
+    }, 60000);
 });
