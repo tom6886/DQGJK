@@ -34,7 +34,7 @@ namespace DQGJK.Web.Controllers
 
             ViewBag.station = _context.Station.Where(q => q.Code.Equals(stationCode)).FirstOrDefault();
 
-            List<Cabinet> list = _context.Cabinet.Where(q => q.StationCode.Equals(stationCode)).ToList();
+            List<Cabinet> list = _context.Cabinet.Where(q => q.StationCode.Equals(stationCode)).OrderBy(q => q.Sort).ToList();
 
             return PartialView("List", list);
         }

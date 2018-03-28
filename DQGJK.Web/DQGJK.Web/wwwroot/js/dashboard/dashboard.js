@@ -98,7 +98,7 @@
                     name: obj.title,
                     data: [obj.data],
                     tooltip: {
-                        valueSuffix: ' ℃'
+                        valueSuffix: obj.config.title
                     }
                 }]
 

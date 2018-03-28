@@ -140,7 +140,7 @@ namespace DQGJK.Message
 
         private static int GetStartPosition(byte[] data)
         {
-            int index = -1;
+            int index = data.Length;
 
             if (data.Length < 2) { return index; }
 

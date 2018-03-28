@@ -79,6 +79,7 @@ namespace DQGJK.Web.Controllers
                 oldCab.ModifyTime = DateTime.Now;
                 oldCab.StationCode = oldCab.StationCode;
                 oldCab.Name = cabinet.Name;
+                oldCab.Sort = cabinet.Sort;
                 oldCab.Status = cabinet.Status;
 
                 _context.Entry(oldCab).State = EntityState.Modified;

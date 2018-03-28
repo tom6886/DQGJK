@@ -11,9 +11,7 @@
             TemperatureLimit = element.TemperatureLimit;
             State = element.State;
             Valid = ((Temperature > -50 && Temperature < 100)
-                && (Humidity > 0 && Humidity < 100)
-                && (HumidityLimit > 0 && HumidityLimit < 100)
-                && (TemperatureLimit > -50 && TemperatureLimit < 100));
+                && (Humidity > 0 && Humidity < 100));
         }
 
         /// <summary>
