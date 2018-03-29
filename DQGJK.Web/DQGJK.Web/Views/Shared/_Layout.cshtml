@@ -54,22 +54,22 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-12">
-                <div class="bottom-group">
+                <a class="bottom-group" data-toggle="modal" data-target="#dlg_alarms" data-fc="overtime">
                     <i class="fa fa-circle"></i>
                     <span>通讯故障</span>
-                </div>
+                </a>
             </div>
             <div class="col-12">
-                <div class="bottom-group">
+                <a class="bottom-group" data-toggle="modal" data-target="#dlg_alarms" data-fc="temperature">
                     <i class="fa fa-circle"></i>
                     <span>温度报警</span>
-                </div>
+                </a>
             </div>
             <div class="col-md-2">
-                <div class="bottom-group">
+                <a class="bottom-group" data-toggle="modal" data-target="#dlg_alarms" data-fc="humidity">
                     <i class="fa fa-circle"></i>
                     <span>湿度报警</span>
-                </div>
+                </a>
             </div>
             <div class="col-md-3">
                 <div class="bottom-group">
@@ -120,6 +120,8 @@
         </div>
     </div>
 
+    <div class="modal" id="dlg_alarms" tabindex="-1" role="dialog">
+    </div>
 
     <script type="text/javascript" src="~/js/bootcss.min.js"></script>
     <script type="text/javascript" src="~/js/integrate.min.js"></script>

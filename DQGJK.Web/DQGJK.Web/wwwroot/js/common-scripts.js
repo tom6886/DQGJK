@@ -5,15 +5,17 @@ var Main = Main || {};
 Main.init = function () {
     Main.Interval.Start();
     new Main.PassWord().init();
+    new Main.Alarms().init();
 };
 
 Main.Interval = {
     Start: function () {
         var _this = this;
+        _this.Online();
         setInterval(_this.Online, 6000);
     },
     Online: function () {
-        $.post("Common/GetOnlineCount", function (r) { $("#online-span").text(r); });
+        $.post("Main/GetOnlineCount", function (r) { $("#online-span").text(r); });
     }
 };
 
@@ -67,7 +69,48 @@ Main.PassWord.prototype = {
             _this.form.submit();
         });
     }
+};
+
+Main.Alarms = function () {
+    this.container = $("#dlg_alarms");
+    this.overtime = new Main.BaseAlarm("Main/OverTime");
+    this.temperature = new Main.BaseAlarm("Main/Temperature");
+    this.humidity = new Main.BaseAlarm("Main/Humidity");
+};
+
+Main.Alarms.prototype = {
+    init: function () {
+        var _this = this;
+
+        _this.container.on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var fc = _this[button.data("fc")];
+            if (!fc) { return; }
+            fc.open($(this));
+        }).on('hidden.bs.modal', function () {
+            $(".modal-dialog", $(this)).remove();
+        });
+    }
 }
+
+Main.BaseAlarm = function (url) {
+    this.url = url;
+};
+
+Main.BaseAlarm.prototype = {
+    open: function (modal) {
+        var _this = this;
+
+        $.post(_this.url, function (r) {
+            if (r.code < 0) {
+                alert(r.msg);
+                return false;
+            }
+
+            modal.html(r);
+        });
+    }
+};
 
 $(function () {
     Main.init();
