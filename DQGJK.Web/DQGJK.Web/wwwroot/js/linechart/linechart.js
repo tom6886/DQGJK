@@ -1,20 +1,20 @@
 ﻿;
 (function ($) {
     var priv = {
-        set: function ($this) {
+        set: function ($this, data) {
             $this.each(function (i, v) {
                 var _this = $(v);
 
-                priv.chart(_this);
+                priv.chart(_this, data);
             });
         },
-        chart: function (obj) {
+        chart: function (obj, data) {
             obj.highcharts({
                 chart: {
                     zoomType: 'xy'
                 },
                 title: {
-                    text: obj.data("title")
+                    text: "#" + data.code + "柜"
                 },
                 credits: {
                     enabled: false
@@ -23,8 +23,7 @@
                     enabled: false
                 },
                 xAxis: [{
-                    categories: ['一月', '二月', '三月', '四月', '五月', '六月',
-                        '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    categories: data.xAxis,
                     crosshair: true
                 }],
                 yAxis: [{ // Primary yAxis
@@ -58,14 +57,14 @@
                     name: '湿度',
                     type: 'spline',
                     yAxis: 1,
-                    data: [59, 64, 51, 42, 59, 64, 59, 54, 59, 53, 53, 56],
+                    data: data.humidity,
                     tooltip: {
-                        valueSuffix: ' mb'
+                        valueSuffix: ' RH'
                     }
                 }, {
                     name: '温度',
                     type: 'spline',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                    data: data.temperature,
                     tooltip: {
                         valueSuffix: ' °C'
                     }
@@ -74,13 +73,13 @@
         }
     };
 
-    $.fn.linechart = function () {
+    $.fn.linechart = function (data) {
 
         var $this = this;
 
         if ($this.length == 0) { return; }
 
-        priv.set($this);
+        priv.set($this, data);
 
         return $this;
     };
