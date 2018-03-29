@@ -28,6 +28,9 @@ Home.Carousel.prototype = {
             _this.bind();
         });
     },
+    fresh: function () {
+        this.query($("#stationCode").val());
+    },
     bind: function () {
         var _entity = this;
 
@@ -81,7 +84,5 @@ $(function () {
         widgets.carousel.query(widgets.carousel.stationCode.select2("val"));
     });
 
-    setInterval(function () {
-        widgets.carousel.query($("#stationCode").val());
-    }, 60000);
+    setInterval(function () { widgets.carousel.fresh(); }, 60000);
 });

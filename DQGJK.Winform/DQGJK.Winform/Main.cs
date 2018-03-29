@@ -305,11 +305,14 @@ namespace DQGJK.Winform
             {
                 using (DBContext db = new DBContext())
                 {
+                    DateTime now = DateTime.Now;
+
                     //获取未发送过的消息
                     List<Operate> list = db.Operate.Where(q => q.State == OperateState.Before).ToList();
 
-                    //获取发送过但没有返回报文的消息
-                    List<Operate> sended = db.Operate.Where(q => q.State == OperateState.Sended && q.RetryCount < 6).ToList();
+                    //获取发送过但超过五分钟没有返回报文的消息
+                    DateTime board = now - new TimeSpan(0, 5, 0);
+                    List<Operate> sended = db.Operate.Where(q => q.State == OperateState.Sended && q.RetryCount < 6 && q.SendTime < board).ToList();
 
                     list.AddRange(sended);
 
@@ -318,8 +321,6 @@ namespace DQGJK.Winform
                     List<string> ids = list.Select(q => q.ID).ToList();
 
                     List<DeviceOperate> subList = db.DeviceOperate.Where(q => ids.Contains(q.OperateID)).ToList();
-
-                    DateTime now = DateTime.Now;
 
                     list = list.OrderBy(q => q.CreateTime).ToList();
 

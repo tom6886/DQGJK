@@ -2,6 +2,7 @@
 using DQGJK.Web.Contexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,7 +33,15 @@ namespace DQGJK.Web.Controllers
 
             ViewBag.user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
 
-            ViewBag.station = _context.Station.Where(q => q.Code.Equals(stationCode)).FirstOrDefault();
+            Station station = _context.Station.Where(q => q.Code.Equals(stationCode)).FirstOrDefault();
+
+            if (station == null) { ViewBag.station = new Station(); return PartialView("List"); }
+
+            ViewBag.station = station;
+
+            DateTime board = DateTime.Now - new TimeSpan(0, 10, 0);
+
+            ViewBag.state = station.ModifyTime > board;
 
             List<Cabinet> list = _context.Cabinet.Where(q => q.StationCode.Equals(stationCode)).OrderBy(q => q.Sort).ToList();
 
