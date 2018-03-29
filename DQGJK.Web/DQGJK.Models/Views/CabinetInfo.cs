@@ -20,6 +20,14 @@ namespace DQGJK.Models
 
         public string StationName { get; set; }
 
+        public decimal Humidity { get; set; }
+
+        public decimal Temperature { get; set; }
+
+        public int HumidityAlarm { get; set; }
+
+        public int TemperatureAlarm { get; set; }
+
         public DateTime ModifyTime { get; set; }
 
         public Status Status { get; set; }

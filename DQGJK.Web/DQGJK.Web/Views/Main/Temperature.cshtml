@@ -1,0 +1,43 @@
+﻿@using DQGJK.Models;
+@model List<CabinetInfo>
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">温度报警设备</h4>
+        </div>
+        <div class="modal-body" style="max-height:600px;overflow:auto;">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <td>环网柜名称</td>
+                            <td>环网柜编号</td>
+                            <td>电气柜编号</td>
+                            <td>最近通讯时间</td>
+                            <td>温度</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (CabinetInfo item in Model)
+                            {
+                                <tr>
+                                    <td>@item.StationName</td>
+                                    <td>@item.StationCode</td>
+                                    <td>@item.Code</td>
+                                    <td>@item.ModifyTime</td>
+                                    <td>@item.Temperature</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</div>
