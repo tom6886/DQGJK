@@ -14,7 +14,14 @@ namespace DQGJK.Web.Controllers
 
             if (user == null)
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index" }));
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    filterContext.Result = new StatusCodeResult(499);
+                }
+                else
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index" }));
+                }
             }
 
             base.OnActionExecuting(filterContext);

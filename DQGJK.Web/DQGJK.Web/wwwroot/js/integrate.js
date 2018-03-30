@@ -180,6 +180,14 @@ function extend(subClass, superClass) {
         superClass.prototype.constructor = superClass;
     }
 };
+
+$.ajaxSetup({
+    statusCode: {
+        499: function (data) {
+            window.location.href = "Login";
+        }
+    }
+});
 ;
 
 var Main = Main || {};

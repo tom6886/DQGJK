@@ -59,6 +59,8 @@ namespace DQGJK.Winform
         public int Dehumidify { get; set; }
 
         public Status Status { get; set; }
+
+        public int Sort { get; set; }
     }
 
     public enum Status
