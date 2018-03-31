@@ -1,7 +1,8 @@
 ﻿using DQGJK.Message;
+using DQGJK.Winform.Models;
+using DQGJK.Winform.Operates;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DQGJK.Winform
 {
@@ -16,68 +17,18 @@ namespace DQGJK.Winform
 
             if (!Main.online.ContainsKey(item.ClientCode) || string.IsNullOrEmpty(Main.online[item.ClientCode])) { return item; }
 
-            SendMessage msg = new SendMessage()
+            try
             {
-                CenterCode = 0x01,
-                ClientCode = BCDUtil.ConvertFrom(item.ClientCode, 6),
-                SendTime = sendTime,
-                Serial = 0,
-                FunctionCode = item.FunctionCode
-            };
-
-            if (item.FunctionCode.Equals("B1"))
-            {
-                msg.Body = ConvertToB1(subList.Where(q => q.OperateID.Equals(item.ID)).ToList());
+                IOperate operate = OperateFactory.Create(item.FunctionCode, subList, sendTime);
+                SendMessage msg = operate.Handle(ref item);
+                Main.listener.Send(Main.online[item.ClientCode], msg.ToByte());
             }
-            else if (item.FunctionCode.Equals("B2"))
+            catch (Exception ex)
             {
-                msg.Body = ConvertToB2(subList.Where(q => q.OperateID.Equals(item.ID)).ToList());
+                LogHelper.WriteLog("创建并下发命令时出错", ex.Message, ex.StackTrace);
             }
-
-            byte[] content = msg.ToByte();
-            item.State = OperateState.Sended;
-            item.Content = BytesUtil.ToHexString(content);
-            item.SendTime = sendTime;
-
-            Main.listener.Send(Main.online[item.ClientCode], content);
 
             return item;
-        }
-
-        internal static byte[] ConvertToB1(List<DeviceOperate> operates)
-        {
-            List<byte> list = new List<byte>();
-
-            foreach (var item in operates)
-            {
-                Element ele = new Element();
-                ele.Code = item.DeviceCode;
-                ele.State = new DeviceState()
-                {
-                    RelayOne = item.RelayOne,
-                    RelayTwo = item.RelayTwo,
-                    Dehumidify = item.Dehumidify
-                };
-                list.AddRange(new B1Element(ele).ToByte());
-            }
-
-            return list.ToArray();
-        }
-
-        internal static byte[] ConvertToB2(List<DeviceOperate> operates)
-        {
-            List<byte> list = new List<byte>();
-
-            foreach (var item in operates)
-            {
-                Element ele = new Element();
-                ele.Code = item.DeviceCode;
-                ele.HumidityLimit = Convert.ToDouble(item.HumidityLimit);
-                ele.TemperatureLimit = Convert.ToDouble(item.TemperatureLimit);
-                list.AddRange(new B2Element(ele).ToByte());
-            }
-
-            return list.ToArray();
         }
     }
 }

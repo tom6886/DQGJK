@@ -1,4 +1,5 @@
 ﻿using DQGJK.Message;
+using DQGJK.Winform.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +7,7 @@ using System.Linq;
 
 namespace DQGJK.Winform.Handlers
 {
-    internal abstract class BaseHandler<T> where T : IElement
+    public abstract class BaseHandler<T> where T : IElement
     {
         public void UpdateCabinet(RecieveMessage _Message)
         {

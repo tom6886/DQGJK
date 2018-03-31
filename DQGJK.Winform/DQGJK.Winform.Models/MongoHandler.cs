@@ -2,24 +2,24 @@
 using MongoDB.Driver;
 using System.Configuration;
 
-namespace DQGJK.Winform
+namespace DQGJK.Winform.Models
 {
-    internal class MongoHandler
+    public class MongoHandler
     {
         private static string _MongoDbConnectionStr = ConfigurationManager.AppSettings["mongodb"];
 
-        internal static void Save<T>(T t)
+        public static void Save<T>(T t)
         {
             GetCollection<T>().InsertOne(t);
         }
 
-        internal static void SaveOfBson<T>(T t)
+        public static void SaveOfBson<T>(T t)
         {
             BsonDocument bd = t.ToBsonDocument();
             GetBsonCollection<T>().InsertOne(bd);
         }
 
-        internal static IMongoCollection<T> GetCollection<T>(string collectionName = null)
+        public static IMongoCollection<T> GetCollection<T>(string collectionName = null)
         {
             MongoUrl mongoUrl = new MongoUrl(_MongoDbConnectionStr);
             var mongoClient = new MongoClient(mongoUrl);
@@ -27,7 +27,7 @@ namespace DQGJK.Winform
             return database.GetCollection<T>(collectionName ?? typeof(T).Name);
         }
 
-        internal static IMongoCollection<BsonDocument> GetBsonCollection<T>(string collectionName = null)
+        public static IMongoCollection<BsonDocument> GetBsonCollection<T>(string collectionName = null)
         {
             MongoUrl mongoUrl = new MongoUrl(_MongoDbConnectionStr);
             var mongoClient = new MongoClient(mongoUrl);

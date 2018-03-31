@@ -34,11 +34,11 @@ Home.Carousel.prototype = {
     bind: function () {
         var _entity = this;
 
-        $(".carousel-select", this.container).each(function (i, v) {
+        $(".carousel-select", _entity.container).each(function (i, v) {
             $(v).val($(v).siblings(".select-value").val());
         });
 
-        $(".carousel-panel-edit").click(function () {
+        $(".carousel-panel-edit", _entity.container).click(function () {
             var _this = $(this), _panel = _this.parents(".panel-info:eq(0)"), _editable = $(".carousel-save:eq(0)", _panel).is(":hidden");
             $(".carousel-input", _panel).attr("readonly", !_editable);
             $(".carousel-select", _panel).attr("disabled", !_editable);
@@ -46,7 +46,7 @@ Home.Carousel.prototype = {
             _this.text(_editable ? "停止遥控" : "遥控");
         });
 
-        $(".carousel-save").click(function () {
+        $(".carousel-save", _entity.container).click(function () {
             var _this = $(this), _panel = _this.parents(".panel-info:eq(0)");
             if (_this.attr("data-code") === "B1") {
                 _entity.command({
@@ -67,9 +67,18 @@ Home.Carousel.prototype = {
                 });
             }
         });
+
+        $(".btn-measure", _entity.container).click(function () {
+            _entity.measure($("#stationCode").val());
+        });
     },
     command: function (params) {
         $.post("Home/Command", params, function (r) {
+            alert(r.msg);
+        });
+    },
+    measure: function (code) {
+        $.post("Home/Measure", { stationCode: code }, function (r) {
             alert(r.msg);
         });
     }

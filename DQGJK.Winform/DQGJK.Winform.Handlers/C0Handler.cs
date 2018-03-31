@@ -1,11 +1,12 @@
 ﻿using DQGJK.Message;
+using DQGJK.Winform.Models;
 using System;
 
 namespace DQGJK.Winform.Handlers
 {
-    internal class B0Handler : BaseHandler<B0C0Element>, IMessageHandler
+    internal class C0Handler : BaseHandler<B0C0Element>, IMessageHandler
     {
-        public B0Handler(string UID, RecieveMessage Message)
+        public C0Handler(string UID, RecieveMessage Message)
         {
             _UID = UID;
             _Message = Message;

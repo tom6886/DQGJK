@@ -1,11 +1,12 @@
 ﻿using DQGJK.Message;
+using DQGJK.Winform.Models;
 using System;
 
 namespace DQGJK.Winform.Handlers
 {
-    internal class C0Handler : BaseHandler<B0C0Element>, IMessageHandler
+    internal class B0Handler : BaseHandler<B0C0Element>, IMessageHandler
     {
-        public C0Handler(string UID, RecieveMessage Message)
+        public B0Handler(string UID, RecieveMessage Message)
         {
             _UID = UID;
             _Message = Message;
@@ -19,9 +20,9 @@ namespace DQGJK.Winform.Handlers
         {
             MongoHandler.Save(new B0C0Data(_Message));
 
-            Response();
-
             UpdateCabinet(_Message);
+
+            UpdateOperate(_Message, "B0");
         }
 
         public override bool SetCabinet(B0C0Element element, ref Cabinet cabinet)
@@ -39,18 +40,6 @@ namespace DQGJK.Winform.Handlers
             cabinet.Dehumidify = element.State.Dehumidify;
 
             return true;
-        }
-
-        private void Response()
-        {
-            SendMessage res = new SendMessage();
-            res.ClientCode = _Message.ClientCode;
-            res.CenterCode = _Message.CenterCode;
-            res.SendTime = DateTime.Now;
-            res.Serial = 0;
-            res.FunctionCode = "C0";
-
-            Main.listener.Send(_UID, res.ToByte());
         }
     }
 }

@@ -33,6 +33,7 @@
             this.btn_save = new DevExpress.XtraEditors.SimpleButton();
             this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_select = new DevExpress.XtraEditors.SimpleButton();
             this.btn_create = new DevExpress.XtraEditors.SimpleButton();
             this.tb_device = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -43,7 +44,6 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btn_select = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edit_content.Properties)).BeginInit();
@@ -111,6 +111,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(560, 26);
             this.panel1.TabIndex = 4;
+            // 
+            // btn_select
+            // 
+            this.btn_select.Location = new System.Drawing.Point(366, 3);
+            this.btn_select.Name = "btn_select";
+            this.btn_select.Size = new System.Drawing.Size(75, 23);
+            this.btn_select.TabIndex = 5;
+            this.btn_select.Text = "选择设备";
+            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
             // btn_create
             // 
@@ -213,15 +222,6 @@
             this.layoutControlItem4.Size = new System.Drawing.Size(564, 95);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
-            // 
-            // btn_select
-            // 
-            this.btn_select.Location = new System.Drawing.Point(366, 3);
-            this.btn_select.Name = "btn_select";
-            this.btn_select.Size = new System.Drawing.Size(75, 23);
-            this.btn_select.TabIndex = 5;
-            this.btn_select.Text = "选择设备";
-            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
             // Commond
             // 

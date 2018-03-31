@@ -1,5 +1,6 @@
 ﻿using DQGJK.Message;
 using DQGJK.Winform.Handlers;
+using DQGJK.Winform.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -193,6 +194,19 @@ namespace DQGJK.Winform
                 if (message.FunctionCode.Equals("F2")) { return; }
                 IMessageHandler handler = HandlerFactory.Create(message.FunctionCode, token.UID, message);
                 handler.Handle();
+
+                //如果是设备自报数据，向设备发送接收成功的报文
+                if (message.FunctionCode.Equals("C0"))
+                {
+                    SendMessage res = new SendMessage();
+                    res.ClientCode = message.ClientCode;
+                    res.CenterCode = message.CenterCode;
+                    res.SendTime = DateTime.Now;
+                    res.Serial = 0;
+                    res.FunctionCode = "C0";
+
+                    listener.Send(token.UID, res.ToByte());
+                }
             }
             catch (Exception ex)
             {
@@ -326,7 +340,7 @@ namespace DQGJK.Winform
 
                     foreach (var item in list)
                     {
-                        db.Entry(MessageHelper.OperateHandle(item, subList, now)).State = EntityState.Modified;
+                        db.Entry(MessageHelper.OperateHandle(item, subList.Where(q => q.OperateID.Equals(item.ID)).ToList(), now)).State = EntityState.Modified;
                     }
 
                     db.SaveChanges();

@@ -109,24 +109,13 @@
     <Compile Include="Devices.Designer.cs">
       <DependentUpon>Devices.cs</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\BaseHandler.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
-    <Compile Include="Models\CabinetData.cs" />
-    <Compile Include="Models\DBContext.cs" />
-    <Compile Include="Models\Cabinet.cs" />
     <Compile Include="Commond.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Commond.Designer.cs">
       <DependentUpon>Commond.cs</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\C0Handler.cs" />
-    <Compile Include="Handlers\B3Handler.cs" />
-    <Compile Include="Handlers\B2Handler.cs" />
-    <Compile Include="Handlers\B1Handler.cs" />
-    <Compile Include="Handlers\B0Handler.cs" />
-    <Compile Include="Handlers\HandlerFactory.cs" />
-    <Compile Include="Handlers\IMessageHandler.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -134,14 +123,8 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeviceOperate.cs" />
-    <Compile Include="Models\MongoData.cs" />
-    <Compile Include="Helpers\MongoHandler.cs" />
-    <Compile Include="Models\MongoStat.cs" />
-    <Compile Include="Models\Operate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Station.cs" />
     <Compile Include="Statistic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +169,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\ChnCharInfo.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DQGJK.Winform.Handlers\DQGJK.Winform.Handlers.csproj">
+      <Project>{a3797004-8de3-4461-adc2-c927e9d3c74d}</Project>
+      <Name>DQGJK.Winform.Handlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DQGJK.Winform.Models\DQGJK.Winform.Models.csproj">
+      <Project>{47D27698-4496-4AC8-9C0D-BA97ADA353BC}</Project>
+      <Name>DQGJK.Winform.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DQGJK.Winform.Operate\DQGJK.Winform.Operates.csproj">
+      <Project>{24b4881a-81f4-4609-b6c6-23edf7535558}</Project>
+      <Name>DQGJK.Winform.Operates</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

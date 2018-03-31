@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DQGJK.Winform
+namespace DQGJK.Winform.Models
 {
     [Table("Operate")]
     public class Operate

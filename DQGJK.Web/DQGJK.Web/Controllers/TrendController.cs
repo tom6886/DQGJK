@@ -28,7 +28,7 @@ namespace DQGJK.Web.Controllers
         {
             if (string.IsNullOrEmpty(stationCode))
             {
-                Cabinet cabinet = _context.Cabinet.OrderBy(q => q.ModifyTime).FirstOrDefault();
+                Cabinet cabinet = _context.Cabinet.OrderByDescending(q => q.ModifyTime).FirstOrDefault();
                 if (cabinet != null) { stationCode = cabinet.StationCode; }
             }
 

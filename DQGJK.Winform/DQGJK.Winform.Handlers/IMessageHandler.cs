@@ -2,7 +2,7 @@
 
 namespace DQGJK.Winform.Handlers
 {
-    interface IMessageHandler
+    public interface IMessageHandler
     {
         string _UID { get; set; }
 

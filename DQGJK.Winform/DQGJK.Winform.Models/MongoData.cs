@@ -3,9 +3,9 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 
-namespace DQGJK.Winform
+namespace DQGJK.Winform.Models
 {
-    internal class MongoData
+    public class MongoData
     {
         public ObjectId Id { get; set; }
 
@@ -19,12 +19,12 @@ namespace DQGJK.Winform
     }
 
     //心跳包，不保存日志数据
-    internal class F2Data : MongoData { }
+    public class F2Data : MongoData { }
 
     //终端机自报数据或者中心站召测数据
-    internal class B0C0Data : MongoData
+    public class B0C0Data : MongoData
     {
-        internal B0C0Data(RecieveMessage message)
+        public B0C0Data(RecieveMessage message)
         {
             Id = new ObjectId();
             ClientCode = message.ClientCodeStr;
@@ -41,9 +41,9 @@ namespace DQGJK.Winform
     }
 
     //中心站遥控设备除湿机以及继电器
-    internal class B1Data : MongoData
+    public class B1Data : MongoData
     {
-        internal B1Data(RecieveMessage message)
+        public B1Data(RecieveMessage message)
         {
             Id = new ObjectId();
             ClientCode = message.ClientCodeStr;
@@ -56,9 +56,9 @@ namespace DQGJK.Winform
         public List<B1Element> Data { get; set; }
     }
 
-    internal class B2Data : MongoData
+    public class B2Data : MongoData
     {
-        internal B2Data(RecieveMessage message)
+        public B2Data(RecieveMessage message)
         {
             Id = new ObjectId();
             ClientCode = message.ClientCodeStr;
@@ -71,9 +71,9 @@ namespace DQGJK.Winform
         public List<B2Element> Data { get; set; }
     }
 
-    internal class B3Data : MongoData
+    public class B3Data : MongoData
     {
-        internal B3Data(RecieveMessage message)
+        public B3Data(RecieveMessage message)
         {
             Id = new ObjectId();
             ClientCode = message.ClientCodeStr;

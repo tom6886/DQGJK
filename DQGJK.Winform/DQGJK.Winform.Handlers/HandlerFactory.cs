@@ -3,11 +3,11 @@ using System.Reflection;
 
 namespace DQGJK.Winform.Handlers
 {
-    internal class HandlerFactory
+    public class HandlerFactory
     {
         public static IMessageHandler Create(string FunctionCode, string UID, RecieveMessage Message)
         {
-            IHandlerFactory factory = (IHandlerFactory)Assembly.Load("DQGJK.Winform").CreateInstance("DQGJK.Winform.Handlers." + FunctionCode + "Factory");
+            IHandlerFactory factory = (IHandlerFactory)Assembly.Load("DQGJK.Winform.Handlers").CreateInstance("DQGJK.Winform.Handlers." + FunctionCode + "Factory");
             return factory.CreateHandler(UID, Message);
         }
     }
@@ -17,7 +17,7 @@ namespace DQGJK.Winform.Handlers
         IMessageHandler CreateHandler(string UID, RecieveMessage Message);
     }
 
-    internal class B0Factory : IHandlerFactory
+    public class B0Factory : IHandlerFactory
     {
         public IMessageHandler CreateHandler(string UID, RecieveMessage Message)
         {
@@ -25,7 +25,7 @@ namespace DQGJK.Winform.Handlers
         }
     }
 
-    internal class B1Factory : IHandlerFactory
+    public class B1Factory : IHandlerFactory
     {
         public IMessageHandler CreateHandler(string UID, RecieveMessage Message)
         {
@@ -33,7 +33,7 @@ namespace DQGJK.Winform.Handlers
         }
     }
 
-    internal class B2Factory : IHandlerFactory
+    public class B2Factory : IHandlerFactory
     {
         public IMessageHandler CreateHandler(string UID, RecieveMessage Message)
         {
@@ -41,7 +41,7 @@ namespace DQGJK.Winform.Handlers
         }
     }
 
-    internal class B3Factory : IHandlerFactory
+    public class B3Factory : IHandlerFactory
     {
         public IMessageHandler CreateHandler(string UID, RecieveMessage Message)
         {
@@ -49,7 +49,7 @@ namespace DQGJK.Winform.Handlers
         }
     }
 
-    internal class C0Factory : IHandlerFactory
+    public class C0Factory : IHandlerFactory
     {
         public IMessageHandler CreateHandler(string UID, RecieveMessage Message)
         {

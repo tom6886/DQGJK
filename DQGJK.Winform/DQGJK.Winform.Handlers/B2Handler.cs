@@ -1,4 +1,5 @@
 ﻿using DQGJK.Message;
+using DQGJK.Winform.Models;
 using System;
 
 namespace DQGJK.Winform.Handlers

@@ -27,7 +27,7 @@ namespace DQGJK.Web.Controllers
         {
             if (string.IsNullOrEmpty(stationCode))
             {
-                Cabinet cabinet = _context.Cabinet.OrderBy(q => q.ModifyTime).FirstOrDefault();
+                Cabinet cabinet = _context.Cabinet.OrderByDescending(q => q.ModifyTime).FirstOrDefault();
                 if (cabinet != null) { stationCode = cabinet.StationCode; }
             }
 
@@ -86,6 +86,31 @@ namespace DQGJK.Web.Controllers
                     _context.Entry(oldOperate).State = EntityState.Modified;
                 }
             }
+
+            _context.SaveChanges();
+
+            return Json(new { code = 1, msg = "命令已下发" });
+        }
+
+        [HttpPost]
+        public JsonResult Measure(string stationCode)
+        {
+            Guser user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
+
+            if (!(user.Roles.Equals("Administrator") || user.Roles.Equals("Operator"))) { return Json(new { code = -1, msg = "只有管理员或者操作人员可以遥控设备" }); }
+
+            Operate operate = _context.Operate.Where(q => q.ClientCode.Equals(stationCode)
+                                && q.FunctionCode.Equals("B0") && (q.State == OperateState.Before || q.State == OperateState.Sended)).FirstOrDefault();
+
+            if (operate != null) { return Json(new { code = 1, msg = "命令已下发" }); }
+
+            operate = new Operate()
+            {
+                ClientCode = stationCode,
+                FunctionCode = "B0"
+            };
+
+            _context.Operate.Add(operate);
 
             _context.SaveChanges();
 

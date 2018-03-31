@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace DQGJK.Winform
+namespace DQGJK.Winform.Models
 {
     public class DBContext : DbContext
     {

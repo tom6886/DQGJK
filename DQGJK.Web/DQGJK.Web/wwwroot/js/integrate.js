@@ -202,7 +202,7 @@ Main.Interval = {
     Start: function () {
         var _this = this;
         _this.Online();
-        setInterval(_this.Online, 6000);
+        setInterval(_this.Online, 60000);
     },
     Online: function () {
         $.post("Main/GetOnlineCount", function (r) { $("#online-span").text(r); });
