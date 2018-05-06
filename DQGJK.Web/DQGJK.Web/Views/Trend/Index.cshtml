@@ -1,4 +1,5 @@
 ﻿<link href="~/js/select2/select2.css" rel="stylesheet" />
+<link href="~/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <div class="row">
     <div class="col-md-12">
         <div class="content-panel panel panel-default panel-full">
@@ -33,6 +34,18 @@
                         </div>
                     </div>
                     <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">统计类型</span>
+                            <select class="form-control" name="Type">
+                                <option value="0">按天统计</option>
+                                <option value="1">按月统计</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row div-by-day" style="margin-bottom: 15px;">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
                         <div class="input-group date form_date" data-date="" data-date-format="yyyy/mm/dd">
                             <span class="input-group-addon">开始时间</span>
                             <input class="form-control" size="16" name="StartDate" type="text" value="" readonly="readonly">
@@ -44,6 +57,28 @@
                         <div class="input-group date form_date" data-date="" data-date-format="yyyy/mm/dd">
                             <span class="input-group-addon">结束时间</span>
                             <input class="form-control" size="16" name="EndDate" type="text" value="" readonly="readonly">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-info query" href="javascript:void(0)">查询</a>
+                    </div>
+                </div>
+                <div class="row div-by-month" style="margin-bottom: 15px;display:none;">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="input-group date form_month" data-date="" data-date-format="yyyy/mm">
+                            <span class="input-group-addon">开始月份</span>
+                            <input class="form-control" size="16" name="StartMonth" type="text" value="" readonly="readonly">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group date form_month" data-date="" data-date-format="yyyy/mm">
+                            <span class="input-group-addon">结束月份</span>
+                            <input class="form-control" size="16" name="EndMonth" type="text" value="" readonly="readonly">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
@@ -90,6 +125,22 @@
 
         $("input[name=StartDate]").val(start);
         $("input[name=EndDate]").val(end);
+
+        $('.form_month').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            autoclose: true,
+            todayBtn: true,
+            startView: 'year',
+            minView: 'year',
+            maxView: 'decade',
+        });
+
+        var startMonth = date.getFullYear() + "/" + "01";
+        var endMonth = date.getFullYear() + "/" + (date.getMonth() + 1);
+
+        $("input[name=StartMonth]").val(startMonth);
+        $("input[name=EndMonth]").val(endMonth);
     });
 </script>
 

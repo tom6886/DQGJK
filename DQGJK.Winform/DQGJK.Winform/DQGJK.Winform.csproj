@@ -117,6 +117,7 @@
       <DependentUpon>Commond.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LogHelper.cs" />
+    <Compile Include="Helpers\MongoHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

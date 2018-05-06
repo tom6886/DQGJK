@@ -305,16 +305,7 @@ namespace DQGJK.Winform
             {
                 edit_log.Text = "";
             }
-        }
 
-        private void brn_stat_Click(object sender, EventArgs e)
-        {
-            Statistic form = new Statistic();
-            form.ShowDialog(this);
-        }
-
-        private void timer3_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
             try
             {
                 using (DBContext db = new DBContext())
@@ -349,6 +340,24 @@ namespace DQGJK.Winform
             catch (Exception ex)
             {
                 LogHelper.WriteLog("下发命令时出错", ex.Message, ex.StackTrace);
+            }
+        }
+
+        private void brn_stat_Click(object sender, EventArgs e)
+        {
+            Statistic form = new Statistic();
+            form.ShowDialog(this);
+        }
+
+        private void timer3_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                MongoHelper.StatMongoData(DateTime.Now.AddDays(-1));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("统计数据时出错", ex.Message, ex.StackTrace);
             }
         }
     }

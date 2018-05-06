@@ -210,6 +210,7 @@
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Interval = 300000D;
             this.timer1.SynchronizingObject = this;
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
@@ -224,7 +225,7 @@
             // timer3
             // 
             this.timer3.Enabled = true;
-            this.timer3.Interval = 60000D;
+            this.timer3.Interval = 21600000D;
             this.timer3.SynchronizingObject = this;
             this.timer3.Elapsed += new System.Timers.ElapsedEventHandler(this.timer3_Elapsed);
             // 

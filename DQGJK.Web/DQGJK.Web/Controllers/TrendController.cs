@@ -38,7 +38,7 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Cabinets(string start, string end, string stationCode)
+        public JsonResult Cabinets(string start, string end, string stationCode, int type)
         {
             DateTime startDate = Convert.ToDateTime(start);
             DateTime endDate = Convert.ToDateTime(end);
@@ -49,6 +49,23 @@ namespace DQGJK.Web.Controllers
 
             if (devices.Count == 0) { return Json(new { code = 0, msg = "查询的环网柜没有从机信息" }); }
 
+            ArrayList array = new ArrayList();
+
+            if (type == 0)
+            {
+                array = getCabinetsDataByDay(startDate, endDate, stationCode, devices);
+            }
+            else
+            {
+                array = getCabinetsDataByMonth(startDate, endDate, stationCode, devices);
+            }
+
+
+            return Json(new { code = 1, data = array });
+        }
+
+        private ArrayList getCabinetsDataByDay(DateTime startDate, DateTime endDate, string stationCode, List<string> devices)
+        {
             List<CabinetData> datas = _context.CabinetData.Where(q => q.ClientCode.Equals(stationCode)
             && q.CreateTime > startDate && q.CreateTime < endDate).ToList();
 
@@ -81,7 +98,55 @@ namespace DQGJK.Web.Controllers
                 array.Add(_chart);
             }
 
-            return Json(new { code = 1, data = array });
+            return array;
+        }
+
+        private ArrayList getCabinetsDataByMonth(DateTime startDate, DateTime endDate, string stationCode, List<string> devices)
+        {
+            List<Pstatistic> datas = (from q in _context.CabinetData
+                                      group q by new { q.DeviceCode, q.Year, q.Month } into g
+                                      select new Pstatistic()
+                                      {
+                                          DeviceCode = g.Key.DeviceCode,
+                                          Year = g.Key.Year,
+                                          Month = g.Key.Month,
+                                          AverageHumidity = g.Average(p => p.AverageHumidity),
+                                          AverageTemperature = g.Average(p => p.AverageTemperature)
+                                      }).ToList();
+
+            int months = (endDate.Year - startDate.Year) * 12 + (endDate.Month - startDate.Month) + 1;
+
+            ArrayList array = new ArrayList();
+
+            foreach (var item in devices)
+            {
+                Pchart _chart = new Pchart(item);
+
+                for (int i = 0; i < months; i++)
+                {
+                    DateTime _date = startDate.AddMonths(i);
+
+                    _chart.XAxis.Add(_date.ToString("yyyy-MM"));
+
+                    Pstatistic _data = datas.Where(q => q.DeviceCode.Equals(item) && q.Year == _date.Year
+                                        && q.Month == _date.Month).FirstOrDefault();
+
+                    if (_data == null)
+                    {
+                        _chart.Temperature.Add(null);
+                        _chart.Humidity.Add(null);
+                    }
+                    else
+                    {
+                        _chart.Temperature.Add(_data.AverageTemperature);
+                        _chart.Humidity.Add(_data.AverageHumidity);
+                    }
+                }
+
+                array.Add(_chart);
+            }
+
+            return array;
         }
     }
 }
