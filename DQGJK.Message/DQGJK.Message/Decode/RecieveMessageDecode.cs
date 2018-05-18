@@ -15,7 +15,7 @@ namespace DQGJK.Message
             SendTime = 9,
             Serial = 15,
             FunctionCode = 17,
-            DataLength = 19,
+            DataLength = 18,
             BodyStart = 20
         }
 

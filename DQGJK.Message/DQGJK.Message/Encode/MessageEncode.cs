@@ -7,7 +7,7 @@ namespace DQGJK.Message
     {
         private static byte[] Head = { 0x7E, 0x7E };
 
-        private static byte Mark = 0x80;
+        //private static byte Mark = 0x80;
 
         private static byte BodyStart = 0x02;
 
@@ -36,10 +36,10 @@ namespace DQGJK.Message
             list.AddRange(TimeToByte(message.SendTime));
             list.AddRange(BCDUtil.ConvertFrom(message.Serial.ToString(), 2));
             list.AddRange(BytesUtil.ToHexArray(message.FunctionCode));
-            list.Add(Mark);
 
             int DataLength = (message.Body == null) ? 0 : message.Body.Length;
-            list.Add((byte)DataLength);
+            string DataLengthStr = "0" + DataLength.ToString("X3");
+            list.AddRange(BCDUtil.ConvertFrom(DataLengthStr, 2));
 
             list.Add(BodyStart);
 

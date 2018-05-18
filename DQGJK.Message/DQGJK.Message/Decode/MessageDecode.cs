@@ -88,10 +88,16 @@ namespace DQGJK.Message
         }
 
         //获取上下行标识及报文长度
-        //分两个字节,前一个字节代表发送方,无需解析,后一个字节代表数据长度 19-20位
+        //分两个字节,代表数据长度 19-20位
         public int DataLength(int position)
         {
-            return Convert.ToInt16(Data[position]);
+            byte[] length = new byte[2];
+
+            Array.Copy(Data, position, length, 0, 2);
+
+            string lengthStr = BCDUtil.ConvertToHex(length);
+
+            return Convert.ToInt32(lengthStr.Substring(1), 16);
         }
 
         //获取正文数据,02开头,后面的长度等于前面解析得到的报文长度
@@ -117,7 +123,7 @@ namespace DQGJK.Message
 
         public byte[] CRC(int endPosition)
         {
-            if (!Data[endPosition].Equals(BodyEnd)) { IsChecked = false; return null; }
+            if (endPosition > Data.Length || !Data[endPosition].Equals(BodyEnd)) { IsChecked = false; return null; }
 
             byte[] crc = new byte[2];
 

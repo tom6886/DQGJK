@@ -95,6 +95,26 @@ namespace DQGJK.Message
         /// </summary>  
         /// <param name="AData"></param>  
         /// <returns></returns>  
+        public static string ConvertToHex(Byte[] AData)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder(AData.Length * 2);
+                foreach (Byte b in AData)
+                {
+                    sb.Append((b >> 4).ToString("X"));
+                    sb.Append((b & 0x0f).ToString("X"));
+                }
+                return sb.ToString();
+            }
+            catch { return null; }
+        }
+
+        /// <summary>  
+        /// 16进制转换BCD（解压BCD）  
+        /// </summary>  
+        /// <param name="AData"></param>  
+        /// <returns></returns>  
         public static string ConvertTo(Byte[] AData)
         {
             try
