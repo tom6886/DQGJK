@@ -117,6 +117,8 @@ namespace DQGJK.Web.Controllers
                 oldStat.Country = station.Country;
                 oldStat.CityCode = station.CityCode;
                 oldStat.Address = station.Address;
+                oldStat.Lat = station.Lat;
+                oldStat.Lng = station.Lng;
                 oldStat.Status = station.Status;
 
                 _context.Entry(oldStat).State = EntityState.Modified;

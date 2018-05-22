@@ -38,8 +38,8 @@ namespace DQGJK.Message
             list.AddRange(BytesUtil.ToHexArray(message.FunctionCode));
 
             int DataLength = (message.Body == null) ? 0 : message.Body.Length;
-            string DataLengthStr = "0" + DataLength.ToString("X3");
-            list.AddRange(BCDUtil.ConvertFrom(DataLengthStr, 2));
+            string DataLengthStr = "8" + DataLength.ToString("X3");
+            list.AddRange(BytesUtil.ToHexArray(DataLengthStr));
 
             list.Add(BodyStart);
 

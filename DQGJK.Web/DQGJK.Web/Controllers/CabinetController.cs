@@ -32,11 +32,11 @@ namespace DQGJK.Web.Controllers
 
             if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
 
-            if (!string.IsNullOrEmpty(key)) { query = query.Where(q => q.Name.Contains(key) || q.Code.Contains(key)); }
+            if (!string.IsNullOrEmpty(key)) { query = query.Where(q => q.StationCode.Equals(key)); }
 
             Pager pager = new Pager(query.Count(), pi);
 
-            List<CabinetInfo> list = query.OrderByDescending(q => q.ModifyTime).Skip((pager.PageIndex - 1) * 10).Take(10).ToList();
+            List<CabinetInfo> list = query.OrderBy(q => q.Code).OrderBy(q => q.StationCode).Skip((pager.PageIndex - 1) * 10).Take(10).ToList();
 
             ViewBag.Pager = pager;
 

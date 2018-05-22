@@ -6,8 +6,8 @@
                 <div class="row" style="margin-bottom: 15px;">
                     <div class="col-md-3">
                         <div class="input-group">
-                            <span class="input-group-addon">电气柜</span>
-                            <input type="text" class="form-control" placeholder="请输入电气柜名称或编号" name="key" />
+                            <span class="input-group-addon">环网柜</span>
+                            <input type="text" data-select="s" class="form-control _select" name="key" />
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -22,6 +22,13 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="~/js/Page/cabinet.js"></script>
 <script type="text/javascript" src="~/js/select2/select2.min.js"></script>
 <script type="text/javascript" src="~/js/select.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("._select").select_2();
+    });
+</script>
+
+<script type="text/javascript" src="~/js/Page/cabinet.js"></script>

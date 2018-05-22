@@ -40,6 +40,7 @@ namespace DQGJK.Winform.Handlers
                         cabinet = new Cabinet();
                         cabinet.Name = item.Code;
                         cabinet.Code = item.Code;
+                        if (!item.Code.Equals("FF")) { cabinet.Sort = Convert.ToInt32(item.Code, 16); }
                         cabinet.StationCode = _Message.ClientCodeStr;
                         cabinet.Status = Status.enable;
                     }

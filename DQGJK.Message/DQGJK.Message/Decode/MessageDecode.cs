@@ -169,7 +169,13 @@ namespace DQGJK.Message
 
             if (data.Length < headLength + 19) { return headLength + 43; }
 
-            return Convert.ToInt16(data[headLength + 19]) + 24;
+            byte[] length = new byte[2];
+
+            Array.Copy(data, headLength + 18, length, 0, 2);
+
+            string lengthStr = BCDUtil.ConvertToHex(length);
+
+            return Convert.ToInt32(lengthStr.Substring(1), 16) + 24;
         }
     }
 }
