@@ -3,9 +3,10 @@
 
 <div class="panel panel-default" style="margin-bottom: 10px;">
     <div class="panel-body" style="text-align: center;">
-        <i class="fa fa-circle device-level-@ViewBag.state"></i>
+        @{ bool stationState = ViewBag.station.ModifyTime > ViewBag.board;}
+        <i class="fa fa-circle device-level-@stationState"></i>
         <span>@ViewBag.station.Name</span>
-        <span style="font-size: 12px;margin-left: 30px;">更新时间：@ViewBag.station.ModifyTime</span>
+        <span class="span-modify-time">更新时间：@ViewBag.station.ModifyTime</span>
         <input type="hidden" id="stationCode" value="@ViewBag.station.Code" />
         @if (ViewBag.user.Roles.Equals("Administrator") || ViewBag.user.Roles.Equals("Operator"))
         {
@@ -30,7 +31,10 @@
                     <div class="panel panel-info" data-code="@item.Code">
                         <div class="panel-heading">
                             <h3 class="panel-title">
+                                @{ bool itemState = item.ModifyTime > ViewBag.board;}
+                                <i class="fa fa-circle device-level-@itemState"></i>
                                 #@item.Name 柜
+                                <span class="span-modify-time">更新时间：@item.ModifyTime</span>
                                 @if (ViewBag.user.Roles.Equals("Administrator") || ViewBag.user.Roles.Equals("Operator"))
                                 {
                                     <a href="javascript:void(0)" class="carousel-panel-edit">遥控</a>
@@ -107,8 +111,8 @@
                     @Html.Raw("</div></div>")
                 }
 
-                i++;
-            }
+                                        i++;
+                                    }
         }
 
     </div>

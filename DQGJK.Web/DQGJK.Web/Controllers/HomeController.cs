@@ -41,7 +41,7 @@ namespace DQGJK.Web.Controllers
 
             DateTime board = DateTime.Now - new TimeSpan(0, 10, 0);
 
-            ViewBag.state = station.ModifyTime > board;
+            ViewBag.board = board;
 
             List<Cabinet> list = _context.Cabinet.Where(q => q.StationCode.Equals(stationCode)).OrderBy(q => q.Sort).ToList();
 

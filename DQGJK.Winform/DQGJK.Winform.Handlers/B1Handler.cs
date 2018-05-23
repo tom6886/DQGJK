@@ -1,5 +1,6 @@
 ﻿using DQGJK.Message;
 using DQGJK.Winform.Models;
+using System;
 
 namespace DQGJK.Winform.Handlers
 {
@@ -31,6 +32,7 @@ namespace DQGJK.Winform.Handlers
             cabinet.RelayOne = element.State.RelayOne;
             cabinet.RelayTwo = element.State.RelayTwo;
             cabinet.Dehumidify = element.State.Dehumidify;
+            cabinet.ModifyTime = DateTime.Now;
             return true;
         }
     }

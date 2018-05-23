@@ -45,8 +45,6 @@ namespace DQGJK.Winform.Handlers
                         cabinet.Status = Status.enable;
                     }
 
-                    cabinet.ModifyTime = now;
-
                     if (!SetCabinet(item, ref cabinet)) { continue; };
 
                     if (isNull)

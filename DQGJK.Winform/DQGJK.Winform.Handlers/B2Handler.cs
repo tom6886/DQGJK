@@ -29,6 +29,7 @@ namespace DQGJK.Winform.Handlers
         {
             cabinet.HumidityLimit = Convert.ToDecimal(element.HumidityLimit);
             cabinet.TemperatureLimit = Convert.ToDecimal(element.TemperatureLimit);
+            cabinet.ModifyTime = DateTime.Now;
             return true;
         }
     }

@@ -9690,6 +9690,8 @@ label { font-weight: 400; }
 
 .carousel-panel-edit { float: right; font-size: 14px; color: indianred !important; }
 
+.span-modify-time { font-size: 12px; margin-left: 30px; }
+
 /* for ie6 */
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td { margin: 0; padding: 0; color: #333; }
 body, button, input, select, textarea { font-family: Consolas,"微软雅黑",Arial, Helvetica, sans-serif; font-size: 14px; }

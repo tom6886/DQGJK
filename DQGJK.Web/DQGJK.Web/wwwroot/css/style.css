@@ -778,3 +778,5 @@ label { font-weight: 400; }
         .bottom .bottom-group span { color: white; }
 
 .carousel-panel-edit { float: right; font-size: 14px; color: indianred !important; }
+
+.span-modify-time { font-size: 12px; margin-left: 30px; }
