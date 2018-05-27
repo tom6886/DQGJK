@@ -1,0 +1,64 @@
+﻿@using DQGJK.Models;
+@using DQGJK.Web.PageModels;
+@model List<LogInfo>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <td>环网柜名称</td>
+                <td>环网柜编号</td>
+                <td>设备编号</td>
+                <td>错误类型</td>
+                <td>发生时间</td>
+                <td>结束时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (LogInfo item in Model)
+                {
+                    <tr>
+                        <td>@item.ClientName</td>
+                        <td>@item.ClientCode</td>
+                        <td>@item.DeviceCode</td>
+                        @switch (@item.Type)
+                        {
+                            case ExceptionType.humidity:
+                                <td>湿度报警</td>
+                                break;
+                            case ExceptionType.offline:
+                                <td>通讯报警</td>
+                                break;
+                            case ExceptionType.temperature:
+                                <td>温度报警</td>
+                                break;
+                        }
+
+                        <td>@item.CreateTime</td>
+                        <td>@item.EndTime</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div style="padding: 10px 15px;">
+    @await Component.InvokeAsync("Pager", (Pager)ViewBag.Pager)
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".pagination a").click(function () {
+            History.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        });
+
+        $("#goToBtn").click(function () {
+            if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
+            History.Widgets.table.query($(this).data("pageindex"));
+            return false;
+        })
+    });
+</script>

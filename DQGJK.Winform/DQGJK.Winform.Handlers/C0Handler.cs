@@ -1,6 +1,8 @@
 ﻿using DQGJK.Message;
 using DQGJK.Winform.Models;
 using System;
+using System.Data.Entity;
+using System.Linq;
 
 namespace DQGJK.Winform.Handlers
 {
@@ -23,9 +25,18 @@ namespace DQGJK.Winform.Handlers
             UpdateCabinet(_Message);
         }
 
-        public override bool SetCabinet(B0C0Element element, ref Cabinet cabinet)
+        public override bool SetCabinet(DBContext db, B0C0Element element, ref Cabinet cabinet)
         {
             if (!element.Valid) { return false; }
+
+            string clientCode = cabinet.StationCode;
+            string deviceCode = cabinet.Code;
+
+            if (cabinet.HumidityAlarm != element.State.HumidityAlarm)
+                SetExceptionLog(db, cabinet.HumidityAlarm, clientCode, deviceCode, ExceptionType.humidity);
+
+            if (cabinet.TemperatureAlarm != element.State.TemperatureAlarm)
+                SetExceptionLog(db, cabinet.TemperatureAlarm, clientCode, deviceCode, ExceptionType.temperature);
 
             cabinet.Humidity = Convert.ToDecimal(element.Humidity);
             cabinet.Temperature = Convert.ToDecimal(element.Temperature);

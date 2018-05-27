@@ -9,14 +9,21 @@
   <menu roles="">
     <name>历史数据</name>
     <href>history</href>
-    <iclass>fa-camera</iclass>
+    <iclass>fa-calendar</iclass>
+    <subMenus></subMenus>
+  </menu>
+
+  <menu roles="">
+    <name>报警日志</name>
+    <href>loginfo</href>
+    <iclass>fa-bookmark</iclass>
     <subMenus></subMenus>
   </menu>
 
   <menu roles="">
     <name>电子地图</name>
     <href>map</href>
-    <iclass>fa-picture-o</iclass>
+    <iclass>fa-map-marker</iclass>
     <subMenus></subMenus>
   </menu>
 

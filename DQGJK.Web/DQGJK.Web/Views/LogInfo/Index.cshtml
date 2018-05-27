@@ -1,0 +1,93 @@
+﻿<link href="~/js/select2/select2.css" rel="stylesheet" />
+<link href="~/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="content-panel panel panel-default panel-full">
+            <div class="panel-body">
+                <div class="row" style="margin-bottom: 15px;">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">省</span>
+                            <input type="text" data-select="p" class="form-control _select" name="Province" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">市</span>
+                            <input type="text" data-select="ci" class="form-control _select" name="City" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">县</span>
+                            <input type="text" data-select="co" class="form-control _select" name="Country" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 15px;">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">环网柜</span>
+                            <input type="text" data-select="s" class="form-control _select" name="stationCode" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group date form_date" data-date="" data-date-format="yyyy/mm/dd">
+                            <span class="input-group-addon">开始时间</span>
+                            <input class="form-control" size="16" name="StartDate" type="text" value="" readonly="readonly">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group date form_date" data-date="" data-date-format="yyyy/mm/dd">
+                            <span class="input-group-addon">结束时间</span>
+                            <input class="form-control" size="16" name="EndDate" type="text" value="" readonly="readonly">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-info query" href="javascript:void(0)">查询</a>
+                    </div>
+                </div>
+                <section id="unseen"></section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/select2/select2.min.js"></script>
+<script type="text/javascript" src="~/js/select.js"></script>
+
+<script type="text/javascript" src="~/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="~/js/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("._select").select_2();
+
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+        var date = new Date();
+        var start = date.getFullYear() + "/" + (date.getMonth() + 1) + "/01";
+        var end = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+
+        $("input[name=StartDate]").val(start);
+        $("input[name=EndDate]").val(end);
+    });
+</script>
+
+<script type="text/javascript" src="~/js/Page/loginfo.js"></script>

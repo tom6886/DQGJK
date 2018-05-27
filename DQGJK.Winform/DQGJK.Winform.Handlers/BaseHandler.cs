@@ -45,7 +45,7 @@ namespace DQGJK.Winform.Handlers
                         cabinet.Status = Status.enable;
                     }
 
-                    if (!SetCabinet(item, ref cabinet)) { continue; };
+                    if (!SetCabinet(db, item, ref cabinet)) { continue; };
 
                     if (isNull)
                         db.Cabinet.Add(cabinet);
@@ -57,7 +57,7 @@ namespace DQGJK.Winform.Handlers
             }
         }
 
-        public abstract bool SetCabinet(T element, ref Cabinet cabinet);
+        public abstract bool SetCabinet(DBContext db, T element, ref Cabinet cabinet);
 
         public void UpdateOperate(RecieveMessage _Message, string FunctionCode)
         {
@@ -73,6 +73,23 @@ namespace DQGJK.Winform.Handlers
                 }
 
                 db.SaveChanges();
+            }
+        }
+
+        public void SetExceptionLog(DBContext db, int state, string clientCode, string deviceCode, ExceptionType type)
+        {
+            if (state == 0)
+                db.ExceptionLog.Add(new ExceptionLog(clientCode, deviceCode, type));
+            else
+            {
+                ExceptionLog log = db.ExceptionLog.Where(q => q.ClientCode.Equals(clientCode)
+                                        && q.DeviceCode.Equals(deviceCode) && q.Type == type).OrderByDescending(q => q.CreateTime).FirstOrDefault();
+
+                if (log != null && log.EndTime == null)
+                {
+                    log.EndTime = DateTime.Now;
+                    db.Entry(log).State = EntityState.Modified;
+                }
             }
         }
     }

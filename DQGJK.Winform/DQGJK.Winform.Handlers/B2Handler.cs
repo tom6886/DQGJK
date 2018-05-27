@@ -25,7 +25,7 @@ namespace DQGJK.Winform.Handlers
             UpdateOperate(_Message, "B2");
         }
 
-        public override bool SetCabinet(B2Element element, ref Cabinet cabinet)
+        public override bool SetCabinet(DBContext db, B2Element element, ref Cabinet cabinet)
         {
             cabinet.HumidityLimit = Convert.ToDecimal(element.HumidityLimit);
             cabinet.TemperatureLimit = Convert.ToDecimal(element.TemperatureLimit);

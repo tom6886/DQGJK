@@ -20,5 +20,7 @@ namespace DQGJK.Winform.Models
         public DbSet<Operate> Operate { get; set; }
 
         public DbSet<DeviceOperate> DeviceOperate { get; set; }
+
+        public DbSet<ExceptionLog> ExceptionLog { get; set; }
     }
 }

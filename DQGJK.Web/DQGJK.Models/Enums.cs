@@ -20,4 +20,11 @@
         Sended = 1,
         Done = 2
     }
+
+    public enum ExceptionType
+    {
+        offline = 0,
+        humidity = 1,
+        temperature = 2
+    }
 }

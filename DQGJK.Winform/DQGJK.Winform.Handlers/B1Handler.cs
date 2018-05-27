@@ -25,7 +25,7 @@ namespace DQGJK.Winform.Handlers
             UpdateOperate(_Message, "B1");
         }
 
-        public override bool SetCabinet(B1Element element, ref Cabinet cabinet)
+        public override bool SetCabinet(DBContext db, B1Element element, ref Cabinet cabinet)
         {
             if (element.State == null) { return false; }
 
