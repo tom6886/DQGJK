@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DQGJK.Models;
 using System.Collections;
 using DQGJK.Web.PageModels;
+using DQGJK.Web.Contexts;
 
 namespace DQGJK.Web.Controllers
 {
@@ -26,9 +27,16 @@ namespace DQGJK.Web.Controllers
         [HttpGet]
         public PartialViewResult StationInfo(string stationCode)
         {
+            Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
+
             if (string.IsNullOrEmpty(stationCode))
             {
-                Cabinet cabinet = _context.Cabinet.OrderByDescending(q => q.ModifyTime).FirstOrDefault();
+                var query = _context.CabinetInfo.AsQueryable();
+
+                if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
+
+                CabinetInfo cabinet = query.OrderByDescending(q => q.ModifyTime).FirstOrDefault();
+
                 if (cabinet != null) { stationCode = cabinet.StationCode; }
             }
 

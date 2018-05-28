@@ -76,11 +76,15 @@ Account.Dialog.prototype = {
         }).validate({
             rules: {
                 Account: "required",
-                PassWord: "required"
+                PassWord: "required",
+                DeptID: "required",
+                Roles: "required"
             },
             messages: {
                 Account: "用户名称是必填项",
-                PassWord: "密码是必填项"
+                PassWord: "密码是必填项",
+                DeptID: "所属部门是必填项",
+                Roles: "所属角色是必填项"
             }
         });
 

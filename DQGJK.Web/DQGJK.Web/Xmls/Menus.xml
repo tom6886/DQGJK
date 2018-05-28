@@ -1,5 +1,5 @@
 ﻿<xml>
-  <menu roles="Administrator,Customer">
+  <menu roles="">
     <name>实时数据</name>
     <href>home</href>
     <iclass>fa-dashboard</iclass>
@@ -34,7 +34,7 @@
     <subMenus></subMenus>
   </menu>
 
-  <menu roles="Administrator,Customer">
+  <menu roles="Administrator">
     <name>系统管理</name>
     <href>#</href>
     <iclass>fa-cogs</iclass>

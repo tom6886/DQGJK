@@ -25,15 +25,26 @@ namespace DQGJK.Web.Controllers
         [HttpGet]
         public PartialViewResult Carousel(string stationCode)
         {
+            Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
+
             if (string.IsNullOrEmpty(stationCode))
             {
-                Cabinet cabinet = _context.Cabinet.OrderByDescending(q => q.ModifyTime).FirstOrDefault();
+                var query = _context.CabinetInfo.AsQueryable();
+
+                if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
+
+                CabinetInfo cabinet = query.OrderByDescending(q => q.ModifyTime).FirstOrDefault();
+
                 if (cabinet != null) { stationCode = cabinet.StationCode; }
             }
 
             ViewBag.user = HttpContext.Session.Get<Guser>("SESSION-ACCOUNT-KEY");
 
-            Station station = _context.Station.Where(q => q.Code.Equals(stationCode)).FirstOrDefault();
+            var stationQ = _context.Station.AsQueryable();
+
+            if (department != null) { stationQ = stationQ.Where(q => q.DeptID.Equals(department.ID)); }
+
+            Station station = stationQ.Where(q => q.Code.Equals(stationCode)).FirstOrDefault();
 
             if (station == null) { ViewBag.station = new Station(); return PartialView("List"); }
 

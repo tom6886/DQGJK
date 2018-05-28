@@ -8,6 +8,8 @@ namespace DQGJK.Winform.Models
     [Table("ExceptionLog")]
     public class ExceptionLog
     {
+        public ExceptionLog() { }
+
         public ExceptionLog(string clientCode, string deviceCode, ExceptionType type)
         {
             this.ID = StringUtil.UniqueID();
