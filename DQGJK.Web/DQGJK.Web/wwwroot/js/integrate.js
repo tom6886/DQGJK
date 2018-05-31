@@ -196,6 +196,7 @@ Main.init = function () {
     Main.Interval.Start();
     new Main.PassWord().init();
     new Main.Alarms().init();
+    Main.Lights.init();
 };
 
 Main.Interval = {
@@ -205,7 +206,12 @@ Main.Interval = {
         setInterval(_this.Online, 60000);
     },
     Online: function () {
-        $.post("Main/GetOnlineCount", function (r) { $("#online-span").text(r); });
+        $.post("Main/GetOnlineCount", function (r) {
+            $("#online-span").text(r.online);
+            Main.Lights.overtime.setState(r.overtime);
+            Main.Lights.temperature.setState(r.temperature);
+            Main.Lights.humidity.setState(r.humidity);
+        });
     }
 };
 
@@ -301,6 +307,35 @@ Main.BaseAlarm.prototype = {
         });
     }
 };
+
+Main.Lights = {
+    overtime: null,
+    temperature: null,
+    humidity: null,
+    init: function () {
+        this.overtime = new Main.BaseLight($(".a-normal:eq(0)"), $(".a-abnormal:eq(0)"));
+        this.temperature = new Main.BaseLight($(".a-normal:eq(1)"), $(".a-abnormal:eq(1)"));
+        this.humidity = new Main.BaseLight($(".a-normal:eq(2)"), $(".a-abnormal:eq(2)"));
+        return this;
+    }
+}
+
+Main.BaseLight = function (normal, abnormal) {
+    this.normal = normal;
+    this.abnormal = abnormal;
+}
+
+Main.BaseLight.prototype = {
+    setState: function (state) {
+        if (state == 0) {
+            this.normal.show();
+            this.abnormal.hide();
+        } else {
+            this.normal.hide();
+            this.abnormal.show();
+        }
+    }
+}
 
 $(function () {
     Main.init();

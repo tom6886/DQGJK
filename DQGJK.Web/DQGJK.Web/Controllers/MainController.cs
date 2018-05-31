@@ -17,19 +17,30 @@ namespace DQGJK.Web.Controllers
         }
 
         [HttpPost]
-        public int GetOnlineCount()
+        public JsonResult GetOnlineCount()
         {
             Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
 
             DateTime board = DateTime.Now - new TimeSpan(0, 10, 0);
 
             var query = _context.Station.AsQueryable();
+            var cabinetsQ = _context.CabinetInfo.AsQueryable();
 
-            query = query.Where(q => q.Status == Status.enable && q.ModifyTime > board);
+            query = query.Where(q => q.Status == Status.enable);
 
-            if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
+            if (department != null)
+            {
+                query = query.Where(q => q.DeptID.Equals(department.ID));
+                cabinetsQ = cabinetsQ.Where(q => q.DeptID.Equals(department.ID));
+            }
 
-            return query.Count();
+            return Json(new
+            {
+                online = query.Where(q => q.ModifyTime > board).Count(),
+                overtime = query.Where(q => q.ModifyTime < board).Count(),
+                temperature = cabinetsQ.Where(q => q.TemperatureAlarm > 0).Count(),
+                humidity = cabinetsQ.Where(q => q.HumidityAlarm > 0).Count()
+            });
         }
 
         [HttpPost]

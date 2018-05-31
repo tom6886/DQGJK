@@ -9685,8 +9685,10 @@ label { font-weight: 400; }
 
 .bottom { font-size: 16px; padding: 14px 0; }
     .bottom .bottom-group { cursor: pointer; }
-        .bottom .bottom-group i { color: darkred; }
         .bottom .bottom-group span { color: white; }
+    .bottom .a-abnormal { display: none; }
+        .bottom .a-abnormal i { color: #EE0000; }
+    .bottom .a-normal i { color: #00FF00; }
 
 .carousel-panel-edit { float: right; font-size: 14px; color: indianred !important; }
 

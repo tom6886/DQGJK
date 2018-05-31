@@ -220,18 +220,16 @@ namespace DQGJK.Winform
 
             online.TryGetValue(client, out _uid);
 
-            //如果IP地址变化，则关闭之前的连接
-            if (_uid != null && !_uid.Equals(uid))
-            {
-                listener.CloseClientSocket(_uid);
-            }
-
             if (_uid != null && _uid.Equals(uid)) { return; }
 
             if (_uid == null)
                 online.TryAdd(client, uid);
             else
+            {
                 online.TryUpdate(client, uid, _uid);
+                //如果IP地址变化，则关闭之前的连接
+                listener.CloseClientSocket(_uid);
+            }
         }
 
         private int Listener_GetPackageLength(byte[] data, out int headLength)

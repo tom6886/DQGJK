@@ -5,7 +5,6 @@
         <div class="content-panel panel panel-default panel-full">
             <div class="panel-body">
                 <div class="row" style="margin-bottom: 15px;">
-                    <div class="col-md-1"></div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <span class="input-group-addon">省</span>
@@ -24,15 +23,14 @@
                             <input type="text" data-select="co" class="form-control _select" name="Country" />
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-bottom: 15px;">
-                    <div class="col-md-1"></div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <span class="input-group-addon">环网柜</span>
                             <input type="text" data-select="s" class="form-control _select" name="StationCode" />
                         </div>
                     </div>
+                </div>
+                <div class="row" style="margin-bottom: 15px;">
                     <div class="col-md-3">
                         <div class="input-group">
                             <span class="input-group-addon">统计类型</span>
@@ -42,10 +40,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row div-by-day" style="margin-bottom: 15px;">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 div-by-day">
                         <div class="input-group date form_date" data-date="" data-date-format="yyyy/mm/dd">
                             <span class="input-group-addon">开始时间</span>
                             <input class="form-control" size="16" name="StartDate" type="text" value="" readonly="readonly">
@@ -53,7 +48,7 @@
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 div-by-day">
                         <div class="input-group date form_date" data-date="" data-date-format="yyyy/mm/dd">
                             <span class="input-group-addon">结束时间</span>
                             <input class="form-control" size="16" name="EndDate" type="text" value="" readonly="readonly">
@@ -61,13 +56,7 @@
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <a class="btn btn-info query" href="javascript:void(0)">查询</a>
-                    </div>
-                </div>
-                <div class="row div-by-month" style="margin-bottom: 15px;display:none;">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 div-by-month" style="display:none;">
                         <div class="input-group date form_month" data-date="" data-date-format="yyyy/mm">
                             <span class="input-group-addon">开始月份</span>
                             <input class="form-control" size="16" name="StartMonth" type="text" value="" readonly="readonly">
@@ -75,7 +64,7 @@
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 div-by-month" style="display:none;">
                         <div class="input-group date form_month" data-date="" data-date-format="yyyy/mm">
                             <span class="input-group-addon">结束月份</span>
                             <input class="form-control" size="16" name="EndMonth" type="text" value="" readonly="readonly">
