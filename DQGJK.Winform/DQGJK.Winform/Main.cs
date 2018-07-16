@@ -1,5 +1,6 @@
 ﻿using DQGJK.Message;
 using DQGJK.Winform.Handlers;
+using DQGJK.Winform.Helpers;
 using DQGJK.Winform.Models;
 using System;
 using System.Collections.Concurrent;
@@ -223,7 +224,10 @@ namespace DQGJK.Winform
             if (_uid != null && _uid.Equals(uid)) { return; }
 
             if (_uid == null)
+            {
                 online.TryAdd(client, uid);
+                ConnectionHelper.OnLine(client);
+            }
             else
             {
                 online.TryUpdate(client, uid, _uid);
@@ -273,6 +277,18 @@ namespace DQGJK.Winform
                 sb.Append(" 连接时间：" + token.ConnectTime.ToString());
                 sb.Append("\r\n");
                 AppendLog(sb.ToString());
+
+                string uid = token.UID;
+
+                if (number > 0 || string.IsNullOrEmpty(uid)) { return; }
+
+                KeyValuePair<string, string> item = online.Where(q => q.Value.Equals(uid)).FirstOrDefault();
+
+                if (default(KeyValuePair<string, string>).Equals(item)) { return; }
+
+                ConnectionHelper.OffLine(item.Key);
+
+                online.TryRemove(item.Key, out uid);
             }
             catch (Exception ex)
             {
