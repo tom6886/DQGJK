@@ -51,13 +51,13 @@
 <script type="text/javascript">
     $(function () {
         $(".pagination a").click(function () {
-            History.Widgets.table.query($(this).data("pageindex"));
+            LogInfo.Widgets.table.query($(this).data("pageindex"));
             return false;
         });
 
         $("#goToBtn").click(function () {
             if (Number($("#pageIndexBox").val()) > Number($("#pageCount").val())) { alert("页索引超出范围"); return false; }
-            History.Widgets.table.query($(this).data("pageindex"));
+            LogInfo.Widgets.table.query($(this).data("pageindex"));
             return false;
         })
     });

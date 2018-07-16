@@ -1,0 +1,1 @@
+mongod.exe -logpath "D:\Program Files\MongoDB\Data\log\mongodb.log" -logappend -dbpath "D:\Program Files\MongoDB\Data\db" -directoryperdb -serviceName MongoDB -install

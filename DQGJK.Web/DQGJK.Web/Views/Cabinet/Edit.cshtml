@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">环网柜</span>
-                        <input type="text" data-select="s" class="form-control _select" name="StationCode" data-id="@ViewBag.cabinet.StationCode" data-value="@ViewBag.cabinet.StationName" />
+                        <input type="text" disabled data-select="s" class="form-control _select" name="StationCode" data-id="@ViewBag.cabinet.StationCode" data-value="@ViewBag.cabinet.StationName" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -31,7 +31,7 @@
                         <input type="text" class="form-control" name="Sort" value="@ViewBag.cabinet.Sort" />
                     </div>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">状态</span>
                         <select name="Status" class="form-control">
@@ -40,7 +40,7 @@
                         </select>
                         <input type="hidden" id="Status" value="@ViewBag.cabinet.Status" />
                     </div>
-                </div>
+                </div>*@
             </form>
         </div>
         <div class="modal-footer">
