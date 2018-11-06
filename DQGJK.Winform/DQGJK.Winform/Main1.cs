@@ -19,7 +19,7 @@ namespace DQGJK.Winform
     public partial class Main1 : Form
     {
         internal static SocketListener _listener;
-        internal static ConcurrentDictionary<string, string> _online;
+        //internal static ConcurrentDictionary<string, string> _online;
         internal static BindingList<DeviceRow> _devices;
 
         #region 初始化
@@ -39,7 +39,9 @@ namespace DQGJK.Winform
 
             _listener.OnSended += Listener_OnSended;
 
-            _online = new ConcurrentDictionary<string, string>();
+            //_online = new ConcurrentDictionary<string, string>();
+
+            _devices = new BindingList<DeviceRow>();
 
             InitializeComponent();
 
@@ -69,7 +71,6 @@ namespace DQGJK.Winform
         #region 设备列表
         private void BindDeviceGrid()
         {
-            _devices = new BindingList<DeviceRow>();
             BindGrid(deviceGrid, _devices);
         }
 
@@ -154,15 +155,15 @@ namespace DQGJK.Winform
 
         private void UpdateCache(string client, string uid)
         {
-            string _uid;
+            DeviceRow device = _devices.Where(q => q.ClientCode.Equals(client)).FirstOrDefault();
 
-            _online.TryGetValue(client, out _uid);
+            //_online.TryGetValue(client, out _uid);
 
-            if (_uid != null && _uid.Equals(uid)) { return; }
+            if (device != null && !string.IsNullOrEmpty(device.UID) && device.UID.Equals(uid)) { return; }
 
-            if (_uid == null)
+            if (device == null)
             {
-                _online.TryAdd(client, uid);
+                //_online.TryAdd(client, uid);
                 //新增设备列表记录
                 AsyncUserTokenInfo info = _listener.OnlineUserToken.Where(q => q.UID.Equals(uid)).FirstOrDefault();
                 if (info != null)
@@ -170,18 +171,20 @@ namespace DQGJK.Winform
                     AddDevice(new DeviceRow()
                     {
                         ClientCode = client,
+                        UID = uid,
                         ClientIP = info.Remote.Address.ToString(),
                         InTime = info.ConnectTime.ToString(),
                         ModifyTime = info.FreshTime.ToString()
                     });
                 }
-                //BindGrid(deviceGrid, _devices);
                 //数据库更新上线时间
                 ConnectionHelper.OnLine(client);
             }
             else
             {
-                _online.TryUpdate(client, uid, _uid);
+                string _uid = device.UID;
+                //_online.TryUpdate(client, uid, _uid);
+                device.UID = uid;
                 //如果IP地址变化，则关闭之前的连接
                 _listener.CloseClientSocket(_uid);
             }
@@ -233,13 +236,13 @@ namespace DQGJK.Winform
 
                 if (number > 0 || string.IsNullOrEmpty(uid)) { return; }
 
-                KeyValuePair<string, string> item = _online.Where(q => q.Value.Equals(uid)).FirstOrDefault();
+                //KeyValuePair<string, string> item = _online.Where(q => q.Value.Equals(uid)).FirstOrDefault();
 
-                if (default(KeyValuePair<string, string>).Equals(item)) { return; }
+                //if (default(KeyValuePair<string, string>).Equals(item)) { return; }
 
-                ConnectionHelper.OffLine(item.Key);
+                //ConnectionHelper.OffLine(item.Key);
 
-                _online.TryRemove(item.Key, out uid);
+                //_online.TryRemove(item.Key, out uid);
             }
             catch (Exception ex)
             {

@@ -39,7 +39,8 @@ namespace DQGJK.Web.Controllers
                 online = query.Where(q => q.ModifyTime > board).Count(),
                 overtime = query.Where(q => q.ModifyTime < board).Count(),
                 temperature = cabinetsQ.Where(q => q.TemperatureAlarm > 0).Count(),
-                humidity = cabinetsQ.Where(q => q.HumidityAlarm > 0).Count()
+                humidity = cabinetsQ.Where(q => q.HumidityAlarm > 0).Count(),
+                intermission = cabinetsQ.Where(q => q.Dehumidify == 1 && q.Intermission == 0).Count()
             });
         }
 
@@ -85,6 +86,20 @@ namespace DQGJK.Web.Controllers
             if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
 
             List<CabinetInfo> list = query.Where(q => q.HumidityAlarm > 0).OrderByDescending(q => q.ModifyTime).ToList();
+
+            return PartialView("Humidity", list);
+        }
+
+        [HttpPost]
+        public PartialViewResult Intermission()
+        {
+            Department department = HttpContext.Session.Get<Department>("SESSION-DEPARTMENT-KEY");
+
+            var query = _context.CabinetInfo.AsQueryable();
+
+            if (department != null) { query = query.Where(q => q.DeptID.Equals(department.ID)); }
+
+            List<CabinetInfo> list = query.Where(q => q.Dehumidify == 1 && q.Intermission == 0).OrderByDescending(q => q.ModifyTime).ToList();
 
             return PartialView("Humidity", list);
         }

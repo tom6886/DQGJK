@@ -9659,8 +9659,9 @@ label { font-weight: 400; }
 
 .device-level-True { color: #00FF00; }
 .device-level-False { color: #EE0000; }
-.device-level-2 { color: #FF7F00; }
-.device-level-3 { color: #EEEE00; }
+.device-level-1 { color: #00FF00; }
+.device-level-2 { color: #FFF000; }
+.device-level-0 { color: #EE0000; }
 
 .clickclass { background-color: #aeb2b7; }
 

@@ -69,5 +69,10 @@
         /// 除湿状态
         /// </summary>
         public int Dehumidify { get; set; }
+
+        /// <summary>
+        /// 除湿间隔
+        /// </summary>
+        public int Intermission { get; set; }
     }
 }

@@ -47,6 +47,7 @@ namespace DQGJK.Winform.Handlers
             cabinet.HumidityAlarm = element.State.HumidityAlarm;
             cabinet.TemperatureAlarm = element.State.TemperatureAlarm;
             cabinet.Dehumidify = element.State.Dehumidify;
+            cabinet.Intermission = element.State.Intermission;
             cabinet.ModifyTime = DateTime.Now;
 
             return true;

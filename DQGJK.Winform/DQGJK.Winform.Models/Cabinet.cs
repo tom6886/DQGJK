@@ -58,6 +58,8 @@ namespace DQGJK.Winform.Models
 
         public int Dehumidify { get; set; }
 
+        public int Intermission { get; set; }
+
         public Status Status { get; set; }
 
         public int Sort { get; set; }

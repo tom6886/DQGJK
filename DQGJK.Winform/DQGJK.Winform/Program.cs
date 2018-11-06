@@ -31,7 +31,7 @@ namespace DQGJK.Winform
                 BonusSkins.Register();
                 SkinManager.EnableFormSkins();
                 UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-                Application.Run(new Login());
+                Application.Run(new Main());
             }
             catch (Exception ex)
             {

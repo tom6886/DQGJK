@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
 
-    <title>环网柜智能云在线监测</title>
+    <title>环网柜（电气柜）智能云在线监控系统</title>
 
     <link href="~/css/common.css" rel="stylesheet" />
     <script type="text/javascript" src="~/js/buddle.jquery.min.js"></script>
@@ -20,7 +20,7 @@
         <div class="top">
             <!--logo start-->
             <a href="index.html" class="logo">
-                <b>环网柜智能云在线监测</b>
+                <b>环网柜（电气柜）智能云在线监控系统</b>
             </a>
             <!--logo end-->
             <img src="~/images/logo_1.png" style="height: 30px; float: right; margin-top: 10px;" />
@@ -73,7 +73,7 @@
                     <span>温度报警</span>
                 </a>
             </div>
-            <div class="col-md-2">
+            <div class="col-12">
                 <a class="bottom-group a-abnormal" data-toggle="modal" data-target="#dlg_alarms" data-fc="humidity">
                     <i class="fa fa-circle"></i>
                     <span>湿度报警</span>
@@ -83,14 +83,24 @@
                     <span>湿度报警</span>
                 </a>
             </div>
-            <div class="col-md-3">
+            <div class="col-12">
+                <a class="bottom-group a-abnormal" data-toggle="modal" data-target="#dlg_alarms" data-fc="intermission">
+                    <i class="fa fa-circle"></i>
+                    <span>除湿间歇</span>
+                </a>
+                <a class="bottom-group a-normal">
+                    <i class="fa fa-circle"></i>
+                    <span>除湿间歇</span>
+                </a>
+            </div>
+            <div class="col-md-2">
                 <div class="bottom-group">
                     <span>当前运行设备：<span id="online-span">0</span> 台</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="bottom-group">
-                    <span style="float:right;margin-right:20px;">合肥万历信息科技有限公司</span>
+                    <span style="float:right;margin-right:20px;">合肥同想信息技术有限公司</span>
                 </div>
             </div>
         </div>

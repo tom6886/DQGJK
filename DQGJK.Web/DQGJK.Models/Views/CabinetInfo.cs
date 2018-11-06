@@ -28,6 +28,10 @@ namespace DQGJK.Models
 
         public int TemperatureAlarm { get; set; }
 
+        public int Dehumidify { get; set; }
+
+        public int Intermission { get; set; }
+
         public DateTime ModifyTime { get; set; }
 
         public Status Status { get; set; }

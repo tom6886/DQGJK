@@ -211,6 +211,7 @@ Main.Interval = {
             Main.Lights.overtime.setState(r.overtime);
             Main.Lights.temperature.setState(r.temperature);
             Main.Lights.humidity.setState(r.humidity);
+            Main.Lights.intermission.setState(r.intermission);
         });
     }
 };
@@ -272,6 +273,7 @@ Main.Alarms = function () {
     this.overtime = new Main.BaseAlarm("Main/OverTime");
     this.temperature = new Main.BaseAlarm("Main/Temperature");
     this.humidity = new Main.BaseAlarm("Main/Humidity");
+    this.intermission = new Main.BaseAlarm("Main/Intermission");
 };
 
 Main.Alarms.prototype = {
@@ -312,10 +314,12 @@ Main.Lights = {
     overtime: null,
     temperature: null,
     humidity: null,
+    intermission: null,
     init: function () {
         this.overtime = new Main.BaseLight($(".a-normal:eq(0)"), $(".a-abnormal:eq(0)"));
         this.temperature = new Main.BaseLight($(".a-normal:eq(1)"), $(".a-abnormal:eq(1)"));
         this.humidity = new Main.BaseLight($(".a-normal:eq(2)"), $(".a-abnormal:eq(2)"));
+        this.intermission = new Main.BaseLight($(".a-normal:eq(3)"), $(".a-abnormal:eq(3)"));
         return this;
     }
 }

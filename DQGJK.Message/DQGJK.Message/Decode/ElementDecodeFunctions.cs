@@ -102,7 +102,8 @@ namespace DQGJK.Message
                 RelayTwo = arr[1],
                 HumidityAlarm = arr[2],
                 TemperatureAlarm = arr[3],
-                Dehumidify = arr[4]
+                Dehumidify = arr[4],
+                Intermission = arr[5]
             };
 
             return state;
